@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <defs>
+    <linearGradient id="featbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="360" fill="url(#featbg)" rx="12"/>
+  <text x="400" y="35" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#fb8500">Key Features</text>
+  <rect x="20" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="140" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🎭</text>
+  <text x="140" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">6 Character Archetypes</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Hero, Mentor, Shadow, Trickster, Herald, Shap</text>
+  <text x="140" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">eshifter — deep profiles</text>
+  <text x="140" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="277" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="397" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">📐</text>
+  <text x="397" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">4 Plot Structures</text>
+  <text x="397" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Three-Act, Hero's Journey, Five-Act, Save the</text>
+  <text x="397" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"> Cat — proven frameworks</text>
+  <text x="397" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="534" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="654" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🌍</text>
+  <text x="654" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Worldbuilding Engine</text>
+  <text x="654" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Geography, Politics, Culture, Technology, His</text>
+  <text x="654" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">tory, Economy categories</text>
+  <text x="654" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="20" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="140" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">📊</text>
+  <text x="140" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Tension Visualization</text>
+  <text x="140" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Plot arc tension curves with beat-by-beat nar</text>
+  <text x="140" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">rative analysis</text>
+  <text x="140" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="277" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="397" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">📚</text>
+  <text x="397" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">8 Genre Support</text>
+  <text x="397" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Sci-fi, Fantasy, Mystery, Thriller, Romance, </text>
+  <text x="397" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Horror, Literary, Historical</text>
+  <text x="397" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="534" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#fb8500" stroke-width="1" opacity="0.9"/>
+  <text x="654" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🧬</text>
+  <text x="654" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Character Generation</text>
+  <text x="654" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Detailed profiles: appearance, personality, a</text>
+  <text x="654" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">rc, speech patterns, fears</text>
+  <text x="654" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+</svg>

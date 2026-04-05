@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="archbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8892b0"/>
+    </marker>
+  </defs>
+  <rect width="800" height="400" fill="url(#archbg)" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#4361ee">System Architecture</text>
+  <g transform="translate(0,20)">
+  <path d="M180,130 C210.0,130 210.0,175 240,175" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M180,270 C210.0,270 210.0,200 240,200" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M400,185 C425.0,185 425.0,185 450,185" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M610,185 C635.0,185 635.0,70 660,70" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M610,185 C635.0,185 635.0,190 660,190" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M610,185 C635.0,185 635.0,310 660,310" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+
+  <rect x="40" y="100" width="140" height="60" rx="8" fill="#4361ee" opacity="0.15" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="110" y="124" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#4361ee">Topic + Audience</text>
+  <text x="110" y="140" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">(User Input)</text>
+  <rect x="40" y="240" width="140" height="60" rx="8" fill="#7209b7" opacity="0.15" stroke="#7209b7" stroke-width="1.5"/>
+  <text x="110" y="264" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#7209b7">Format Config</text>
+  <text x="110" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">(4 formats)</text>
+  <rect x="240" y="150" width="160" height="70" rx="8" fill="#ffd166" opacity="0.15" stroke="#ffd166" stroke-width="1.5"/>
+  <text x="320" y="179" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#ffd166">build_prompt()</text>
+  <text x="320" y="195" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">Slide Engine</text>
+  <rect x="450" y="150" width="160" height="70" rx="8" fill="#ef476f" opacity="0.15" stroke="#ef476f" stroke-width="1.5"/>
+  <text x="530" y="179" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#ef476f">Ollama LLM</text>
+  <text x="530" y="195" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">generate_presentation()</text>
+  <rect x="660" y="40" width="130" height="60" rx="8" fill="#4361ee" opacity="0.15" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="725" y="64" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#4361ee">Slide Deck</text>
+  <text x="725" y="80" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">(Full Content)</text>
+  <rect x="660" y="160" width="130" height="60" rx="8" fill="#f72585" opacity="0.15" stroke="#f72585" stroke-width="1.5"/>
+  <text x="725" y="184" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#f72585">Speaker Notes</text>
+  <text x="725" y="200" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">speaker_notes_only()</text>
+  <rect x="660" y="280" width="130" height="60" rx="8" fill="#4cc9f0" opacity="0.15" stroke="#4cc9f0" stroke-width="1.5"/>
+  <text x="725" y="304" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#4cc9f0">Markdown Export</text>
+  <text x="725" y="320" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">export_to_markdown()</text>
+  </g>
+</svg>

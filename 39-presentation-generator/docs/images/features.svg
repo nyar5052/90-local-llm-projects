@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <defs>
+    <linearGradient id="featbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="360" fill="url(#featbg)" rx="12"/>
+  <text x="400" y="35" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#4361ee">Key Features</text>
+  <rect x="20" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="140" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🎬</text>
+  <text x="140" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">4 Presentation Formats</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Standard, Pecha Kucha (20×20), Lightning Talk</text>
+  <text x="140" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">, Keynote-style</text>
+  <text x="140" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="277" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="397" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">📑</text>
+  <text x="397" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">9 Slide Templates</text>
+  <text x="397" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Title, Agenda, Content, Data, Quote, Comparis</text>
+  <text x="397" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">on, Timeline, Q&A, Closing</text>
+  <text x="397" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="534" y="50" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="654" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🎤</text>
+  <text x="654" y="110" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Speaker Notes</text>
+  <text x="654" y="130" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">3-5 sentence conversational notes per slide f</text>
+  <text x="654" y="143" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">or confident delivery</text>
+  <text x="654" y="156" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="20" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="140" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">🎨</text>
+  <text x="140" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Visual Suggestions</text>
+  <text x="140" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">AI recommends charts, diagrams, hero images, </text>
+  <text x="140" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">icon grids per slide</text>
+  <text x="140" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="277" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="397" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">⏱️</text>
+  <text x="397" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Timing Estimates</text>
+  <text x="397" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Per-slide and total timing based on format an</text>
+  <text x="397" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">d speaking pace (130 WPM)</text>
+  <text x="397" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+  <rect x="534" y="200" width="240" height="130" rx="10" fill="#16213e" stroke="#4361ee" stroke-width="1" opacity="0.9"/>
+  <text x="654" y="235" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="24">📄</text>
+  <text x="654" y="260" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="white">Markdown Export</text>
+  <text x="654" y="280" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0">Clean markdown output ready for conversion to</text>
+  <text x="654" y="293" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"> PowerPoint or Keynote</text>
+  <text x="654" y="306" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9.5" fill="#8892b0"></text>
+</svg>

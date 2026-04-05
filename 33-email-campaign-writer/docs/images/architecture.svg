@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgArch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2ec4b6"/>
+      <stop offset="100%" style="stop-color:#533483"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgArch)" rx="12"/>
+  <rect x="0" y="390" width="800" height="10" fill="url(#accentGrad)"/>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="bold">ARCHITECTURE OVERVIEW</text>
+
+  <!-- Row 1: User Input -->
+  <rect x="30" y="50" width="160" height="70" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="75" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">🎯 USER INPUT</text>
+  <text x="110" y="93" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Product, Audience</text>
+  <text x="110" y="108" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Campaign Type</text>
+
+  <!-- Arrow 1 -->
+  <line x1="190" y1="85" x2="220" y2="85" stroke="#2ec4b6" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <polygon points="220,80 230,85 220,90" fill="#2ec4b6"/>
+
+  <!-- Row 1: CLI / Web UI -->
+  <rect x="235" y="50" width="140" height="70" rx="8" fill="#1e2a45" stroke="#533483" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="305" y="75" text-anchor="middle" fill="#a78bfa" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">⌨️ CLI / 🌐 Web UI</text>
+  <text x="305" y="93" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">cli.py (Click)</text>
+  <text x="305" y="108" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">web_ui.py (Streamlit)</text>
+
+  <!-- Arrow 2 -->
+  <line x1="375" y1="85" x2="405" y2="85" stroke="#2ec4b6" stroke-width="2"/>
+  <polygon points="405,80 415,85 405,90" fill="#2ec4b6"/>
+
+  <!-- Row 1: Core Engine -->
+  <rect x="420" y="50" width="170" height="70" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="505" y="75" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">⚙️ CORE ENGINE</text>
+  <text x="505" y="93" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">build_prompt()</text>
+  <text x="505" y="108" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">generate_campaign()</text>
+
+  <!-- Arrow 3 -->
+  <line x1="590" y1="85" x2="620" y2="85" stroke="#2ec4b6" stroke-width="2"/>
+  <polygon points="620,80 630,85 620,90" fill="#2ec4b6"/>
+
+  <!-- Row 1: Ollama -->
+  <rect x="635" y="50" width="140" height="70" rx="8" fill="#1e2a45" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="705" y="75" text-anchor="middle" fill="#f97316" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">🦙 OLLAMA</text>
+  <text x="705" y="93" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Gemma 4 / LLaMA 3</text>
+  <text x="705" y="108" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Local LLM Inference</text>
+
+  <!-- Down arrow from Core Engine to Email Processing -->
+  <line x1="505" y1="120" x2="505" y2="150" stroke="#2ec4b6" stroke-width="2"/>
+  <polygon points="500,150 505,160 510,150" fill="#2ec4b6"/>
+
+  <!-- Row 2: Email Processing -->
+  <rect x="190" y="165" width="240" height="80" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="310" y="190" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">📬 EMAIL PROCESSING</text>
+  <text x="310" y="208" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">build_email_sequence()</text>
+  <text x="310" y="223" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">generate_subject_variants()</text>
+  <text x="310" y="238" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">extract_personalization_tokens()</text>
+
+  <!-- Arrow from Email Processing to Output -->
+  <line x1="430" y1="205" x2="460" y2="205" stroke="#2ec4b6" stroke-width="2"/>
+  <polygon points="460,200 470,205 460,210" fill="#2ec4b6"/>
+
+  <!-- Row 2: Output -->
+  <rect x="475" y="165" width="240" height="80" rx="8" fill="#1e2a45" stroke="#533483" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="595" y="190" text-anchor="middle" fill="#a78bfa" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">📤 OUTPUT LAYER</text>
+  <text x="595" y="208" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">preview_html() → HTML template</text>
+  <text x="595" y="223" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">calculate_sequence_timeline()</text>
+  <text x="595" y="238" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">estimate_campaign_metrics()</text>
+
+  <!-- Down arrow to Data Layer -->
+  <line x1="400" y1="245" x2="400" y2="270" stroke="#2ec4b6" stroke-width="2"/>
+  <polygon points="395,270 400,280 405,270" fill="#2ec4b6"/>
+
+  <!-- Row 3: Dataclasses -->
+  <rect x="190" y="285" width="240" height="70" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="310" y="310" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">📦 DATA MODELS</text>
+  <text x="310" y="328" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Campaign dataclass</text>
+  <text x="310" y="343" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Email dataclass</text>
+
+  <!-- Row 3: Config -->
+  <rect x="475" y="285" width="240" height="70" rx="8" fill="#1e2a45" stroke="#f97316" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="595" y="310" text-anchor="middle" fill="#f97316" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">⚙️ CONFIGURATION</text>
+  <text x="595" y="328" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">config.yaml (YAML)</text>
+  <text x="595" y="343" text-anchor="middle" fill="#c0c0d0" font-family="Segoe UI,Arial,sans-serif" font-size="10">load_config() with caching</text>
+
+  <!-- Side panel: Campaign Types -->
+  <rect x="20" y="165" width="155" height="190" rx="8" fill="#12192e" stroke="#2ec4b6" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="97" y="188" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="bold">CAMPAIGN TYPES</text>
+  <text x="97" y="210" text-anchor="middle" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="10">● welcome</text>
+  <text x="97" y="230" text-anchor="middle" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="10">● promotional</text>
+  <text x="97" y="250" text-anchor="middle" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="10">● nurture</text>
+  <text x="97" y="270" text-anchor="middle" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="10">● re-engagement</text>
+  <text x="97" y="290" text-anchor="middle" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="10">● product-launch</text>
+  <line x1="40" y1="305" x2="155" y2="305" stroke="#2ec4b6" stroke-width="0.5" stroke-opacity="0.4"/>
+  <text x="97" y="323" text-anchor="middle" fill="#808099" font-family="Segoe UI,Arial,sans-serif" font-size="9">Smart send-day</text>
+  <text x="97" y="338" text-anchor="middle" fill="#808099" font-family="Segoe UI,Arial,sans-serif" font-size="9">spacing per type</text>
+
+  <!-- Connection: Config to Core Engine (dotted) -->
+  <line x1="595" y1="285" x2="595" y2="260" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3" stroke-opacity="0.5"/>
+</svg>

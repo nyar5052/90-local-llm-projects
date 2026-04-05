@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00b4d8"/>
+      <stop offset="100%" style="stop-color:#533483"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="bold">ARCHITECTURE OVERVIEW</text>
+
+  <!-- ===== Row 1: User Input ===== -->
+  <rect x="310" y="45" width="180" height="40" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="400" y="65" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">👤 User Input</text>
+  <text x="400" y="79" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">topic · platform · tone</text>
+
+  <!-- Arrow 1 -->
+  <line x1="400" y1="85" x2="400" y2="100" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- ===== Row 2: CLI + Web UI ===== -->
+  <rect x="195" y="102" width="160" height="45" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="275" y="122" text-anchor="middle" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="bold">⌨️ CLI</text>
+  <text x="275" y="138" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">cli.py · Click</text>
+
+  <rect x="445" y="102" width="160" height="45" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="525" y="122" text-anchor="middle" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="bold">🌐 Web UI</text>
+  <text x="525" y="138" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">web_ui.py · Streamlit</text>
+
+  <!-- Arrows from CLI / Web UI down -->
+  <line x1="275" y1="147" x2="350" y2="170" stroke="#00b4d8" stroke-width="1.5"/>
+  <line x1="525" y1="147" x2="450" y2="170" stroke="#00b4d8" stroke-width="1.5"/>
+
+  <!-- ===== Row 3: Core Engine ===== -->
+  <rect x="220" y="165" width="360" height="60" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="400" y="185" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">⚙️ Core Engine — core.py</text>
+  <text x="400" y="200" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">build_prompt · generate_posts · generate_ab_variants</text>
+  <text x="400" y="214" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">generate_hashtags · load_config</text>
+
+  <!-- Arrows from Core down to Formatter and Preview -->
+  <line x1="330" y1="225" x2="260" y2="248" stroke="#00b4d8" stroke-width="1.5"/>
+  <line x1="470" y1="225" x2="540" y2="248" stroke="#00b4d8" stroke-width="1.5"/>
+
+  <!-- ===== Row 4: Platform Formatter + Preview ===== -->
+  <rect x="120" y="245" width="275" height="50" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="258" y="265" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="bold">🔧 Platform Formatter</text>
+  <text x="258" y="282" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">format_for_platform · validate_char_count</text>
+
+  <rect x="405" y="245" width="275" height="50" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="543" y="265" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="bold">📊 Preview &amp; Metrics</text>
+  <text x="543" y="282" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">preview_post · suggest_schedule</text>
+
+  <!-- Arrows down to Output -->
+  <line x1="258" y1="295" x2="340" y2="318" stroke="#00b4d8" stroke-width="1.5"/>
+  <line x1="543" y1="295" x2="460" y2="318" stroke="#00b4d8" stroke-width="1.5"/>
+
+  <!-- ===== Row 5: Output ===== -->
+  <rect x="300" y="315" width="200" height="40" rx="8" fill="#1e2a45" stroke="#00b4d8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="400" y="335" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">📤 Output</text>
+  <text x="400" y="349" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Terminal · File · Web Preview</text>
+
+  <!-- ===== Ollama bar at bottom ===== -->
+  <rect x="150" y="370" width="500" height="24" rx="6" fill="url(#accent)" opacity="0.85"/>
+  <text x="400" y="387" text-anchor="middle" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="bold">🦙 Ollama  ·  Gemma 4 LLM  ·  localhost:11434</text>
+
+  <!-- ===== Platform Config side panel ===== -->
+  <rect x="640" y="102" width="140" height="145" rx="8" fill="#12192d" stroke="#533483" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="710" y="120" text-anchor="middle" fill="#533483" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="bold">Platform Config</text>
+  <line x1="655" y1="128" x2="765" y2="128" stroke="#533483" stroke-width="0.5"/>
+  <text x="665" y="148" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="11">🐦 Twitter</text>
+  <text x="760" y="148" text-anchor="end" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="11">280</text>
+  <text x="665" y="172" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="11">💼 LinkedIn</text>
+  <text x="760" y="172" text-anchor="end" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="11">3000</text>
+  <text x="665" y="196" fill="#00b4d8" font-family="Segoe UI,Arial,sans-serif" font-size="11">📸 Instagram</text>
+  <text x="760" y="196" text-anchor="end" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="11">2200</text>
+  <line x1="655" y1="208" x2="765" y2="208" stroke="#533483" stroke-width="0.5"/>
+  <text x="710" y="226" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="9">Hashtags: 3 / 5 / 15</text>
+  <text x="710" y="240" text-anchor="middle" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="9">max_chars per platform</text>
+
+  <!-- Dashed connector from config to core -->
+  <line x1="640" y1="195" x2="580" y2="195" stroke="#533483" stroke-width="1" stroke-dasharray="5,3"/>
+
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#00b4d8"/>
+    </marker>
+  </defs>
+</svg>

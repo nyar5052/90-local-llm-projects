@@ -1,209 +1,590 @@
 <div align="center">
-<img src="https://img.shields.io/badge/✍️_📰_Newsletter_Editor-Local_LLM_Powered-blue?style=for-the-badge&labelColor=1a1a2e&color=16213e" alt="Project Banner" width="600"/>
-<br/>
-<img src="https://img.shields.io/badge/Gemma_4-Ollama-orange?style=flat-square&logo=google&logoColor=white" alt="Gemma 4"/>
-<img src="https://img.shields.io/badge/Python-3.9+-blue?style=flat-square&logo=python&logoColor=white" alt="Python"/>
-<img src="https://img.shields.io/badge/Streamlit-Web_UI-red?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit"/>
-<img src="https://img.shields.io/badge/Click-CLI-green?style=flat-square&logo=gnu-bash&logoColor=white" alt="Click CLI"/>
-<img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License"/>
-<br/><br/>
-<strong>Part of <a href="https://github.com/kennedyraju55/90-local-llm-projects">90 Local LLM Projects</a> collection</strong>
+
+<img src="docs/images/banner.svg" alt="Newsletter Editor Banner" width="800"/>
+
+<br><br>
+
+[![Python](https://img.shields.io/badge/Python-3.9+-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Ollama](https://img.shields.io/badge/Ollama-Local_LLM-black?style=for-the-badge&logo=ollama)](https://ollama.com)
+[![License](https://img.shields.io/badge/License-MIT-06d6a0?style=for-the-badge)](LICENSE)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Web_UI-ff4b4b?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+
+**Transform Raw Notes into Polished, Professional Newsletters**
+
+[Quick Start](#-quick-start) •
+[Features](#-features) •
+[CLI Reference](#-cli-reference) •
+[Web UI](#-web-ui) •
+[Architecture](#-architecture) •
+[API Reference](#-api-reference) •
+[Configuration](#%EF%B8%8F-configuration) •
+[FAQ](#-faq)
+
 </div>
-<br/>
 
-## 🌟 Features
+---
 
-| Feature | Description |
-|---------|-------------|
-| 📝 **Smart Content Curation** | AI transforms raw notes into polished newsletter sections |
-| 📋 **Section Templates** | 6 built-in templates: News Roundup, Deep Dive, Tips & Tricks, Spotlight, Events, Q&A |
-| 👥 **Subscriber Segmentation** | Target content for All, New, Premium, or Inactive subscribers |
-| 🗄️ **Archive Management** | Automatic archiving with browsable history |
-| 🌐 **HTML Export** | Professional styled HTML output for email delivery |
-| 🎨 **Multiple Tones** | Informative, casual, witty, formal, or friendly writing styles |
-| 💻 **Dual Interface** | Full CLI + Streamlit Web UI |
-| ⚙️ **YAML Configuration** | Flexible config management |
-| 📊 **Rich Terminal UI** | Beautiful CLI output with Rich library |
+## 📋 Table of Contents
+
+- [Why Newsletter Editor?](#-why-newsletter-editor)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [CLI Reference](#-cli-reference)
+- [Web UI](#-web-ui)
+- [Architecture](#-architecture)
+- [API Reference](#-api-reference)
+- [Configuration](#%EF%B8%8F-configuration)
+- [Testing](#-testing)
+- [Local vs Cloud LLMs](#-local-vs-cloud-llms)
+- [FAQ](#-faq)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🤔 Why Newsletter Editor?
+
+> **Project 36 of the [90 Local LLM Projects](https://github.com/kennedyraju55/90-local-llm-projects) series** — building real-world AI tools that run entirely on your local machine.
+
+| ✅ Why This Tool | ❌ The Problem It Solves |
+|-----------------|------------------------|
+| 📧 Email newsletters are still #1 ROI channel | Manual formatting takes hours per issue |
+| 🧠 AI understands your raw notes contextually | Template systems require rigid structure |
+| 🎯 Segment-aware content reaches the right readers | One-size-fits-all reduces engagement |
+| ⚡ Generate in seconds, not hours | Consistency suffers under deadline pressure |
+
+
+---
+
+## ✨ Features
+
+<div align="center">
+
+<img src="docs/images/features.svg" alt="Newsletter Editor Features" width="800"/>
+
+</div>
+
+<br>
+
+### 📋 6 Section Templates
+
+News Roundup, Deep Dive, Tips & Tricks, Spotlight, Events, Reader Q&A.
+
+### 👥 4 Subscriber Segments
+
+All, New Welcome, Premium Exclusive, Inactive Re-engagement.
+
+### 🎨 5 Writing Tones
+
+Informative, Casual, Witty, Formal, Friendly — adapt to audience.
+
+### 📦 Archive Management
+
+Auto-archive with timestamps, browse history, metadata tracking.
+
+### 🌐 HTML Email Export
+
+Styled HTML output with responsive design, ready for email delivery.
+
+### ⚡ CLI + Web UI
+
+Full Click CLI with 4 commands plus Streamlit web interface.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Python 3.9+** — [Download](https://www.python.org/downloads/)
+- **Ollama** — [Install Ollama](https://ollama.com/download)
+- A pulled model (e.g., `ollama pull llama3.1:8b`)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/kennedyraju55/newsletter-editor.git
+cd newsletter-editor
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install the package
+pip install -e .
+```
+
+### Environment Setup
+
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit with your settings
+# OLLAMA_HOST=http://localhost:11434
+# OLLAMA_MODEL=llama3.1:8b
+```
+
+### Your First Run
+
+```bash
+newsletter-editor generate --input notes.txt --name "Weekly Tech Digest" --tone witty --template news_roundup --html
+```
+
+<details>
+<summary><strong>📋 Example Output</strong> (click to expand)</summary>
+
+```
+📧 Newsletter Editor - Generating...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📰 Weekly Tech Digest
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# 🗞️ Weekly Tech Digest
+
+## 📰 Top Stories This Week
+- **AI Coding Assistants Hit Mainstream** — GitHub Copilot...
+- **Rust Adoption Surges in 2024** — Mozilla's language...
+
+## 🔍 Deep Dive: Local LLMs
+Running models on your own hardware isn't just possible...
+
+## 💡 Tips & Tricks
+1. Use `ollama pull` to download models instantly
+2. Set temperature to 0.3 for factual content...
+
+## 📅 Upcoming Events
+| Date | Event | Location |
+|------|-------|----------|
+| Jan 15 | AI Summit | Virtual |
+
+✅ Newsletter generated (4 sections, witty tone)
+📄 HTML exported: Weekly_Tech_Digest.html
+📦 Archived: weekly_tech_digest_20240115_143022.md
+```
+
+</details>
+
+---
+
+## 🖥️ CLI Reference
+
+```bash
+newsletter-editor --help
+```
+
+**Global Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--config` | Path to configuration file | `config.yaml` |
+| `--verbose` | Enable debug logging | `False` |
+
+
+### `newsletter-editor generate`
+
+Generate a polished newsletter from raw notes.
+
+| Option | Description | Default |
+|--------|-------------|----------|
+| `--input` | Path to raw notes file | `Required` |
+| `--name` | Newsletter name/title | `Required` |
+| `--sections` | Number of sections | `4` |
+| `--tone` | Writing tone (informative/casual/witty/formal/friendly) | `informative` |
+| `--template` | Section template (news_roundup/deep_dive/tips_tricks/spotlight/upcoming_events/reader_qa) | `None` |
+| `--segment` | Subscriber segment (all/new/premium/inactive) | `None` |
+| `--output, -o` | Save output to file | `None` |
+| `--html` | Also export as HTML | `False` |
+| `--archive/--no-archive` | Archive the generated newsletter | `True` |
+
+
+### `newsletter-editor templates`
+
+List available section templates.
+
+
+### `newsletter-editor segments`
+
+List available subscriber segments.
+
+
+### `newsletter-editor archive`
+
+List archived newsletters with metadata.
+
+
+
+---
+
+## 🌐 Web UI
+
+Newsletter Editor includes a beautiful **Streamlit** web interface for users who prefer a graphical experience.
+
+### Launch the Web UI
+
+```bash
+# Using Streamlit directly
+streamlit run src/newsletter_editor/web_ui.py
+
+# Or using Make
+make web
+```
+
+### Web UI Features
+
+- 🎨 **Intuitive Interface** — Clean, modern design with sidebar controls
+- ⚡ **Real-time Generation** — Watch content generate with live streaming
+- 📋 **Copy & Export** — One-click copy to clipboard or download as file
+- 🔧 **All CLI Options** — Every CLI feature available through dropdowns and toggles
+- 📱 **Responsive Design** — Works on desktop and mobile browsers
+
+> **Tip:** The Web UI runs at `http://localhost:8501` by default. Share it on your local network for team access.
+
+---
 
 ## 🏗️ Architecture
+
+<div align="center">
+
+<img src="docs/images/architecture.svg" alt="Newsletter Editor Architecture" width="800"/>
+
+</div>
+
+### How It Works
+
+1. **Input Processing** — Raw input is loaded and validated
+2. **Prompt Engineering** — `build_prompt()` constructs an optimized prompt with context-specific instructions
+3. **LLM Generation** — The prompt is sent to Ollama with a specialized system prompt: *"Expert newsletter editor & curator"*
+4. **Post-Processing** — Output is formatted, validated, and optionally exported
+5. **Storage** — Results are saved for future reference and iteration
+
+### Project Structure
 
 ```
 36-newsletter-editor/
 ├── src/
 │   └── newsletter_editor/
-│       ├── __init__.py          # Package metadata
-│       ├── core.py              # Business logic, templates, segmentation
-│       ├── cli.py               # Click CLI with subcommands
-│       └── web_ui.py            # Streamlit web interface
+│       ├── __init__.py
+│       ├── core.py          # Business logic, templates, LLM integration
+│       ├── cli.py           # Click CLI with 4 commands
+│       └── web_ui.py        # Streamlit web interface
 ├── tests/
-│   ├── __init__.py
-│   ├── test_core.py             # Core logic tests
-│   └── test_cli.py              # CLI integration tests
-├── config.yaml                  # Configuration file
-├── setup.py                     # Package setup
-├── Makefile                     # Build & run commands
-├── .env.example                 # Environment template
-├── requirements.txt             # Dependencies
-└── README.md                    # This file
+│   └── test_core.py         # Unit tests
+├── docs/
+│   └── images/
+│       ├── banner.svg       # Project banner
+│       ├── architecture.svg # System architecture
+│       └── features.svg     # Feature showcase
+├── config.yaml              # LLM & newsletter configuration
+├── setup.py                 # Package installation
+├── requirements.txt         # Python dependencies
+├── Makefile                 # Build automation
+├── .env.example             # Environment template
+└── README.md                # This file
 ```
 
-## 📦 Installation
+### Technology Stack
 
-### Prerequisites
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| 🧠 LLM Backend | Ollama | Local model inference (privacy-first) |
+| 🐍 Language | Python 3.9+ | Core application logic |
+| ⌨️ CLI Framework | Click | Command-line interface with rich help |
+| 🌐 Web Framework | Streamlit | Interactive web UI |
+| 📊 Output | Rich | Beautiful terminal formatting |
+| ⚙️ Config | YAML | Flexible configuration management |
+| 📦 Packaging | setuptools | pip-installable package |
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with a model pulled
+---
 
-### Quick Start
+## 📚 API Reference
 
-```bash
-# Install the package
-make install
+All functions are importable from `newsletter_editor.core`:
 
-# Or install with dev dependencies
-make dev
-
-# Or manual install
-pip install -e .
+```python
+from newsletter_editor.core import *
 ```
 
-## 🖥️ CLI Usage
+#### `load_config(config_path: Optional[str] = None)` → `dict`
 
-The CLI provides subcommands for all functionality:
+Loads YAML configuration, deep-merges with defaults.
 
-### Generate a Newsletter
+```python
+from newsletter_editor.core import load_config
 
-```bash
-# Basic generation
-newsletter-editor generate --input notes.txt --name "Tech Weekly"
-
-# With template and segment
-newsletter-editor generate \
-  --input notes.txt \
-  --name "Tech Weekly" \
-  --sections 6 \
-  --tone witty \
-  --template deep_dive \
-  --segment premium \
-  --html \
-  -o output.md
-
-# Without archiving
-newsletter-editor generate --input notes.txt --name "Quick Update" --no-archive
+result = load_config(config_path)
 ```
 
-### List Templates
+---
 
-```bash
-newsletter-editor templates
+#### `read_input_file(filepath: str)` → `str`
+
+Reads raw notes/content from a text file.
+
+```python
+from newsletter_editor.core import read_input_file
+
+result = read_input_file(filepath)
 ```
 
-### List Subscriber Segments
+---
 
-```bash
-newsletter-editor segments
+#### `get_section_templates()` → `dict`
+
+Returns all 6 section template definitions.
+
+```python
+from newsletter_editor.core import get_section_templates
+
+result = get_section_templates()
 ```
 
-### Browse Archive
+---
 
-```bash
-newsletter-editor archive
+#### `get_subscriber_segments()` → `dict`
+
+Returns all 4 subscriber segment definitions.
+
+```python
+from newsletter_editor.core import get_subscriber_segments
+
+result = get_subscriber_segments()
 ```
 
-### Global Options
+---
 
-```bash
-newsletter-editor --config custom-config.yaml --verbose generate ...
+#### `build_prompt(raw_content, name, sections, tone, template=None, segment=None)` → `str`
+
+Constructs the LLM prompt with template hints and segment guidance.
+
+```python
+from newsletter_editor.core import build_prompt
+
+result = build_prompt(raw_content)
 ```
 
-### Input File Format
+---
 
-Create a text file with your raw notes:
-```
-AI news: GPT-5 released with major improvements
-New NVIDIA chip boosts training 2x
-Python 3.13 out with performance gains
-React 19 now stable - new hooks API
-https://example.com/ai-news
-```
+#### `generate_newsletter(raw_content, name, sections, tone, template=None, segment=None, config=None)` → `str`
 
-## 🌐 Web UI
+Generates newsletter via LLM with expert editor system prompt.
 
-Launch the interactive Streamlit interface:
+```python
+from newsletter_editor.core import generate_newsletter
 
-```bash
-make run-web
-# or
-streamlit run src/newsletter_editor/web_ui.py
+result = generate_newsletter(raw_content)
 ```
 
-### Web UI Features
+---
 
-| Tab | Description |
-|-----|-------------|
-| ✍️ **Section Builder** | Input content, configure settings, generate newsletter |
-| 👁️ **Preview** | Live rendered preview of your newsletter |
-| 📋 **Template Selector** | Browse and learn about section templates |
-| 📤 **Export** | Download as Markdown/HTML, manage archive |
+#### `export_to_html(markdown_content, newsletter_name)` → `str`
+
+Converts markdown newsletter to styled, responsive HTML.
+
+```python
+from newsletter_editor.core import export_to_html
+
+result = export_to_html(markdown_content)
+```
+
+---
+
+#### `archive_newsletter(content, name, config=None)` → `str`
+
+Archives newsletter with timestamp-based filename.
+
+```python
+from newsletter_editor.core import archive_newsletter
+
+result = archive_newsletter(content)
+```
+
+---
+
+#### `list_archive(config=None)` → `list[dict]`
+
+Lists archived newsletters with filename, path, size, modified date.
+
+```python
+from newsletter_editor.core import list_archive
+
+result = list_archive(config)
+```
+
+---
+
+
+
+---
 
 ## ⚙️ Configuration
 
-Edit `config.yaml` to customize behavior:
+### config.yaml
 
 ```yaml
 llm:
-  temperature: 0.7        # Creativity level (0.0-1.0)
-  max_tokens: 4096         # Max output length
-
-newsletter:
-  default_sections: 4
-  default_tone: "informative"
-  supported_tones:
-    - informative
-    - casual
-    - witty
-    - formal
-    - friendly
-
-export:
-  output_dir: "output"
-  archive_dir: "archive"
+  model: "llama3.1:8b"        # Ollama model name
+  temperature: 0.7            # Creativity (0.0-1.0)
+  max_tokens: 4096           # Maximum output length
+  host: "http://localhost:11434"  # Ollama server URL
 ```
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `OLLAMA_HOST` | Ollama server URL | `http://localhost:11434` |
+| `OLLAMA_MODEL` | Default model name | `llama3.1:8b` |
+
+### Configuration Priority
+
+```
+CLI flags → Environment variables → config.yaml → Built-in defaults
+```
+
+---
 
 ## 🧪 Testing
 
 ```bash
 # Run all tests
-make test
+python -m pytest tests/ -v
 
-# With coverage
-python -m pytest tests/ -v --cov=newsletter_editor
+# Run with coverage
+python -m pytest tests/ --cov=newsletter_editor --cov-report=term-missing
+
+# Run specific test file
+python -m pytest tests/test_core.py -v
+
+# Using Make
+make test
 ```
 
-## 🔧 Development
+---
+
+## ☁️ Local vs Cloud LLMs
+
+| Aspect | 🏠 Local (Ollama) | ☁️ Cloud (OpenAI/etc.) |
+|--------|-------------------|----------------------|
+| **Privacy** | ✅ Data never leaves your machine | ❌ Data sent to third-party servers |
+| **Cost** | ✅ Free after hardware investment | ❌ Per-token pricing adds up |
+| **Speed** | ⚡ No network latency | 🌐 Depends on internet speed |
+| **Availability** | ✅ Works offline, always available | ❌ Requires internet, may have outages |
+| **Models** | 🔄 Growing selection (Llama, Mistral) | ✅ Latest models (GPT-4, Claude) |
+| **Quality** | 🟡 Good for most tasks | ✅ State-of-the-art for complex tasks |
+| **Setup** | 🔧 One-time Ollama install | ✅ API key and go |
+| **Customization** | ✅ Fine-tune your own models | 🟡 Limited to provider options |
+
+> **Our recommendation:** Start with local models for development and privacy-sensitive content. Switch to cloud only if you need cutting-edge model quality for production.
+
+---
+
+## ❓ FAQ
+
+<details>
+<summary><strong>What LLM models work best?</strong></summary>
+<br>
+
+Any Ollama-compatible model works. We recommend `llama3.1:8b` for speed or `llama3.1:70b` for quality. Mistral and Mixtral also produce excellent newsletter content.
+
+</details>
+
+<details>
+<summary><strong>Can I customize the HTML email template?</strong></summary>
+<br>
+
+Yes! The `export_to_html()` function uses embedded CSS that you can modify. The default template is responsive with a max-width of 680px, optimized for email clients.
+
+</details>
+
+<details>
+<summary><strong>How does the archive system work?</strong></summary>
+<br>
+
+Every generated newsletter is automatically saved with a timestamp (e.g., `weekly_digest_20240115_143022.md`). Use `newsletter-editor archive` to browse your history.
+
+</details>
+
+<details>
+<summary><strong>Can I add my own section templates?</strong></summary>
+<br>
+
+Absolutely. Add new templates to the `SECTION_TEMPLATES` dict in `core.py`. Each template needs a `name`, `description`, and `hint` for the LLM.
+
+</details>
+
+<details>
+<summary><strong>Does it support multiple languages?</strong></summary>
+<br>
+
+The LLM can generate content in any language it was trained on. Add language instructions to your tone or use a custom prompt via the config file.
+
+</details>
+
+
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how to get started:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
 
 ```bash
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/newsletter-editor.git
+cd newsletter-editor
+
 # Install dev dependencies
-make dev
+pip install -r requirements.txt
+pip install -e ".[dev]"
 
-# Run linting
-make lint
-
-# Clean build artifacts
-make clean
+# Run tests before submitting
+python -m pytest tests/ -v
 ```
 
-## 📸 Screenshots
-<div align="center">
-<table>
-<tr>
-<td><img src="https://via.placeholder.com/400x250/1a1a2e/e94560?text=CLI+Interface" alt="CLI"/></td>
-<td><img src="https://via.placeholder.com/400x250/16213e/e94560?text=Web+UI" alt="Web UI"/></td>
-</tr>
-<tr><td align="center"><em>CLI Interface</em></td><td align="center"><em>Streamlit Web UI</em></td></tr>
-</table>
-</div>
+### Code Style
+
+- Follow **PEP 8** for Python code
+- Use **type hints** for function signatures
+- Write **docstrings** for all public functions
+- Add **tests** for new features
+
+---
 
 ## 📄 License
 
-This project is part of the [90 Local LLM Projects](../../README.md) collection.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+### 🌟 Part of the [90 Local LLM Projects](https://github.com/kennedyraju55/90-local-llm-projects) Series
+
+*Building real-world AI tools that run entirely on your local machine.*
+
+**Project 36 of 90** — 📧 Newsletter Editor
+
+[⬅️ Previous Project](../README.md) •
+[📋 All Projects](https://github.com/kennedyraju55/90-local-llm-projects) •
+[➡️ Next Project](../README.md)
+
+---
+
+<sub>Built with ❤️ using Ollama & Python | Star ⭐ if you find this useful!</sub>
+
+</div>

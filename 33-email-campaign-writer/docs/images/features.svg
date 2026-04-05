@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="350" viewBox="0 0 800 350">
+  <defs>
+    <linearGradient id="bgFeat" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accentFeat" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2ec4b6"/>
+      <stop offset="100%" style="stop-color:#533483"/>
+    </linearGradient>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="350" fill="url(#bgFeat)" rx="12"/>
+  <rect x="0" y="340" width="800" height="10" fill="url(#accentFeat)"/>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="bold">KEY FEATURES</text>
+
+  <!-- Row 1, Card 1: 5 Campaign Types -->
+  <rect x="30" y="52" width="235" height="120" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="50" y="78" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="22">🎯</text>
+  <text x="80" y="78" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">5 Campaign Types</text>
+  <text x="50" y="100" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">welcome • promotional</text>
+  <text x="50" y="116" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">nurture • re-engagement</text>
+  <text x="50" y="132" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">product-launch</text>
+  <text x="50" y="154" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="9">Each with optimized send timing</text>
+
+  <!-- Row 1, Card 2: A/B Subject Testing -->
+  <rect x="283" y="52" width="235" height="120" rx="8" fill="#1e2a45" stroke="#533483" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="303" y="78" fill="#a78bfa" font-family="Segoe UI,Arial,sans-serif" font-size="22">🔀</text>
+  <text x="333" y="78" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">A/B Subject Testing</text>
+  <text x="303" y="100" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Generate multiple subject</text>
+  <text x="303" y="116" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">line variants for split</text>
+  <text x="303" y="132" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">testing optimization</text>
+  <text x="303" y="154" fill="#c4b5fd" font-family="Segoe UI,Arial,sans-serif" font-size="9">generate_subject_variants()</text>
+
+  <!-- Row 1, Card 3: Personalization Engine -->
+  <rect x="536" y="52" width="235" height="120" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="556" y="78" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="22">🧩</text>
+  <text x="586" y="78" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">Personalization Engine</text>
+  <text x="556" y="100" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">{{token}} replacement</text>
+  <text x="556" y="116" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">with real user data.</text>
+  <text x="556" y="132" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Auto-detects placeholders.</text>
+  <text x="556" y="154" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="9">extract_personalization_tokens()</text>
+
+  <!-- Row 2, Card 4: HTML Email Preview -->
+  <rect x="30" y="190" width="235" height="120" rx="8" fill="#1e2a45" stroke="#533483" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="50" y="216" fill="#a78bfa" font-family="Segoe UI,Arial,sans-serif" font-size="22">🌐</text>
+  <text x="80" y="216" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">HTML Email Preview</text>
+  <text x="50" y="238" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Responsive email template</text>
+  <text x="50" y="254" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">output with inline styles</text>
+  <text x="50" y="270" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">and table-based layout.</text>
+  <text x="50" y="292" fill="#c4b5fd" font-family="Segoe UI,Arial,sans-serif" font-size="9">preview_html()</text>
+
+  <!-- Row 2, Card 5: Sequence Timeline -->
+  <rect x="283" y="190" width="235" height="120" rx="8" fill="#1e2a45" stroke="#2ec4b6" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="303" y="216" fill="#2ec4b6" font-family="Segoe UI,Arial,sans-serif" font-size="22">📅</text>
+  <text x="333" y="216" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">Sequence Timeline</text>
+  <text x="303" y="238" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Smart send-day spacing</text>
+  <text x="303" y="254" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">per campaign type with</text>
+  <text x="303" y="270" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">decay metrics over time.</text>
+  <text x="303" y="292" fill="#7dd3c0" font-family="Segoe UI,Arial,sans-serif" font-size="9">calculate_sequence_timeline()</text>
+
+  <!-- Row 2, Card 6: Metrics Estimation -->
+  <rect x="536" y="190" width="235" height="120" rx="8" fill="#1e2a45" stroke="#533483" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <text x="556" y="216" fill="#a78bfa" font-family="Segoe UI,Arial,sans-serif" font-size="22">📊</text>
+  <text x="586" y="216" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="bold">Metrics Estimation</text>
+  <text x="556" y="238" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">Open/click rate prediction</text>
+  <text x="556" y="254" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">per email with 3% decay</text>
+  <text x="556" y="270" fill="#a0a0b0" font-family="Segoe UI,Arial,sans-serif" font-size="10">factor across sequence.</text>
+  <text x="556" y="292" fill="#c4b5fd" font-family="Segoe UI,Arial,sans-serif" font-size="9">estimate_campaign_metrics()</text>
+</svg>

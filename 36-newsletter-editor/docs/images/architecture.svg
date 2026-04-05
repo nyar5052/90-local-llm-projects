@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="archbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8892b0"/>
+    </marker>
+  </defs>
+  <rect width="800" height="400" fill="url(#archbg)" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#06d6a0">System Architecture</text>
+  <g transform="translate(0,20)">
+  <path d="M170,190 C195.0,190 195.0,140 220,140" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M170,70 C195.0,70 195.0,120 220,120" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M370,135 C400.0,135 400.0,100 430,100" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M370,135 C400.0,135 400.0,170 430,170" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M590,135 C615.0,135 615.0,70 640,70" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M590,135 C615.0,135 615.0,190 640,190" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <path d="M590,135 C615.0,135 615.0,310 640,310" fill="none" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+
+  <rect x="40" y="160" width="130" height="60" rx="8" fill="#06d6a0" opacity="0.15" stroke="#06d6a0" stroke-width="1.5"/>
+  <text x="105" y="184" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#06d6a0">Raw Notes</text>
+  <text x="105" y="200" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">(.txt/.md)</text>
+  <rect x="40" y="40" width="130" height="60" rx="8" fill="#4ecdc4" opacity="0.15" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="105" y="64" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#4ecdc4">Config</text>
+  <text x="105" y="80" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">(config.yaml)</text>
+  <rect x="220" y="100" width="150" height="70" rx="8" fill="#ffd166" opacity="0.15" stroke="#ffd166" stroke-width="1.5"/>
+  <text x="295" y="129" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#ffd166">build_prompt()</text>
+  <text x="295" y="145" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">Prompt Engine</text>
+  <rect x="430" y="100" width="160" height="70" rx="8" fill="#ef476f" opacity="0.15" stroke="#ef476f" stroke-width="1.5"/>
+  <text x="510" y="129" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#ef476f">Ollama LLM</text>
+  <text x="510" y="145" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">generate_newsletter()</text>
+  <rect x="640" y="40" width="130" height="60" rx="8" fill="#06d6a0" opacity="0.15" stroke="#06d6a0" stroke-width="1.5"/>
+  <text x="705" y="64" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#06d6a0">Markdown</text>
+  <text x="705" y="80" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">Newsletter</text>
+  <rect x="640" y="160" width="130" height="60" rx="8" fill="#118ab2" opacity="0.15" stroke="#118ab2" stroke-width="1.5"/>
+  <text x="705" y="184" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#118ab2">HTML Export</text>
+  <text x="705" y="200" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">export_to_html()</text>
+  <rect x="640" y="280" width="130" height="60" rx="8" fill="#073b4c" opacity="0.15" stroke="#073b4c" stroke-width="1.5"/>
+  <text x="705" y="304" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#073b4c">Archive</text>
+  <text x="705" y="320" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="9" fill="#8892b0">archive_newsletter()</text>
+  </g>
+</svg>
