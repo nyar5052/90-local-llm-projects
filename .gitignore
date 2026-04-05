@@ -1,0 +1,18 @@
+# .gitignore for 90-local-llm-projects
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.db
+*.sqlite
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
