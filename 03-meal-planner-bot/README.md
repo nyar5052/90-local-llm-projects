@@ -12,6 +12,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-Web_UI-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
 [![License](https://img.shields.io/badge/License-MIT-2ec4b6?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-2ec4b6?style=for-the-badge)]()
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 
 <p>
   <a href="#-quick-start">Quick Start</a> •
@@ -145,6 +146,47 @@ streamlit run app.py
 ```
 
 Navigate to `http://localhost:8501` in your browser.
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/meal-planner-bot.git
+cd meal-planner-bot
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

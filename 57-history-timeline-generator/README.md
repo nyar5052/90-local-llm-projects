@@ -14,6 +14,7 @@
   <a href="#-testing"><img src="https://img.shields.io/badge/Tests-Passing-2a9d8f?style=flat-square&logo=pytest&logoColor=white" alt="Tests"/></a>
   <a href="https://github.com/kennedyraju55/history-timeline-generator"><img src="https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github" alt="GitHub"/></a>
   <a href="#-configuration"><img src="https://img.shields.io/badge/Config-YAML-cb171e?style=flat-square&logo=yaml&logoColor=white" alt="YAML Config"/></a>
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
 
   <br/><br/>
 
@@ -160,6 +161,47 @@ history-timeline generate --topic "French Revolution" --detail medium
 **Expected output:** A rich, color-coded table with 10–15 chronological events, era groupings, key themes, legacy analysis, and further reading recommendations.
 
 <br/>
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/history-timeline-generator.git
+cd history-timeline-generator
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

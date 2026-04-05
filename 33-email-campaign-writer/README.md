@@ -8,6 +8,7 @@
 [![Click CLI](https://img.shields.io/badge/Click-CLI-2ec4b6?style=flat-square&logo=gnu-bash&logoColor=white)](https://click.palletsprojects.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Project 33](https://img.shields.io/badge/Project-33%2F90-533483?style=flat-square)](https://github.com/kennedyraju55/90-local-llm-projects)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 
 **Part of the [90 Local LLM Projects](https://github.com/kennedyraju55/90-local-llm-projects) collection**
 
@@ -124,6 +125,47 @@ Campaign Type: welcome
 │  ...                                                          │
 ╰───────────────────────────────────────────────────────────────╯
 ```
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/email-campaign-writer.git
+cd email-campaign-writer
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

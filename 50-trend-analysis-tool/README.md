@@ -19,6 +19,7 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/kennedyraju55/trend-analysis-tool/ci.yml?branch=master&style=flat-square&label=CI)](https://github.com/kennedyraju55/trend-analysis-tool/actions)
 [![Tests](https://img.shields.io/badge/tests-pytest-brightgreen?style=flat-square&logo=pytest)](https://docs.pytest.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000?style=flat-square)](https://github.com/psf/black)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 [![GitHub stars](https://img.shields.io/github/stars/kennedyraju55/trend-analysis-tool?style=flat-square&color=f72585)](https://github.com/kennedyraju55/trend-analysis-tool/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/kennedyraju55/trend-analysis-tool?style=flat-square)](https://github.com/kennedyraju55/trend-analysis-tool/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kennedyraju55/trend-analysis-tool?style=flat-square&color=b5179e)](https://github.com/kennedyraju55/trend-analysis-tool/commits/master)
@@ -178,6 +179,47 @@ Overall Theme: Technology adoption driving business transformation
 ```
 
 <br/>
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/trend-analysis-tool.git
+cd trend-analysis-tool
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

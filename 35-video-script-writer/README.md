@@ -10,6 +10,7 @@
 [![Click](https://img.shields.io/badge/Click-CLI-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)](https://click.palletsprojects.com)
 [![Rich](https://img.shields.io/badge/Rich-Terminal-7209b7?style=flat-square&logo=python&logoColor=white)](https://github.com/Textualize/rich)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 
 <strong>Project #35 of the <a href="https://github.com/kennedyraju55/90-local-llm-projects">90 Local LLM Projects</a> collection</strong>
 
@@ -173,6 +174,47 @@ python src/video_script/cli.py --topic "Machine Learning 101" --duration 20 --st
 # If installed as a package
 video-script --topic "Python Tips" --duration 8 --hooks --thumbnails
 ```
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/video-script-writer.git
+cd video-script-writer
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

@@ -23,6 +23,7 @@
 [![YAML Config](https://img.shields.io/badge/Config-YAML-red?style=flat-square&logo=yaml&logoColor=white)](config.yaml)
 [![LaTeX](https://img.shields.io/badge/LaTeX-Output-008080?style=flat-square&logo=latex&logoColor=white)](#-latex-output)
 [![Gemma 3](https://img.shields.io/badge/Model-Gemma_3-4285F4?style=flat-square&logo=google&logoColor=white)](https://ollama.com/library/gemma3)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 
 <br/>
 
@@ -174,6 +175,47 @@ math-solver practice --category geometry --difficulty basic --count 3
 ```
 
 <br/>
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/math-problem-solver.git
+cd math-problem-solver
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

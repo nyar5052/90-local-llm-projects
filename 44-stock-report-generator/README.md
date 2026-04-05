@@ -13,6 +13,7 @@
 [![Tests](https://img.shields.io/github/actions/workflow/status/kennedyraju55/stock-report-generator/tests.yml?label=tests&style=flat-square&logo=githubactions&logoColor=white)](https://github.com/kennedyraju55/stock-report-generator/actions)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000?style=flat-square)](https://github.com/psf/black)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-ff6b35?style=flat-square)](https://github.com/kennedyraju55/stock-report-generator/pulls)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
 [![GitHub Stars](https://img.shields.io/github/stars/kennedyraju55/stock-report-generator?style=flat-square&color=ff6b35)](https://github.com/kennedyraju55/stock-report-generator/stargazers)
 
 **Professional stock analysis reports with technical indicators and risk assessment — powered by local LLM**
@@ -201,6 +202,47 @@ python -m src.stock_reporter.cli --file data/aapl.csv --ticker AAPL
 > **Note:** Output is color-coded in the terminal — green for bullish signals, red for bearish, yellow for neutral.
 
 <br/>
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/stock-report-generator.git
+cd stock-report-generator
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 

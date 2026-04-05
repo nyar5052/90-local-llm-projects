@@ -18,6 +18,7 @@
   <a href="https://github.com/kennedyraju55/science-experiment-explainer/issues"><img src="https://img.shields.io/github/issues/kennedyraju55/science-experiment-explainer?color=7209b7" alt="Open Issues"/></a>
   <a href="https://github.com/kennedyraju55/science-experiment-explainer/pulls"><img src="https://img.shields.io/github/issues-pr/kennedyraju55/science-experiment-explainer?color=3a0ca3" alt="Pull Requests"/></a>
   <img src="https://img.shields.io/badge/code%20style-ruff-000000.svg" alt="Code style: ruff"/>
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
 
   <br/><br/>
 
@@ -171,6 +172,47 @@ make run-web       # Launch Streamlit dashboard
 ```
 
 <br/>
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/science-experiment-explainer.git
+cd science-experiment-explainer
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
 
 ---
 
