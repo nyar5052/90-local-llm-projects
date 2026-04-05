@@ -1,0 +1,34 @@
+model:
+  name: "gemma3"
+  temperature: 0.3
+  max_tokens: 4000
+
+file_extensions:
+  - .txt
+  - .md
+  - .text
+  - .csv
+  - .log
+
+analysis:
+  max_documents: 50
+  preview_chars: 500
+  topic_limit: 20
+
+emerging_detection:
+  threshold: 0.7
+  min_frequency: "medium"
+
+sentiment:
+  enabled: true
+  granularity: "document"
+
+schedule:
+  enabled: false
+  frequency: "weekly"
+  day: "monday"
+  time: "09:00"
+
+logging:
+  level: "INFO"
+  file: "trend_analyzer.log"

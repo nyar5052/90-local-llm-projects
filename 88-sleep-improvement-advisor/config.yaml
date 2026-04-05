@@ -1,0 +1,15 @@
+app:
+  name: "Sleep Improvement Advisor"
+  version: "1.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.5
+  max_tokens: 2048
+sleep:
+  optimal_duration_min: 7.0
+  optimal_duration_max: 9.0
+  optimal_temperature_f: 67
+  screen_cutoff_minutes: 60
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

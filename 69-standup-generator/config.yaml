@@ -1,0 +1,27 @@
+llm:
+  model: "llama3.2"
+  temperature: 0.4
+  max_tokens: 2000
+
+standup:
+  default_template: "daily"
+  history_file: "standup_history.json"
+  auto_save: true
+
+git:
+  enabled: true
+  repo_path: "."
+  days: 1
+  include_branches: true
+
+team:
+  name: ""
+  members: []
+
+ticket:
+  pattern: "[A-Z]+-\\d+"
+  link_template: ""
+
+logging:
+  level: "INFO"
+  file: "standup_gen.log"

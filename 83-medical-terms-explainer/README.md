@@ -1,85 +1,183 @@
-# 83 - Medical Terms Explainer
+# 📚 Medical Terms Explainer
 
-> ⚠️ **DISCLAIMER**: This tool is for **EDUCATIONAL PURPOSES ONLY**. It does **NOT** provide medical advice, diagnosis, or treatment recommendations. Always consult a qualified healthcare professional for any medical questions or concerns.
+> ⚠️ **MEDICAL DISCLAIMER**: This tool is for **EDUCATIONAL PURPOSES ONLY**. It does **NOT** provide medical advice, diagnosis, or treatment recommendations. **ALWAYS** consult a qualified healthcare professional for any medical questions or concerns.
 
-## Overview
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
+[![Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-red.svg)](https://streamlit.io)
 
-Medical Terms Explainer uses a local LLM (via Ollama) to break down complex medical terminology into clear, accessible language. For each term it provides:
+An AI-powered medical terminology education tool that explains complex medical terms in simple language. Features pronunciation guides, visual aid references, related conditions, and a comprehensive medical abbreviation decoder.
 
-- **Definition** — precise medical definition
-- **Etymology** — word origins (Greek, Latin roots) and how the parts combine
-- **Layman Explanation** — simple everyday-language explanation
-- **Usage in Context** — example sentences showing clinical use
-- **Related Terms** — associated medical vocabulary with brief definitions
+---
 
-## Prerequisites
+## 🚨 Important Medical Disclaimer
 
-- Python 3.9+
-- [Ollama](https://ollama.com/) running locally with a model pulled (e.g., `ollama pull llama3`)
+> **This tool is for EDUCATIONAL PURPOSES ONLY.**
+>
+> - ❌ This is NOT medical advice
+> - ❌ Do NOT use this for self-diagnosis
+> - ✅ ALWAYS consult a healthcare professional
+> - ✅ Use this only as a learning aid
+>
+> The information provided is for educational enrichment only.
 
-## Installation
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 📖 **Term Explanation** | AI-powered medical term definitions with etymology |
+| 🗣️ **Pronunciation Guide** | Phonetic pronunciation for 20+ common terms |
+| 🖼️ **Visual Aid References** | Anatomical diagram references for context |
+| 🔗 **Related Conditions** | Links to related medical conditions |
+| 🔤 **Abbreviation Decoder** | 45+ medical abbreviations decoded |
+| 📊 **Detail Levels** | Brief, Standard, and Comprehensive explanations |
+| 🌐 **Web UI** | Interactive Streamlit interface |
+| ⚡ **CLI Tool** | Fast command-line lookups |
+
+---
+
+## 🏗️ Architecture
+
+```
+83-medical-terms-explainer/
+├── src/
+│   └── medical_terms/
+│       ├── __init__.py
+│       ├── core.py              # Core logic, databases, LLM integration
+│       ├── cli.py               # Click CLI interface
+│       └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py
+│   └── test_cli.py
+├── config.yaml
+├── setup.py
+├── requirements.txt
+├── Makefile
+├── .env.example
+└── README.md
+```
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Python 3.10+
+- [Ollama](https://ollama.com/) running locally with a model pulled (e.g., `ollama pull gemma4`)
+
+### Setup
 
 ```bash
 cd 83-medical-terms-explainer
+make install
+cp .env.example .env
+```
+
+Or manually:
+
+```bash
 pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
-## Usage
+---
 
-### Explain a Single Term
+## 💻 CLI Usage
 
-```bash
-python app.py explain --term "hypertension"
-```
-
-With a specific detail level:
+### Explain a Term
 
 ```bash
-python app.py explain --term "hypertension" --detail comprehensive
+python -m medical_terms.cli explain --term "hypertension" --detail comprehensive
 ```
 
 Detail levels:
+
 | Level | Description |
 |---|---|
 | `brief` | Short definition and layman explanation only |
 | `standard` | All sections with moderate detail (default) |
 | `comprehensive` | All sections with extensive detail and historical context |
 
-### Batch Explain Multiple Terms
+### Batch Explain
 
 ```bash
-python app.py batch --terms "hypertension,tachycardia,edema"
+python -m medical_terms.cli batch --terms "hypertension,tachycardia,edema"
 ```
 
-You can also set the detail level for batch mode:
+### Decode Abbreviation
 
 ```bash
-python app.py batch --terms "hypertension,tachycardia" --detail brief
+python -m medical_terms.cli abbreviation --abbrev "CBC"
 ```
 
-## Running Tests
+### List All Abbreviations
 
 ```bash
-pytest test_app.py -v
+python -m medical_terms.cli abbreviations
 ```
 
-## Project Structure
+### Search Abbreviations
 
+```bash
+python -m medical_terms.cli search --query "blood"
 ```
-83-medical-terms-explainer/
-├── app.py              # Main CLI application
-├── requirements.txt    # Python dependencies
-├── test_app.py         # Pytest test suite
-└── README.md           # This file
+
+### Pronunciation
+
+```bash
+python -m medical_terms.cli pronounce --term "arrhythmia"
 ```
+
+---
+
+## 🌐 Web UI
+
+```bash
+make run-web
+# OR
+streamlit run src/medical_terms/web_ui.py
+```
+
+The web interface provides:
+
+- **Term Explainer** tab — search and explain medical terms with pronunciation, visual aids, and related conditions
+- **Abbreviation Decoder** tab — decode and search 45+ medical abbreviations
+- **Pronunciation Guide** tab — look up phonetic pronunciations
+- Sidebar with search history and bookmarks
+
+---
+
+## 🧪 Testing
+
+```bash
+make test
+# OR
+python -m pytest tests/ -v
+```
+
+---
 
 ## How It Works
 
 1. The user provides a medical term (or a comma-separated list).
-2. A prompt is constructed with the requested detail level and sent to the local LLM.
+2. A prompt is constructed with the requested detail level and sent to the local LLM via Ollama.
 3. The LLM responds with a structured explanation covering definition, etymology, layman explanation, clinical usage, and related terms.
-4. Results are displayed in the terminal with rich formatting.
+4. Supplementary data (pronunciation, visual aids, related conditions) is looked up from built-in databases.
+5. Results are displayed in the terminal (CLI) or browser (Streamlit) with rich formatting.
 
-## Disclaimer
+---
 
-This project is strictly an **educational tool**. The explanations generated by the LLM may contain inaccuracies. **Do not** use this tool as a substitute for professional medical advice, diagnosis, or treatment. If you have a medical concern, please consult a licensed healthcare provider.
+## ⚠️ Disclaimer
+
+**This tool is for EDUCATIONAL PURPOSES ONLY. It does NOT provide medical advice, diagnosis, or treatment recommendations. Always consult a qualified healthcare professional.**
+
+The explanations generated by the LLM may contain inaccuracies. **Do not** use this tool as a substitute for professional medical advice, diagnosis, or treatment. If you have a medical concern, please consult a licensed healthcare provider.
+
+---
+
+*Part of the [90 Local LLM Projects](../../README.md) collection.*

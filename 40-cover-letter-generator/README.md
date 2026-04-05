@@ -1,95 +1,136 @@
-# Cover Letter Generator
+<div align="center">
 
-Generate personalized cover letters that match resume highlights to job descriptions using a local Gemma 4 LLM via Ollama.
+# ✉️ Cover Letter Generator
 
-## Features
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Powered by Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai/)
 
-- **Resume Matching**: Automatically identifies relevant experience from your resume
-- **Job-Specific**: Tailors content to specific job requirements
-- **Multiple Tones**: Professional, enthusiastic, confident, or conversational
-- **Strong Hooks**: Opens with compelling statements, not generic "I am writing to..."
-- **Metrics-Driven**: Highlights achievements with quantifiable results
-- **Proper Formatting**: Business letter format under 400 words
+**Generate personalized, AI-powered cover letters that match your resume to any job description.**
 
-## Prerequisites
+[Features](#-features) • [Installation](#-installation) • [CLI Usage](#-cli-usage) • [Web UI](#-web-ui) • [Architecture](#-architecture)
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with the Gemma 4 model
+</div>
 
-## Installation
+---
+
+## 🌟 Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Skill Matching Matrix** | Automatically matches resume skills to JD requirements with gap analysis |
+| 🎨 **4 Writing Tones** | Professional 👔, Enthusiastic 🔥, Confident 💪, Conversational 💬 |
+| 🔍 **Company Research Integration** | AI incorporates company context into personalized letters |
+| 📝 **Revision Tracking** | Save and browse revision history with versioning |
+| 📊 **Match Percentage** | See your skill match score before generating |
+| 📄 **File Upload Support** | Upload resume and JD as text files |
+| 💻 **Dual Interface** | Full CLI + Streamlit Web UI |
+| ⚙️ **YAML Configuration** | Flexible config management |
+
+## 🏗️ Architecture
+
+```
+40-cover-letter-generator/
+├── src/
+│   └── cover_letter_gen/
+│       ├── __init__.py          # Package metadata
+│       ├── core.py              # Business logic, skill matching, revisions
+│       ├── cli.py               # Click CLI with subcommands
+│       └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py             # Core logic tests
+│   └── test_cli.py              # CLI tests
+├── config.yaml                  # Configuration
+├── setup.py                     # Package setup
+├── Makefile                     # Build commands
+├── .env.example                 # Environment template
+├── requirements.txt             # Dependencies
+└── README.md                    # Documentation
+```
+
+## 📦 Installation
 
 ```bash
-pip install -r requirements.txt
+make install    # or: pip install -e .
+make dev        # with dev dependencies
 ```
 
-## Usage
+## 🖥️ CLI Usage
 
-### Prepare Input Files
-
-**resume.txt:**
-```
-Software Engineer with 5 years experience
-- Led team of 8 engineers at TechCorp
-- Built ML pipeline processing 1M+ records/day
-- Python, AWS, Kubernetes, TensorFlow
-- MS Computer Science from Stanford
-```
-
-**jd.txt:**
-```
-Senior Software Engineer at Google
-Requirements: Python, ML, cloud platforms
-We're looking for someone to lead our AI team...
-```
-
-### Run
+### Generate a Cover Letter
 
 ```bash
-# Basic usage
-python app.py --resume resume.txt --job-description jd.txt --company "Google"
+# Basic
+cover-letter-gen generate \
+  --resume resume.txt \
+  --job-description jd.txt \
+  --company "Google"
 
-# With tone and name
-python app.py --resume resume.txt --job-description jd.txt --company "Google" --tone enthusiastic --name "Jane Doe"
-
-# Save to file
-python app.py --resume resume.txt --job-description jd.txt --company "Meta" -o cover_letter.md
+# Full options
+cover-letter-gen generate \
+  --resume resume.txt \
+  --job-description jd.txt \
+  --company "Google" \
+  --tone confident \
+  --name "Jane Doe" \
+  --show-skills \
+  -o cover_letter.md
 ```
 
-### Options
-
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--resume` | Path to resume file (required) | - |
-| `--job-description` | Path to job description file (required) | - |
-| `--company` | Company name (required) | - |
-| `--tone` | Writing tone | professional |
-| `--name` | Applicant name | None |
-| `-o, --output` | Save to file | None |
-
-## Example Output
-
-```
-╭─ ✉️ Cover Letter ─────────────────────────────╮
-│ Dear Google Hiring Team,                       │
-│                                                │
-│ When I built an ML pipeline that processes     │
-│ over 1 million records daily at TechCorp,      │
-│ I realized my passion lies in solving          │
-│ problems at massive scale — exactly what       │
-│ your Senior Engineer role demands.             │
-│                                                │
-│ With 5 years of experience leading...          │
-│                                                │
-│ I would welcome the opportunity to discuss     │
-│ how my experience aligns with Google's...      │
-│                                                │
-│ Best regards,                                  │
-│ Jane Doe                                       │
-╰────────────────────────────────────────────────╯
-```
-
-## Testing
+### Analyze Skill Match
 
 ```bash
-pytest test_app.py -v
+cover-letter-gen skills --resume resume.txt --job-description jd.txt
 ```
+
+### List Tones
+
+```bash
+cover-letter-gen tones
+```
+
+### Browse Revisions
+
+```bash
+cover-letter-gen revisions
+cover-letter-gen revisions --company Google
+```
+
+## 🌐 Web UI
+
+```bash
+make run-web
+```
+
+| Tab | Description |
+|-----|-------------|
+| 📄 **Resume & JD Upload** | Paste or upload resume and job description |
+| ✉️ **Generated Letter** | View and download the cover letter |
+| 🎯 **Skill Match** | Visual skill matching chart with categories |
+| 📝 **Revision History** | Browse saved versions |
+
+## ⚙️ Configuration
+
+```yaml
+llm:
+  temperature: 0.7
+  max_tokens: 2048
+cover_letter:
+  max_words: 400
+  default_tone: "professional"
+revision:
+  max_revisions: 5
+  revision_dir: "revisions"
+```
+
+## 🧪 Testing
+
+```bash
+make test
+```
+
+## 📄 License
+
+Part of the [90 Local LLM Projects](../../README.md) collection.

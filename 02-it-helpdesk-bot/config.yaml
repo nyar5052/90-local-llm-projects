@@ -1,0 +1,15 @@
+# IT Helpdesk Bot — Configuration
+model:
+  name: gemma4
+  temperature: 0.7
+  max_tokens: 2048
+
+tickets:
+  storage_file: tickets.json
+
+knowledge_base:
+  file: knowledge_base.json
+
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

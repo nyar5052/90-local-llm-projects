@@ -1,0 +1,39 @@
+# Debate Topic Generator Configuration
+# ---------------------------------------
+
+app:
+  name: "Debate Topic Generator"
+  version: "1.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "llama3"
+  temperature: 0.8
+  max_tokens: 8192
+  base_url: "http://localhost:11434"
+
+debate:
+  default_topics: 3
+  complexity_levels:
+    - basic
+    - intermediate
+    - advanced
+  evidence_strength_levels:
+    - weak
+    - moderate
+    - strong
+
+judging:
+  default_criteria:
+    - criterion: "Argument Quality"
+      weight: 30
+    - criterion: "Evidence Strength"
+      weight: 25
+    - criterion: "Rebuttal Effectiveness"
+      weight: 25
+    - criterion: "Presentation"
+      weight: 20
+
+streamlit:
+  page_title: "🎙️ Debate Topic Generator"
+  layout: "wide"

@@ -1,72 +1,125 @@
-# Product Description Writer
+<div align="center">
 
-Generate SEO-optimized e-commerce product descriptions using a local Gemma 4 LLM via Ollama.
+# 🛒 Product Description Writer
 
-## Features
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Powered by Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai/)
 
-- **Multi-Platform**: Optimized for Amazon, Shopify, Etsy, eBay, or generic
-- **Platform Best Practices**: Each platform gets tailored copy style
-- **SEO Keywords**: Includes relevant search terms for discoverability
-- **Multiple Variants**: Generate several options for A/B testing
-- **Configurable Length**: Short, medium, or long descriptions
-- **Complete Copy**: Title, short description, full copy, and bullet points
+**Generate SEO-optimized, platform-specific e-commerce product descriptions with AI.**
 
-## Prerequisites
+[Features](#-features) • [Installation](#-installation) • [CLI Usage](#-cli-usage) • [Web UI](#-web-ui) • [Architecture](#-architecture)
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with the Gemma 4 model
+</div>
 
-## Installation
+---
+
+## 🌟 Features
+
+| Feature | Description |
+|---------|-------------|
+| 🏪 **Multi-Platform Support** | Amazon, Shopify, Etsy, eBay with platform-specific optimization |
+| 🔗 **Feature-Benefit Mapping** | Automatically maps product features to customer benefits |
+| 🔍 **SEO Keywords** | Keyword integration with density analysis and scoring |
+| 🔀 **A/B Variants** | Generate multiple description variants for testing |
+| 📏 **Length Control** | Short (50-100), Medium (150-250), Long (300-500) word options |
+| 📊 **SEO Score** | Real-time SEO score with keyword coverage metrics |
+| 💻 **Dual Interface** | Full CLI + Streamlit Web UI |
+| ⚙️ **YAML Configuration** | Flexible config management |
+
+## 🏗️ Architecture
+
+```
+38-product-description-writer/
+├── src/
+│   └── product_writer/
+│       ├── __init__.py          # Package metadata
+│       ├── core.py              # Business logic, SEO, platform configs
+│       ├── cli.py               # Click CLI with subcommands
+│       └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py             # Core logic tests
+│   └── test_cli.py              # CLI tests
+├── config.yaml                  # Configuration
+├── setup.py                     # Package setup
+├── Makefile                     # Build commands
+├── .env.example                 # Environment template
+├── requirements.txt             # Dependencies
+└── README.md                    # Documentation
+```
+
+## 📦 Installation
 
 ```bash
-pip install -r requirements.txt
+make install    # or: pip install -e .
+make dev        # with dev dependencies
 ```
 
-## Usage
+## 🖥️ CLI Usage
+
+### Generate Descriptions
 
 ```bash
-# Amazon listing
-python app.py --product "Wireless Headphones" --features "noise-cancel,bluetooth,40h battery" --platform amazon
+# Basic
+product-writer generate --product "Wireless Headphones"
 
-# Etsy listing
-python app.py --product "Handmade Ceramic Mug" --features "hand-glazed,dishwasher safe" --platform etsy --length long
-
-# Multiple variants
-python app.py --product "Standing Desk" --features "electric,memory presets" --variants 3 -o descriptions.md
+# Full options
+product-writer generate \
+  --product "Wireless Headphones" \
+  --features "noise-cancel,bluetooth,40h battery" \
+  --platform amazon \
+  --length long \
+  --variants 3 \
+  --keywords "wireless,headphones,noise canceling" \
+  -o output.md
 ```
 
-### Options
-
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--product` | Product name (required) | - |
-| `--features` | Comma-separated features | None |
-| `--platform` | E-commerce platform | generic |
-| `--length` | Description length (short/medium/long) | medium |
-| `--variants` | Number of variants | 2 |
-| `-o, --output` | Save to file | None |
-
-## Example Output
-
-```
-╭─ 🛒 Product Descriptions ─────────────────────╮
-│ ## Variant 1                                   │
-│ **Title:** Premium ANC Wireless Headphones     │
-│ with 40H Battery - Bluetooth 5.3               │
-│                                                │
-│ **Short:** Experience crystal-clear audio      │
-│ with industry-leading noise cancellation...    │
-│                                                │
-│ **Bullet Points:**                             │
-│ • 🎧 Active Noise Cancellation                │
-│ • 🔋 40-Hour Battery Life                      │
-│ • 📱 Bluetooth 5.3 Connectivity               │
-│ ...                                            │
-╰────────────────────────────────────────────────╯
-```
-
-## Testing
+### List Platforms
 
 ```bash
-pytest test_app.py -v
+product-writer platforms
 ```
+
+### Map Features to Benefits
+
+```bash
+product-writer benefits --features "waterproof,bluetooth,portable"
+```
+
+## 🌐 Web UI
+
+```bash
+make run-web
+```
+
+| Tab | Description |
+|-----|-------------|
+| 📝 **Product Form** | Enter product details, features, keywords |
+| 🏪 **Platform Tabs** | Browse platform-specific guidelines |
+| 📄 **Generated** | View and download generated descriptions |
+| 📊 **SEO Score** | Keyword coverage, density analysis, overall score |
+
+## ⚙️ Configuration
+
+```yaml
+llm:
+  temperature: 0.7
+  max_tokens: 4096
+product:
+  platforms: [amazon, shopify, etsy, ebay, generic]
+  default_variants: 2
+seo:
+  keyword_count: 10
+```
+
+## 🧪 Testing
+
+```bash
+make test
+```
+
+## 📄 License
+
+Part of the [90 Local LLM Projects](../../README.md) collection.

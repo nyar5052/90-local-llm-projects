@@ -1,0 +1,45 @@
+# Curriculum Planner Configuration
+llm:
+  temperature: 0.7
+  max_tokens: 8192
+
+curriculum:
+  default_weeks: 12
+  default_level: "beginner"
+  max_weeks: 52
+  bloom_levels:
+    - Remember
+    - Understand
+    - Apply
+    - Analyze
+    - Evaluate
+    - Create
+
+assessment:
+  types:
+    - quiz
+    - assignment
+    - project
+    - exam
+    - presentation
+    - discussion
+  default_weights:
+    quizzes: 20
+    assignments: 30
+    project: 30
+    exam: 20
+
+resources:
+  categories:
+    - textbook
+    - video
+    - article
+    - tool
+    - website
+
+storage:
+  output_dir: "./curricula"
+
+logging:
+  level: "INFO"
+  file: "curriculum_planner.log"

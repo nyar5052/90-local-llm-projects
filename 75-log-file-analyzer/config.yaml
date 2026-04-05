@@ -1,0 +1,20 @@
+# Log File Analyzer Configuration
+
+app:
+  name: "Log File Analyzer"
+  version: "1.0.0"
+  log_level: "INFO"
+
+model:
+  name: "llama3"
+  temperature: 0.3
+  max_tokens: 3000
+
+analysis:
+  max_log_chars: 15000
+  pattern_matching: true
+  anomaly_detection: true
+
+streamlit:
+  port: 8505
+  theme: "dark"

@@ -1,0 +1,30 @@
+# History Timeline Generator Configuration
+# ------------------------------------------
+
+app:
+  name: "History Timeline Generator"
+  version: "1.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "llama3"
+  temperature: 0.5
+  max_tokens: 8192
+  base_url: "http://localhost:11434"
+
+detail_levels:
+  - brief
+  - medium
+  - detailed
+
+event_categories:
+  - political
+  - military
+  - social
+  - economic
+  - cultural
+  - scientific
+
+streamlit:
+  page_title: "📜 History Timeline Generator"
+  layout: "wide"

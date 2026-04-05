@@ -1,0 +1,32 @@
+# Poem & Lyrics Generator — Configuration
+app:
+  name: "Poem & Lyrics Generator"
+  version: "2.0.0"
+
+llm:
+  model: "llama3"
+  temperature: 0.9
+  max_tokens: 2048
+
+poem:
+  default_style: "free-verse"
+  available_styles:
+    - haiku
+    - sonnet
+    - free-verse
+    - limerick
+    - rap
+    - ballad
+    - acrostic
+  available_moods:
+    - happy
+    - melancholic
+    - romantic
+    - dark
+    - hopeful
+    - nostalgic
+  collections_dir: "collections"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

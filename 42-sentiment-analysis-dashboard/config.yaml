@@ -1,0 +1,21 @@
+# Sentiment Analysis Dashboard Configuration
+# =============================================
+
+llm:
+  model: "gemma3:4b"
+  temperature: 0.2
+  max_tokens: 2000
+  base_url: "http://localhost:11434"
+
+analysis:
+  batch_size: 10
+  trend_window: 5
+  word_cloud_max_words: 50
+
+export:
+  default_format: "json"
+  include_raw_text: true
+
+logging:
+  level: "INFO"
+  file: null

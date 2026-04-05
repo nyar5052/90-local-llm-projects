@@ -1,0 +1,12 @@
+app:
+  name: "Exercise Form Guide"
+  version: "1.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.5
+  max_tokens: 2048
+valid_levels: ["beginner", "intermediate", "advanced"]
+valid_goals: ["strength", "hypertrophy", "endurance", "flexibility"]
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

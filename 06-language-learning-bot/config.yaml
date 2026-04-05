@@ -1,0 +1,40 @@
+# Language Learning Bot Configuration
+
+llm:
+  model: gemma4
+  temperature: 0.7
+  max_tokens: 2048
+
+languages:
+  - spanish
+  - french
+  - german
+  - italian
+  - portuguese
+  - japanese
+  - korean
+  - chinese
+  - arabic
+  - hindi
+  - russian
+  - dutch
+  - swedish
+  - turkish
+  - greek
+
+levels:
+  - beginner
+  - intermediate
+  - advanced
+
+vocabulary:
+  storage_file: vocabulary.json
+  max_words_per_session: 20
+
+progress:
+  storage_file: progress.json
+  track_sessions: true
+
+web_ui:
+  title: "🌍 Language Learning Bot"
+  page_icon: "🌍"

@@ -1,85 +1,132 @@
 # 📐 Math Problem Solver
 
-Solve math problems with step-by-step explanations using a local LLM (Gemma 4 via Ollama).
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM-Ollama-orange?logo=meta&logoColor=white)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-red?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?logo=pytest)
 
-## Features
+> 🧮 **Solve math problems with step-by-step explanations, LaTeX output, formula library, and practice mode — powered by a local LLM.**
 
-- **Step-by-step solutions**: Detailed breakdown of each step
-- **Multiple categories**: Algebra, calculus, geometry, statistics, trigonometry
-- **Concept identification**: Lists mathematical concepts used
-- **Practice problems**: Suggests related problems for practice
-- **Tips**: Helpful hints for similar problems
+---
 
-## Prerequisites
+## ✨ Features
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with Gemma 4 model
+| Feature | Description |
+|---------|-------------|
+| 🔢 **Step-by-Step Solutions** | Detailed breakdowns of every math problem |
+| 📐 **Formula Library** | Built-in reference for algebra, geometry, calculus, trigonometry |
+| 🏋️ **Practice Mode** | Generate practice problems with difficulty progression |
+| 📄 **LaTeX Output** | Publication-ready mathematical notation |
+| 🎯 **Difficulty Progression** | Problems from basic → intermediate → advanced |
+| 🌐 **Streamlit Web UI** | Beautiful interactive web interface |
+| 💻 **Rich CLI** | Full-featured terminal interface with color output |
+| ⚙️ **YAML Config** | Centralized configuration management |
+| 📊 **Structured Logging** | Production-grade logging throughout |
 
-## Installation
+---
+
+## 🏗️ Architecture
+
+```
+56-math-problem-solver/
+├── src/math_solver/
+│   ├── __init__.py          # Package metadata
+│   ├── core.py              # Business logic, data models, LLM interaction
+│   ├── cli.py               # Rich CLI with Click commands
+│   └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── test_core.py         # Core logic tests
+│   └── test_cli.py          # CLI integration tests
+├── config.yaml              # Application configuration
+├── setup.py                 # Package installation
+├── Makefile                 # Common development tasks
+├── .env.example             # Environment variable template
+├── requirements.txt         # Python dependencies
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Installation
 
 ```bash
-pip install -r requirements.txt
+# Clone and navigate
+cd 56-math-problem-solver
+
+# Install with pip
+pip install -e .
+
+# Or install dev dependencies
+pip install -e ".[dev]"
+
+# Ensure Ollama is running
+ollama serve
 ```
 
-## Usage
+---
 
-### Solve with step-by-step explanation
-```bash
-python app.py --problem "solve 2x + 5 = 15" --show-steps
-```
-
-### Quick answer only
-```bash
-python app.py --problem "integrate x^2 dx" --no-steps
-```
-
-### Specify category
-```bash
-python app.py --problem "find the area of a circle with radius 5" --category geometry
-```
-
-### Save solution
-```bash
-python app.py --problem "find the derivative of x^3 + 2x" --output solution.json
-```
-
-## Options
-
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--problem` | `-p` | Math problem to solve (required) |
-| `--show-steps/--no-steps` | | Show step-by-step solution (default: on) |
-| `--category` | `-c` | algebra, calculus, geometry, statistics, arithmetic, trigonometry |
-| `--output` | `-o` | Save solution to JSON file |
-
-## Example Output
-
-```
-╭──────── 📐 Problem ────────╮
-│ Solve 2x + 5 = 15          │
-│ Category: algebra           │
-╰─────────────────────────────╯
-
-📝 Solution Steps:
-
-Step 1: Subtract 5 from both sides
-  ┌──────────────────────┐
-  │ 2x + 5 - 5 = 15 - 5 │
-  │ 2x = 10              │
-  └──────────────────────┘
-
-Step 2: Divide both sides by 2
-  ┌──────────────┐
-  │ x = 5        │
-  └──────────────┘
-
-╭────── ✅ Answer ──────╮
-│ x = 5                 │
-╰───────────────────────╯
-```
-
-## Running Tests
+## 💻 CLI Usage
 
 ```bash
-pytest test_app.py -v
+# Solve a problem with step-by-step explanation
+math-solver solve --problem "Solve 2x + 5 = 15"
+
+# Specify category
+math-solver solve --problem "Find the area of a circle with r=5" --category geometry
+
+# Save solution to file
+math-solver solve --problem "∫ x² dx" --output solution.json
+
+# Browse formula library
+math-solver formulas --category algebra
+
+# Generate practice problems
+math-solver practice --category calculus --difficulty intermediate --count 5
 ```
+
+---
+
+## 🌐 Web UI
+
+```bash
+# Launch the Streamlit web interface
+streamlit run src/math_solver/web_ui.py
+```
+
+Features:
+- 🔢 **Problem Input** — Enter any math problem and get instant solutions
+- 📝 **Step-by-Step Display** — Expandable solution steps with LaTeX rendering
+- 📖 **Formula Reference** — Browse formulas by category
+- 🏋️ **Practice Quiz** — Interactive practice with hints and answers
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# With coverage
+pytest tests/ -v --cov=src/math_solver --cov-report=term-missing
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to customize:
+
+```yaml
+llm:
+  model: "llama3"
+  temperature: 0.2
+  max_tokens: 4096
+```
+
+---
+
+## 📝 License
+
+MIT

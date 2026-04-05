@@ -1,70 +1,168 @@
-# Email Campaign Writer
+# 📧 Email Campaign Writer
 
-Generate professional marketing email sequences using a local Gemma 4 LLM via Ollama.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Code Style: PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://peps.python.org/pep-0008/)
 
-## Features
+> Generate professional, conversion-optimized marketing email sequences using a local LLM via Ollama.
 
-- **Multi-Email Sequences**: Generate cohesive email campaigns with 1-10 emails
-- **Campaign Types**: Welcome, promotional, nurture, re-engagement, and product launch
-- **A/B Subject Lines**: Each email includes subject line variants for testing
-- **Complete Email Copy**: Subject, preview text, body, and call-to-action
-- **Send Timing**: Suggested scheduling relative to previous emails
-- **Copywriting Frameworks**: Uses AIDA, PAS, and other proven frameworks
+---
 
-## Prerequisites
+## ✨ Features
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with the Gemma 4 model
+- 📬 **Multi-Email Sequences** — Generate cohesive campaigns with 1–10 emails
+- 🎯 **5 Campaign Types** — Welcome, promotional, nurture, re-engagement, product-launch
+- 🔀 **A/B Subject Line Testing** — Generate multiple subject-line variants for split testing
+- 🧩 **Personalization Tokens** — Auto-detect `{{first_name}}` style placeholders and render with real data
+- 🌐 **HTML Email Preview** — Responsive HTML email template output
+- 📅 **Sequence Timeline** — Visualize day-by-day send schedule
+- 📊 **Campaign Metrics** — Estimated open & click rates per campaign type
+- 🖥️ **Streamlit Web UI** — Full-featured browser-based campaign builder
+- ⌨️ **Rich CLI** — Beautiful terminal output with tables, panels, and progress spinners
+- ⚙️ **YAML Config** — Centralized configuration for LLM, campaign defaults, and metrics
 
-## Installation
+## 🏗️ Architecture
 
-```bash
-pip install -r requirements.txt
+```
+33-email-campaign-writer/
+├── src/
+│   └── email_campaign/
+│       ├── __init__.py        # Public API exports
+│       ├── core.py            # Business logic, dataclasses, LLM interaction
+│       ├── cli.py             # Click CLI interface
+│       └── web_ui.py          # Streamlit web application
+├── tests/
+│   ├── conftest.py            # Pytest configuration & path setup
+│   ├── test_core.py           # Core module tests
+│   └── test_cli.py            # CLI integration tests
+├── config.yaml                # App configuration
+├── setup.py                   # Package setup with entry points
+├── requirements.txt           # Python dependencies
+├── Makefile                   # Dev shortcuts
+├── .env.example               # Environment variable template
+└── README.md
 ```
 
-## Usage
+## 📋 Prerequisites
+
+- **Python 3.10+**
+- **[Ollama](https://ollama.ai/)** running locally with a model (e.g. `llama3`)
 
 ```bash
-# Basic usage
-python app.py --product "SaaS Tool" --audience "developers" --emails 3
+# Install & start Ollama, then pull a model
+ollama serve
+ollama pull llama3
+```
 
-# Welcome campaign
-python app.py --product "Fitness App" --audience "health enthusiasts" --type welcome --emails 5
+## 🚀 Installation
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Or install as a package (editable mode)
+pip install -e ".[dev]"
+```
+
+## ⌨️ CLI Usage
+
+```bash
+# Basic campaign generation
+python src/email_campaign/cli.py --product "SaaS Tool" --audience "developers"
+
+# Welcome campaign with 5 emails
+python src/email_campaign/cli.py \
+  --product "Fitness App" \
+  --audience "health enthusiasts" \
+  --type welcome --emails 5
+
+# A/B subject line testing
+python src/email_campaign/cli.py \
+  --product "Online Course" --audience "marketers" --subject-test
+
+# Show timeline + metrics
+python src/email_campaign/cli.py \
+  --product "SaaS Tool" --audience "developers" --timeline
+
+# Personalize preview
+python src/email_campaign/cli.py \
+  --product "App" --audience "users" \
+  --personalize '{"first_name":"Jane","company":"Acme"}'
+
+# HTML preview output
+python src/email_campaign/cli.py \
+  --product "App" --audience "users" --html-preview
 
 # Save to file
-python app.py --product "Online Course" --audience "marketers" --type nurture -o campaign.md
+python src/email_campaign/cli.py \
+  --product "Course" --audience "students" -o campaign.md
 ```
 
-### Options
+### CLI Options
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `--product` | Product/service name (required) | - |
-| `--audience` | Target audience (required) | - |
-| `--emails` | Number of emails in sequence | 3 |
+| `--product` | Product/service name **(required)** | — |
+| `--audience` | Target audience **(required)** | — |
+| `--emails` | Number of emails (1–10) | 3 |
 | `--type` | Campaign type | promotional |
-| `-o, --output` | Save output to file | None |
+| `--subject-test` | Generate A/B subject variants | off |
+| `--html-preview` | Save HTML email preview | off |
+| `--timeline` | Show sequence timeline & metrics | off |
+| `--personalize` | JSON user data for token replacement | — |
+| `-o, --output` | Save campaign to file | — |
 
-## Example Output
-
-```
-╭─ Email Campaign ───────────────────────────────╮
-│ ## Email 1 - Welcome                           │
-│ **Subject A:** Welcome to SaaS Tool, {{name}}! │
-│ **Subject B:** Your journey starts now 🚀      │
-│ **Preview:** Get started in 3 easy steps...    │
-│                                                │
-│ **Body:**                                      │
-│ Hi {{first_name}},                             │
-│ Welcome aboard! We're thrilled to have you...  │
-│                                                │
-│ **CTA:** [Start Your Free Trial]               │
-│ **Send:** Immediately after signup              │
-╰────────────────────────────────────────────────╯
-```
-
-## Testing
+## 🖥️ Web UI
 
 ```bash
-pytest test_app.py -v
+streamlit run src/email_campaign/web_ui.py
 ```
+
+The Streamlit UI provides:
+- **Campaign Builder** — Product, audience, type, and email count inputs
+- **Subject A/B Testing** — Side-by-side subject line comparison
+- **Email Preview** — Expandable email cards with personalization highlighting
+- **HTML Preview** — Rendered HTML email in an embedded viewer
+- **Timeline** — Day-by-day send schedule visualization
+- **Metrics Dashboard** — Estimated open/click rate gauges
+- **Token Editor** — Edit personalization values and preview results
+- **JSON Export** — Download full campaign as structured JSON
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# With coverage
+pytest tests/ -v --tb=short --cov=email_campaign
+```
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to customize:
+
+```yaml
+app:
+  name: "Email Campaign Writer"
+  version: "2.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.7
+  max_tokens: 4096
+campaign:
+  default_type: "promotional"
+  default_emails: 3
+  max_emails: 10
+  metrics:
+    welcome:
+      avg_open_rate: 0.82
+      avg_click_rate: 0.26
+    promotional:
+      avg_open_rate: 0.21
+      avg_click_rate: 0.025
+```
+
+## 📄 License
+
+MIT

@@ -1,0 +1,7 @@
+# Code Translator Configuration
+
+ollama_base_url: "http://localhost:11434"
+model: "gemma3:1b"
+temperature: 0.3
+max_code_chars: 5000
+batch_output_dir: "translations"

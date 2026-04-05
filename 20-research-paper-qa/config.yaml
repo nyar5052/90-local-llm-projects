@@ -1,0 +1,16 @@
+# Research Paper QA Configuration
+llm:
+  model: gemma4
+  temperature: 0.3
+  max_tokens: 2048
+
+qa:
+  max_papers: 10
+  max_history: 50
+  enable_citations: true
+  enable_followup_suggestions: true
+  num_followup_suggestions: 3
+  export_formats:
+    - markdown
+    - json
+    - text

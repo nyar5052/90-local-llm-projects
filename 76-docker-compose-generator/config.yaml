@@ -1,0 +1,28 @@
+# Docker Compose Generator Configuration
+# ========================================
+
+app:
+  name: "Docker Compose Generator"
+  version: "2.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "gemma3"
+  temperature: 0.3
+  max_tokens: 3000
+  timeout: 120
+
+environments:
+  - development
+  - staging
+  - production
+
+defaults:
+  environment: "development"
+  network_mode: "simple"
+  validate_output: true
+  compose_version: "3.8"
+
+ui:
+  theme: "dark"
+  page_title: "🐳 Docker Compose Generator"

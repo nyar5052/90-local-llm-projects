@@ -1,0 +1,33 @@
+# Reading Comprehension Builder Configuration
+# -----------------------------------------------
+
+app:
+  name: "Reading Comprehension Builder"
+  version: "1.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "llama3"
+  temperature: 0.7
+  max_tokens: 8192
+  base_url: "http://localhost:11434"
+
+reading_levels:
+  - elementary
+  - middle school
+  - high school
+  - college
+
+passage_lengths:
+  short: 200
+  medium: 400
+  long: 600
+
+scoring:
+  excellent_threshold: 90
+  good_threshold: 70
+  fair_threshold: 50
+
+streamlit:
+  page_title: "📚 Reading Comprehension Builder"
+  layout: "wide"

@@ -1,0 +1,14 @@
+app:
+  name: "First Aid Guide Bot"
+  version: "1.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.3
+  max_tokens: 1500
+emergency:
+  primary: "911"
+  poison_control: "1-800-222-1222"
+  crisis_line: "988"
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

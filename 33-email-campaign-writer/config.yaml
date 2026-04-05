@@ -1,0 +1,29 @@
+app:
+  name: "Email Campaign Writer"
+  version: "2.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.7
+  max_tokens: 4096
+campaign:
+  default_type: "promotional"
+  default_emails: 3
+  max_emails: 10
+  metrics:
+    welcome:
+      avg_open_rate: 0.82
+      avg_click_rate: 0.26
+    promotional:
+      avg_open_rate: 0.21
+      avg_click_rate: 0.025
+    nurture:
+      avg_open_rate: 0.35
+      avg_click_rate: 0.045
+    re-engagement:
+      avg_open_rate: 0.28
+      avg_click_rate: 0.035
+    product-launch:
+      avg_open_rate: 0.45
+      avg_click_rate: 0.055
+logging:
+  level: "INFO"

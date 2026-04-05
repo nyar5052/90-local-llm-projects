@@ -1,42 +1,96 @@
-# 84 - Health Plan Generator
+# 🏋️ Health Plan Generator
 
-> ⚠️ **DISCLAIMER**: This tool is for **INFORMATIONAL and EDUCATIONAL PURPOSES ONLY**. It does **NOT** provide medical advice, diagnosis, or treatment. The plans generated are general wellness suggestions and are **NOT** a substitute for professional medical guidance. Always consult a qualified healthcare professional before starting any new health, diet, or exercise program.
+> ⚠️ **MEDICAL DISCLAIMER**: This tool is for **INFORMATIONAL and EDUCATIONAL PURPOSES ONLY**. It does **NOT** provide medical advice, diagnosis, or treatment. The plans generated are general wellness suggestions and are **NOT** a substitute for professional medical guidance. **ALWAYS** consult a qualified healthcare professional before starting any new health, diet, or exercise program.
 
-## Overview
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
+[![Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-red.svg)](https://streamlit.io)
 
-Health Plan Generator uses a local LLM (via Ollama) to create personalized wellness plans based on your goals and preferences. Each plan includes:
+An AI-powered personalized wellness plan generator with goal milestones, weekly check-ins, progress tracking, and adaptive recommendations.
 
-- **Overview** — summary of the plan and its objectives
-- **Diet Suggestions** — general nutrition guidance
-- **Exercise Plan** — activity recommendations for your fitness level
-- **Sleep Recommendations** — habits for better rest
-- **Stress Management** — techniques for managing stress
-- **Sample Weekly Schedule** — a day-by-day outline
+---
 
-## Prerequisites
+## 🚨 Important Medical Disclaimer
 
-- Python 3.9+
-- [Ollama](https://ollama.com/) running locally with a model pulled (e.g., `ollama pull llama3`)
+> **This tool does NOT provide medical advice.**
+>
+> - ❌ Plans are NOT a substitute for professional guidance
+> - ❌ Do NOT start a new program without consulting your doctor
+> - ✅ ALWAYS consult a healthcare professional first
+> - ✅ Use this as a supplement to professional advice only
+>
+> Generated plans are for **educational and informational purposes only**.
 
-## Installation
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 📋 **Plan Generation** | AI-powered personalized wellness plans |
+| 🎯 **Goal Milestones** | Week-by-week milestones for common health goals |
+| 📊 **Weekly Check-ins** | Structured weekly progress questionnaires |
+| 📈 **Progress Tracking** | Track energy, sleep, and overall progress |
+| 🔄 **Adaptive Recommendations** | AI adjusts suggestions based on your progress |
+| 🌐 **Web UI** | Interactive Streamlit interface |
+| ⚡ **CLI Tool** | Fast command-line plan generation |
+
+---
+
+## 🏗️ Architecture
+
+```
+84-health-plan-generator/
+├── src/
+│   └── health_planner/
+│       ├── __init__.py      # Package init & version
+│       ├── core.py          # Core logic, milestones, progress tracking
+│       ├── cli.py           # Click CLI interface
+│       └── web_ui.py        # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py         # Core logic tests
+│   └── test_cli.py          # CLI command tests
+├── config.yaml              # Model & generation settings
+├── setup.py                 # Package setup
+├── requirements.txt         # Python dependencies
+├── Makefile                 # Common tasks
+├── .env.example             # Environment template
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Python 3.10+
+- [Ollama](https://ollama.com/) running locally with a model pulled (e.g., `ollama pull gemma4`)
+
+### Setup
 
 ```bash
 cd 84-health-plan-generator
+pip install -e ".[dev]"
+cp .env.example .env
+```
+
+Or without editable install:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+---
+
+## 💻 CLI Usage
 
 ### Generate a Plan
 
 ```bash
-python app.py generate --goal "better sleep"
-```
-
-With additional options:
-
-```bash
-python app.py generate --goal "better sleep" --age 30 --lifestyle sedentary --duration 1month
+python -m health_planner.cli generate --goal "lose weight" --age 30 --lifestyle moderate --duration 1month
 ```
 
 | Option | Values | Description |
@@ -48,37 +102,71 @@ python app.py generate --goal "better sleep" --age 30 --lifestyle sedentary --du
 
 ### Interactive Mode
 
-For a guided experience with step-by-step prompts:
+```bash
+python -m health_planner.cli interactive
+```
+
+### View Milestones
 
 ```bash
-python app.py interactive
+python -m health_planner.cli milestones --goal "better sleep"
 ```
 
-You'll be asked about your goal, age, activity level, and desired duration before the plan is generated.
-
-## Running Tests
+### Weekly Check-in
 
 ```bash
-pytest test_app.py -v
+python -m health_planner.cli checkin
 ```
 
-## Project Structure
+### View Progress
 
-```
-84-health-plan-generator/
-├── app.py              # Main CLI application
-├── requirements.txt    # Python dependencies
-├── test_app.py         # Pytest test suite
-└── README.md           # This file
+```bash
+python -m health_planner.cli progress
 ```
 
-## How It Works
+---
 
-1. You provide a wellness goal along with optional parameters (age, lifestyle, duration).
-2. A structured prompt is sent to the local LLM via Ollama.
-3. The LLM generates a comprehensive wellness plan with diet, exercise, sleep, stress management sections, and a sample weekly schedule.
-4. The plan is displayed in the terminal with rich formatting.
+## 🌐 Web UI
 
-## Disclaimer
+Launch the Streamlit web interface:
 
-This project is strictly an **educational and informational tool**. The wellness plans generated by the LLM are general suggestions and may not be appropriate for your specific health situation. **Do not** use this tool as a substitute for professional medical advice, diagnosis, or treatment. Always consult a licensed healthcare provider before making changes to your health routine.
+```bash
+streamlit run src/health_planner/web_ui.py
+```
+
+The web UI features four tabs:
+
+1. **Plan Generator** — Generate and display AI wellness plans
+2. **Milestone Tracker** — View week-by-week milestones with progress indicators
+3. **Weekly Check-in** — Submit structured weekly check-in questionnaires
+4. **Progress Dashboard** — Charts and metrics for energy, sleep, and stress trends
+
+---
+
+## 🧪 Testing
+
+```bash
+pytest tests/ -v --tb=short
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to adjust LLM settings:
+
+```yaml
+model: "gemma4"
+temperature: 0.4
+max_tokens: 3000
+```
+
+---
+
+## ⚠️ Disclaimer
+
+**This tool is for INFORMATIONAL and EDUCATIONAL PURPOSES ONLY. The wellness plans generated are general suggestions and may not be appropriate for your specific health situation. Do NOT use this tool as a substitute for professional medical advice, diagnosis, or treatment. ALWAYS consult a qualified healthcare professional before starting any new health, diet, or exercise program.**
+
+---
+
+*Part of the [90 Local LLM Projects](../../README.md) collection.*

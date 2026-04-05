@@ -1,0 +1,41 @@
+# Essay Grader Configuration
+llm:
+  temperature: 0.3
+  max_tokens: 4096
+
+grading:
+  default_rubric: "academic"
+  max_essay_length: 50000
+  annotation_enabled: true
+
+rubric_presets:
+  - academic
+  - creative_writing
+  - argumentative
+  - narrative
+  - research_paper
+
+grade_scale:
+  "A+": 9.5
+  "A": 9.0
+  "A-": 8.5
+  "B+": 8.0
+  "B": 7.5
+  "B-": 7.0
+  "C+": 6.5
+  "C": 6.0
+  "C-": 5.5
+  "D": 4.0
+  "F": 0.0
+
+plagiarism:
+  enabled: true
+  threshold: 0.7
+
+storage:
+  history_file: "grade_history.json"
+  reports_dir: "./reports"
+
+logging:
+  level: "INFO"
+  file: "essay_grader.log"

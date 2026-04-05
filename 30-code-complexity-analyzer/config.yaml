@@ -1,0 +1,11 @@
+# Code Complexity Analyzer Configuration
+
+ollama_base_url: "http://localhost:11434"
+model: "gemma3:1b"
+temperature: 0.3
+max_code_chars: 5000
+trends_file: "complexity_trends.json"
+cc_threshold_low: 5
+cc_threshold_high: 10
+mi_threshold_good: 65
+mi_threshold_moderate: 35

@@ -1,78 +1,113 @@
 # 📜 History Timeline Generator
 
-Generate historical timelines with key events, figures, and significance using a local LLM (Gemma 4 via Ollama).
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM-Ollama-orange?logo=meta&logoColor=white)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-red?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?logo=pytest)
 
-## Features
+> 🏛️ **Generate rich historical timelines with era grouping, key figure profiles, and cause-effect chain analysis — powered by a local LLM.**
 
-- **Chronological timelines**: Events ordered by date
-- **Key figures**: Important people for each event
-- **Category tagging**: Political, military, social, economic, cultural, scientific
-- **Multiple detail levels**: Brief, medium, detailed
-- **Date range filtering**: Focus on specific periods
-- **Themes and legacy**: Overarching themes and long-term impact
+---
 
-## Prerequisites
+## ✨ Features
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with Gemma 4 model
+| Feature | Description |
+|---------|-------------|
+| 📅 **Interactive Timelines** | Chronological events with category color-coding |
+| 🏛️ **Era Grouping** | Events organized into historical eras |
+| 👤 **Key Figure Profiles** | Detailed biographies of historical figures |
+| 🔗 **Cause-Effect Chains** | Analyze how events led to consequences |
+| 🎨 **Category Tagging** | Political, military, social, economic, cultural, scientific |
+| 📊 **Detail Levels** | Brief (5-8), medium (10-15), detailed (15-25) events |
+| 🌐 **Streamlit Web UI** | Beautiful interactive timeline interface |
+| 💻 **Rich CLI** | Full-featured terminal with color tables |
+| ⚙️ **YAML Config** | Centralized configuration management |
 
-## Installation
+---
+
+## 🏗️ Architecture
+
+```
+57-history-timeline-generator/
+├── src/history_timeline/
+│   ├── __init__.py          # Package metadata
+│   ├── core.py              # Business logic, data models, LLM interaction
+│   ├── cli.py               # Rich CLI with Click commands
+│   └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── test_core.py         # Core logic tests
+│   └── test_cli.py          # CLI integration tests
+├── config.yaml              # Application configuration
+├── setup.py                 # Package installation
+├── Makefile                 # Common development tasks
+├── .env.example             # Environment variable template
+├── requirements.txt         # Python dependencies
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Installation
 
 ```bash
-pip install -r requirements.txt
+cd 57-history-timeline-generator
+pip install -e ".[dev]"
+ollama serve
 ```
 
-## Usage
+---
 
-### Generate a timeline
-```bash
-python app.py --topic "American Civil War" --detail medium
-```
-
-### Brief overview
-```bash
-python app.py --topic "French Revolution" --detail brief
-```
-
-### With date range
-```bash
-python app.py --topic "Space Race" --start 1957 --end 1972
-```
-
-### Save to file
-```bash
-python app.py --topic "Industrial Revolution" --output timeline.json
-```
-
-## Options
-
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--topic` | `-t` | Historical topic (required) |
-| `--detail` | `-d` | brief, medium, detailed (default: medium) |
-| `--start` | `-s` | Start year filter |
-| `--end` | `-e` | End year filter |
-| `--output` | `-o` | Save to JSON file |
-
-## Example Output
-
-```
-╭──── 📜 Historical Timeline ────╮
-│ American Civil War Timeline     │
-│ Period: 1861 - 1865             │
-╰─────────────────────────────────╯
-
-┌─────────────────┬──────────────────────┬─────────────┐
-│ Date            │ Event                │ Key Figures │
-├─────────────────┼──────────────────────┼─────────────┤
-│ April 12, 1861  │ Battle of Fort Sumter│ Beauregard  │
-│ Jan 1, 1863     │ Emancipation Proc.   │ Lincoln     │
-│ April 9, 1865   │ Surrender at Appo.   │ Lee, Grant  │
-└─────────────────┴──────────────────────┴─────────────┘
-```
-
-## Running Tests
+## 💻 CLI Usage
 
 ```bash
-pytest test_app.py -v
+# Generate a timeline
+history-timeline generate --topic "American Civil War" --detail medium
+
+# With date range
+history-timeline generate --topic "Space Race" --start 1957 --end 1972
+
+# Get key figure profiles
+history-timeline figures --topic "Renaissance"
+
+# Analyze cause-effect chains
+history-timeline cause-effect --topic "French Revolution"
+
+# Save to file
+history-timeline generate --topic "Industrial Revolution" --output timeline.json
 ```
+
+---
+
+## 🌐 Web UI
+
+```bash
+streamlit run src/history_timeline/web_ui.py
+```
+
+Features:
+- 📅 **Timeline Display** — Expandable events with category icons
+- 👤 **Figure Cards** — Detailed profiles of key historical figures
+- 🔗 **Cause-Effect View** — Visual cause → event → effect chains
+- 🏛️ **Era Navigator** — Browse events grouped by historical era
+
+---
+
+## 🧪 Testing
+
+```bash
+pytest tests/ -v
+pytest tests/ -v --cov=src/history_timeline --cov-report=term-missing
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to customize LLM settings, detail levels, and event categories.
+
+---
+
+## 📝 License
+
+MIT

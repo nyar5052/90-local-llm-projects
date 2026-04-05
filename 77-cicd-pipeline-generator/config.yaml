@@ -1,0 +1,25 @@
+# CI/CD Pipeline Generator Configuration
+# ========================================
+
+app:
+  name: "CI/CD Pipeline Generator"
+  version: "2.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "gemma3"
+  temperature: 0.3
+  max_tokens: 3000
+  timeout: 120
+
+platforms:
+  default: "github-actions"
+
+defaults:
+  language: "python"
+  steps: "lint,test,build,deploy"
+  matrix_enabled: false
+
+ui:
+  theme: "dark"
+  page_title: "🚀 CI/CD Pipeline Generator"

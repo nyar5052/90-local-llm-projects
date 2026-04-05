@@ -1,0 +1,8 @@
+# Unit Test Generator Configuration
+
+ollama_base_url: "http://localhost:11434"
+model: "gemma3:1b"
+temperature: 0.3
+max_tokens: 4096
+default_framework: "pytest"
+max_code_chars: 5000

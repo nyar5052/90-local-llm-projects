@@ -1,0 +1,16 @@
+llm:
+  temperature: 0.7
+  max_tokens: 4096
+
+product:
+  platforms: [amazon, shopify, etsy, ebay, generic]
+  lengths: [short, medium, long]
+  default_variants: 2
+
+seo:
+  keyword_count: 10
+  min_keyword_density: 1.0
+  max_keyword_density: 3.0
+
+export:
+  output_dir: "output"

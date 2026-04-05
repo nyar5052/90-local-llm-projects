@@ -1,0 +1,16 @@
+# Travel Itinerary Bot — Configuration
+model:
+  name: gemma4
+  temperature: 0.7
+  max_tokens: 4096
+
+travel:
+  default_days: 5
+  default_budget: moderate
+
+storage:
+  itineraries_file: saved_itineraries.json
+
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

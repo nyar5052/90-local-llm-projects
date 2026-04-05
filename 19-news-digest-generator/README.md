@@ -1,119 +1,90 @@
 # 📰 News Digest Generator
 
-Aggregate, categorize, and summarize news articles from text files using a local LLM. This tool reads `.txt` news files from a folder, groups them by topic, generates per-topic summaries, and produces a polished overall digest — all powered by Ollama running locally.
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![LLM](https://img.shields.io/badge/LLM-Ollama%2FGemma4-green)
+![CLI](https://img.shields.io/badge/CLI-Click-orange)
+![Web](https://img.shields.io/badge/Web-Streamlit-red)
+![Tests](https://img.shields.io/badge/tests-pytest-yellow)
+
+AI-powered news digest generator with category tagging, sentiment tracking, trend identification, and daily/weekly digest formats. Includes Streamlit UI with category filters and sentiment charts.
 
 ## Features
 
-- **Topic Categorization** — Automatically groups articles into a configurable number of topic categories
-- **Article Summarization** — Generates concise summaries for each topic group
-- **Key Headlines Extraction** — Identifies the most important headlines across all articles
-- **Trending Themes** — Discovers overarching themes and patterns in the news
-- **Rich Terminal Output** — Beautiful formatted output with panels, tables, and trees
-- **Export to File** — Optionally save the generated digest to a Markdown file
-- **Batch Processing** — Processes all `.txt` files in a directory at once
+- **Category Tagging** — Auto-categorize articles into configurable topic categories
+- **Sentiment Tracking** — Per-article and overall sentiment analysis
+- **Trend Identification** — Discover overarching themes and emerging trends
+- **Daily/Weekly Formats** — Choose between digest styles
+- **Streamlit Web UI** — Source folder selector, digest preview, category filters
+- **Batch Processing** — Process all `.txt` files in a directory
+- **Export to File** — Save digests as Markdown files
+- **YAML Configuration** — Customizable categories and settings
 
 ## Installation
 
 ```bash
 cd 19-news-digest-generator
 pip install -r requirements.txt
-```
-
-Make sure [Ollama](https://ollama.ai) is installed and running:
-
-```bash
-ollama serve
-ollama pull gemma4
+ollama serve && ollama pull gemma4
 ```
 
 ## Usage
 
+### CLI
+
 ```bash
-# Basic usage — categorize into 5 topics (default)
-python app.py --sources news_folder/
+# Daily digest (default)
+python -m src.news_digest.cli --sources news_folder/
 
-# Specify number of topic groups
-python app.py --sources news_folder/ --topics 5
+# Weekly digest with sentiment
+python -m src.news_digest.cli --sources news_folder/ --format weekly --sentiment
 
-# Save digest to a file
-python app.py --sources news_folder/ --topics 3 --output digest.md
+# Custom topic count with export
+python -m src.news_digest.cli --sources news_folder/ --topics 3 --output digest.md
+```
+
+### Web UI
+
+```bash
+streamlit run src/news_digest/web_ui.py
 ```
 
 ### CLI Options
 
-| Option      | Type   | Default | Description                                  |
-|-------------|--------|---------|----------------------------------------------|
-| `--sources` | PATH   | —       | **(Required)** Path to folder of `.txt` news files |
-| `--topics`  | INT    | `5`     | Number of topic groups to categorize into    |
-| `--output`  | PATH   | —       | Optional file path to save the digest        |
-
-## Example Output
-
-```
-📰 News Digest Generator
-
-✓ Ollama is running
-✓ Loaded 12 article(s) from news_folder/
-
-┌──────────────────────────────────┐
-│       Source Articles            │
-├──────────────────┬───────────────┤
-│ File             │ Length        │
-├──────────────────┼───────────────┤
-│ tech_ai.txt      │ 1,234 chars  │
-│ sports_nba.txt   │ 892 chars    │
-│ finance_fed.txt  │ 1,567 chars  │
-└──────────────────┴───────────────┘
-
-╭─ Topic Categorization (3 groups) ─╮
-│                                    │
-│  ## Topic: Technology              │
-│  **Articles:** tech_ai.txt         │
-│  **Summary:** Major advances in …  │
-│                                    │
-│  ## Topic: Sports                  │
-│  **Articles:** sports_nba.txt      │
-│  **Summary:** Exciting playoff …   │
-│                                    │
-╰────────────────────────────────────╯
-
-╭──────── 📋 News Digest ──────────╮
-│                                   │
-│  # Key Headlines                  │
-│  - AI revolution continues        │
-│  - Markets rally on Fed decision  │
-│                                   │
-│  # Trending Themes                │
-│  - Technology-driven growth       │
-│                                   │
-╰───────────────────────────────────╯
-
-📊 Generation Stats
-├── Articles processed: 12
-├── Topic groups requested: 3
-└── Total input size: 15,432 characters
-```
+| Option        | Required | Default  | Description                            |
+|---------------|----------|----------|----------------------------------------|
+| `--sources`   | Yes      | —        | Path to folder of `.txt` news files    |
+| `--topics`    | No       | `5`      | Number of topic groups                 |
+| `--output`    | No       | —        | Save digest to file                    |
+| `--format`    | No       | `daily`  | Digest format: daily / weekly          |
+| `--sentiment` | No       | —        | Include sentiment analysis             |
+| `--config`    | No       | —        | Path to config.yaml                    |
+| `--verbose`   | No       | —        | Enable debug logging                   |
 
 ## Testing
 
 ```bash
-pytest test_app.py -v
+python -m pytest tests/ -v
 ```
 
 ## Project Structure
 
 ```
 19-news-digest-generator/
-├── app.py              # Main application
-├── requirements.txt    # Python dependencies
-├── test_app.py         # Pytest test suite
-└── README.md           # This file
+├── src/news_digest/
+│   ├── __init__.py
+│   ├── core.py              # Categorization & digest logic
+│   ├── cli.py               # Click CLI interface
+│   ├── web_ui.py            # Streamlit web interface
+│   ├── config.py            # Configuration management
+│   └── utils.py             # Formatting helpers
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py
+│   └── test_cli.py
+├── config.yaml
+├── setup.py
+├── requirements.txt
+├── Makefile
+├── .env.example
+└── README.md
 ```
-
-## How It Works
-
-1. **Read** — Scans the sources folder for `.txt` files and loads their content
-2. **Categorize** — Sends all articles to the LLM to group them into topic categories
-3. **Digest** — Generates a professional news digest with headlines, themes, and summaries
-4. **Display** — Renders the results in a rich terminal UI with panels and tables
-5. **Save** — Optionally exports the complete digest to a Markdown file

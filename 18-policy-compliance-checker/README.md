@@ -1,107 +1,89 @@
 # ✅ Policy Compliance Checker
 
-An AI-powered tool that checks documents against policy rules and produces detailed compliance reports with severity-graded violations, compliant areas, and actionable remediation steps.
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![LLM](https://img.shields.io/badge/LLM-Ollama%2FGemma4-green)
+![CLI](https://img.shields.io/badge/CLI-Click-orange)
+![Web](https://img.shields.io/badge/Web-Streamlit-red)
+![Tests](https://img.shields.io/badge/tests-pytest-yellow)
+
+AI-powered policy compliance checker with 0-100 scoring, severity-graded violations, remediation suggestions, and multi-format report export. Includes both CLI and Streamlit dashboard interfaces.
 
 ## Features
 
-- **Automated Compliance Analysis** — leverages a local LLM (Gemma 4 via Ollama) to audit documents against policy rules.
-- **Severity Levels** — violations are graded as **High**, **Medium**, or **Low** with color-coded output.
-- **Severity Filtering** — focus on the issues that matter most with `--severity high|medium|low`.
-- **Compliance Score** — a 0–100 score with a visual progress bar.
-- **Remediation Steps** — each violation includes a concrete fix suggestion.
-- **Rich Terminal Output** — tables, colored text, and progress bars via Rich.
+- **Compliance Scoring (0-100)** — Visual score with PASS/WARNING/FAIL labels
+- **Issue Severity Levels** — High, Medium, Low with color-coded display
+- **Remediation Suggestions** — Actionable fix for each violation
+- **Report Export** — JSON, Markdown, and CSV export formats
+- **Severity Filtering** — Focus on specific severity levels
+- **Streamlit Dashboard** — Upload documents, view score meter, issue list, and recommendations
+- **YAML Configuration** — Customizable thresholds and settings
 
 ## Installation
 
 ```bash
-# Navigate to the project directory
 cd 18-policy-compliance-checker
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Ensure Ollama is running with Gemma 4
-ollama serve          # in a separate terminal
-ollama pull gemma4
+ollama serve && ollama pull gemma4
 ```
 
 ## Usage
 
+### CLI
+
 ```bash
 # Basic compliance check
-python app.py --document doc.txt --policy policy.txt
+python -m src.compliance_checker.cli --document doc.txt --policy policy.txt
 
-# Show only high-severity violations
-python app.py --document doc.txt --policy policy.txt --severity high
+# Filter by severity
+python -m src.compliance_checker.cli --document doc.txt --policy policy.txt --severity high
 
-# Show only medium-severity violations
-python app.py --document doc.txt --policy policy.txt --severity medium
+# Export report
+python -m src.compliance_checker.cli --document doc.txt --policy policy.txt --export report.json --export-format json
+```
+
+### Web UI
+
+```bash
+streamlit run src/compliance_checker/web_ui.py
 ```
 
 ### CLI Options
 
-| Option        | Required | Description                                |
-|---------------|----------|--------------------------------------------|
-| `--document`  | Yes      | Path to the document to check              |
-| `--policy`    | Yes      | Path to the policy rules file              |
-| `--severity`  | No       | Filter: `all` (default), `high`, `medium`, `low` |
+| Option            | Required | Default | Description                              |
+|-------------------|----------|---------|------------------------------------------|
+| `--document`      | Yes      | —       | Path to the document to check            |
+| `--policy`        | Yes      | —       | Path to the policy rules file            |
+| `--severity`      | No       | `all`   | Filter: all / high / medium / low        |
+| `--export`        | No       | —       | Export report to file                    |
+| `--export-format` | No       | `json`  | Export format: json / markdown / csv     |
+| `--config`        | No       | —       | Path to config.yaml                      |
+| `--verbose`       | No       | —       | Enable debug logging                     |
 
-## Example Output
-
-```
-📄 Policy Compliance Checker
-
-  Document: doc.txt (1234 chars)
-  Policy:   policy.txt (567 chars)
-
-╔══════════════════════════════════╗
-║   Policy Compliance Report       ║
-╚══════════════════════════════════╝
-
-Compliance Score: 72%
-Score ████████████████████████████████████░░░░░░░░░░░░░░  72%
-
-Summary: Document partially complies with the policy.
-
-╭──────────────────────────────────────────────────────────╮
-│ ⚠ Violations (2)                                        │
-├──────────┬─────────────────┬──────────────┬──────────────┤
-│ Severity │ Rule            │ Description  │ Remediation  │
-├──────────┼─────────────────┼──────────────┼──────────────┤
-│ HIGH     │ Data Retention  │ No retention │ Add clause   │
-│ MEDIUM   │ Access Control  │ Missing RBAC │ Define roles │
-╰──────────┴─────────────────┴──────────────┴──────────────╯
-
-╭──────────────────────────────────────────────────────────╮
-│ ✅ Compliant Areas                                       │
-├──────────────────┬───────────────────────────────────────┤
-│ Encryption       │ AES-256 encryption is used            │
-╰──────────────────┴───────────────────────────────────────╯
-
-📋 Recommendations:
-  1. Add data retention policy.
-  2. Define RBAC roles.
-```
-
-## Running Tests
+## Testing
 
 ```bash
-pytest test_app.py -v
+python -m pytest tests/ -v
 ```
 
 ## Project Structure
 
 ```
 18-policy-compliance-checker/
-├── app.py              # Main application
-├── requirements.txt    # Python dependencies
-├── test_app.py         # Pytest test suite
-└── README.md           # This file
+├── src/compliance_checker/
+│   ├── __init__.py
+│   ├── core.py              # Compliance analysis logic
+│   ├── cli.py               # Click CLI interface
+│   ├── web_ui.py            # Streamlit dashboard
+│   ├── config.py            # Configuration management
+│   └── utils.py             # Export helpers
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py
+│   └── test_cli.py
+├── config.yaml
+├── setup.py
+├── requirements.txt
+├── Makefile
+├── .env.example
+└── README.md
 ```
-
-## How It Works
-
-1. Reads the target document and policy rules from disk.
-2. Sends both to a local Gemma 4 LLM via Ollama for analysis.
-3. Parses the structured JSON compliance report from the LLM.
-4. Renders a rich, color-coded report in the terminal.

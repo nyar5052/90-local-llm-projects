@@ -1,0 +1,20 @@
+# Competitor Analysis Tool Configuration
+# ========================================
+
+llm:
+  model: "gemma3:4b"
+  temperature: 0.4
+  max_tokens: 4000
+  base_url: "http://localhost:11434"
+
+analysis:
+  max_competitors: 10
+  feature_matrix_max_features: 15
+
+output:
+  default_format: "rich"
+  export_format: "json"
+
+logging:
+  level: "INFO"
+  file: null

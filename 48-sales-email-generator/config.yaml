@@ -1,0 +1,39 @@
+model:
+  name: "gemma3"
+  temperature: 0.7
+  max_tokens: 2000
+
+tones:
+  professional: "Formal, business-appropriate, respectful"
+  casual: "Friendly, conversational, approachable"
+  persuasive: "Compelling, benefit-focused, action-oriented"
+  consultative: "Advisory, problem-solving, thought-leadership"
+
+templates:
+  cold_outreach:
+    description: "First contact with a new prospect"
+    word_count: "150-200"
+  follow_up:
+    description: "Follow up after initial contact"
+    word_count: "100-150"
+  demo_request:
+    description: "Invite prospect to a product demo"
+    word_count: "120-180"
+  case_study:
+    description: "Share relevant case study"
+    word_count: "150-200"
+  break_up:
+    description: "Final follow-up before closing"
+    word_count: "80-120"
+
+sequence:
+  default_emails: 4
+  delay_days: [0, 3, 7, 14]
+
+personalization:
+  min_score: 60
+  target_score: 80
+
+logging:
+  level: "INFO"
+  file: "sales_email_gen.log"

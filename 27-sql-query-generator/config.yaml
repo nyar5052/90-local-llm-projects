@@ -1,0 +1,9 @@
+# SQL Query Generator Configuration
+
+ollama_base_url: "http://localhost:11434"
+model: "gemma3:1b"
+temperature: 0.3
+default_dialect: "standard"
+history_file: "query_history.json"
+max_history: 100
+max_schema_chars: 4000

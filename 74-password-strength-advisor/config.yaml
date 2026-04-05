@@ -1,0 +1,20 @@
+# Password Strength Advisor Configuration
+
+app:
+  name: "Password Strength Advisor"
+  version: "1.0.0"
+  log_level: "INFO"
+
+model:
+  name: "llama3"
+  temperature: 0.3
+  max_tokens: 1024
+
+password:
+  min_length: 12
+  max_length: 128
+  default_generate_length: 16
+
+streamlit:
+  port: 8504
+  theme: "dark"

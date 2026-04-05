@@ -1,0 +1,43 @@
+# Science Experiment Explainer Configuration
+llm:
+  temperature: 0.5
+  max_tokens: 4096
+
+experiment:
+  default_level: "middle school"
+  default_detail: "medium"
+  subjects:
+    - Chemistry
+    - Physics
+    - Biology
+    - Earth Science
+    - Environmental Science
+  grade_levels:
+    - elementary
+    - middle school
+    - high school
+    - college
+
+safety:
+  require_adult_supervision_below: "high school"
+  risk_levels:
+    low: "green"
+    medium: "yellow"
+    high: "orange"
+    critical: "red"
+  mandatory_ppe:
+    - safety goggles
+    - lab coat
+
+equipment:
+  show_cost_estimates: true
+  currency: "USD"
+  suggest_alternatives: true
+
+storage:
+  experiments_dir: "./experiments"
+  favorites_file: "favorites.json"
+
+logging:
+  level: "INFO"
+  file: "science_explainer.log"

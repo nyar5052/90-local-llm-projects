@@ -1,0 +1,30 @@
+# Environment Config Manager Configuration
+# ==========================================
+
+app:
+  name: "Environment Config Manager"
+  version: "2.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "gemma3"
+  temperature: 0.3
+  max_tokens: 2048
+  timeout: 120
+
+defaults:
+  project_type: "generic"
+  environment: "development"
+
+security:
+  min_secret_length: 8
+  weak_values:
+    - password
+    - secret
+    - changeme
+    - admin
+    - test
+
+ui:
+  theme: "dark"
+  page_title: "⚙️ Env Config Manager"

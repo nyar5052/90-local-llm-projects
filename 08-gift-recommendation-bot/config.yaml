@@ -1,0 +1,44 @@
+# Gift Recommendation Bot Configuration
+
+llm:
+  model: gemma4
+  temperature: 0.7
+  max_tokens: 3072
+
+occasions:
+  - birthday
+  - christmas
+  - anniversary
+  - wedding
+  - graduation
+  - baby-shower
+  - housewarming
+  - valentines
+  - mothers-day
+  - fathers-day
+  - retirement
+  - thank-you
+  - get-well
+  - other
+
+relationships:
+  - partner
+  - parent
+  - sibling
+  - friend
+  - colleague
+  - child
+  - grandparent
+  - teacher
+  - boss
+  - neighbor
+
+wishlist:
+  storage_file: wishlists.json
+
+calendar:
+  storage_file: occasion_calendar.json
+
+web_ui:
+  title: "🎁 Gift Recommendation Bot"
+  page_icon: "🎁"

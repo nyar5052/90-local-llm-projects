@@ -1,0 +1,20 @@
+# Incident Report Generator Configuration
+
+app:
+  name: "Incident Report Generator"
+  version: "1.0.0"
+  log_level: "INFO"
+
+model:
+  name: "llama3"
+  temperature: 0.3
+  max_tokens: 3000
+
+report:
+  default_priority: "P2"
+  default_type: "security"
+  include_appendix: true
+
+streamlit:
+  port: 8502
+  theme: "dark"

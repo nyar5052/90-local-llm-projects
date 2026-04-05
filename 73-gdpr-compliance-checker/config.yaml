@@ -1,0 +1,20 @@
+# GDPR Compliance Checker Configuration
+
+app:
+  name: "GDPR Compliance Checker"
+  version: "1.0.0"
+  log_level: "INFO"
+
+model:
+  name: "llama3"
+  temperature: 0.2
+  max_tokens: 3000
+
+compliance:
+  default_check: "all"
+  article_checklist: true
+  data_flow_mapping: true
+
+streamlit:
+  port: 8503
+  theme: "dark"

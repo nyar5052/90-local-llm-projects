@@ -1,15 +1,23 @@
 # 📚 Study Buddy Bot
 
-> AI-powered exam preparation assistant that quizzes, explains, and creates study plans using a local LLM.
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![LLM](https://img.shields.io/badge/LLM-Ollama%2FGemma4-orange.svg)
+![UI](https://img.shields.io/badge/UI-Streamlit-red.svg)
+
+> AI-powered exam preparation assistant with quizzes, flashcards, study plans, progress tracking, and a Pomodoro timer.
 
 ## ✨ Features
 
 - **5 Study Modes** — Quiz, explain, study plan, summarize, flashcards
 - **Any Subject** — Works with any academic subject and topic
 - **Interactive Q&A** — Ask follow-up questions for deeper understanding
+- **Pomodoro Timer** — Built-in study session timer
+- **Flashcard Storage** — Save and review flashcard sets
+- **Progress Tracking** — Track study time by subject and topic
 - **Adaptive Teaching** — Uses Feynman technique and analogies
 - **Practice Tests** — Mix of multiple choice, true/false, and short answer
-- **Study Plans** — Day-by-day revision schedules with goals
+- **Streamlit Web UI** — Full-featured browser interface
 
 ## 📦 Installation
 
@@ -17,56 +25,64 @@
 pip install -r requirements.txt
 ```
 
-## 🚀 Usage
+## 🚀 CLI Usage
 
 ```bash
-# Explain a topic
-python app.py --subject "Biology" --topic "Cell Division" --mode explain
+# Start a study session
+python -m study_buddy.cli study --subject "Biology" --topic "Cell Division" --mode explain
 
 # Generate a quiz
-python app.py --subject "History" --topic "World War 2" --mode quiz
+python -m study_buddy.cli study --subject "History" --topic "World War 2" --mode quiz
 
-# Create a study plan
-python app.py --subject "Chemistry" --topic "Organic Chemistry" --mode plan
+# Start a Pomodoro timer
+python -m study_buddy.cli timer --minutes 25
 
-# Generate flashcards
-python app.py --subject "Physics" --topic "Newton's Laws" --mode flashcards
+# View study statistics
+python -m study_buddy.cli stats
 
-# Interactive mode (choose mode at runtime)
-python app.py --subject "Math" --topic "Calculus"
+# List saved flashcard sets
+python -m study_buddy.cli flashcard-list
 ```
 
-### Example Output
+## 🌐 Web UI
 
+```bash
+streamlit run src/study_buddy/web_ui.py
 ```
-╭─ 📚 Quiz — Cell Division ───────────────────╮
-│ **Q1:** What are the main phases of mitosis? │
-│ A) Prophase, Metaphase, Anaphase, Telophase  │
-│ B) G1, S, G2, M                              │
-│ C) ...                                        │
-│                                               │
-│ **Answer Key:**                               │
-│ 1. A — The four phases of mitosis are...     │
-╰───────────────────────────────────────────────╯
 
-📝 Your question: What's the difference between mitosis and meiosis?
-╭─ 📚 Study Buddy ─────────────────────────────╮
-│ Great question! The key differences are...    │
-╰───────────────────────────────────────────────╯
-```
+The web UI provides:
+- 📖 Study sessions with multiple modes
+- 📝 Quiz generation with configurable questions
+- 🃏 Flashcard creation and review
+- ⏱️ Built-in Pomodoro study timer
+- 📊 Progress tracking dashboard
 
 ## 🧪 Running Tests
 
 ```bash
-pytest test_app.py -v
+python -m pytest tests/ -v
 ```
 
 ## 📁 Project Structure
 
 ```
 09-study-buddy-bot/
-├── app.py              # Main application
-├── requirements.txt    # Dependencies
-├── test_app.py         # Unit tests
-└── README.md           # This file
+├── src/
+│   └── study_buddy/
+│       ├── __init__.py       # Package metadata
+│       ├── core.py           # Core business logic
+│       ├── cli.py            # Click CLI interface
+│       ├── web_ui.py         # Streamlit web interface
+│       ├── config.py         # Configuration management
+│       └── utils.py          # Helper utilities
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py          # Core logic tests
+│   └── test_cli.py           # CLI tests
+├── config.yaml               # Default configuration
+├── setup.py                  # Package setup
+├── requirements.txt          # Dependencies
+├── Makefile                  # Common commands
+├── .env.example              # Example environment variables
+└── README.md                 # This file
 ```

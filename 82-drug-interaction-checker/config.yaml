@@ -1,0 +1,13 @@
+# Drug Interaction Checker Configuration
+model: "gemma4"
+temperature: 0.2
+max_tokens: 1500
+log_level: "INFO"
+ollama_url: "http://localhost:11434"
+
+# Interaction settings
+interactions:
+  include_food: true
+  include_dosage: true
+  show_alternatives: true
+  severity_threshold: "minor"

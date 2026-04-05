@@ -1,0 +1,28 @@
+app:
+  name: "Personal Knowledge Base"
+  version: "1.0.0"
+  log_level: "INFO"
+  data_dir: "./data"
+
+knowledge_base:
+  max_notes: 10000
+  default_tags: []
+  search_limit: 20
+  backup_enabled: true
+  backup_interval_hours: 24
+
+templates:
+  meeting_notes:
+    title: "Meeting Notes - {date}"
+    content: "## Attendees\n\n## Agenda\n\n## Discussion\n\n## Action Items\n"
+  book_review:
+    title: "Book Review - {title}"
+    content: "## Summary\n\n## Key Takeaways\n\n## Rating\n\n## Recommendations\n"
+  project_plan:
+    title: "Project Plan - {name}"
+    content: "## Objectives\n\n## Timeline\n\n## Resources\n\n## Risks\n"
+
+llm:
+  model: "llama3"
+  temperature: 0.3
+  system_prompt: "You are a knowledge base search assistant."

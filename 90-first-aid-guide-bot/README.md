@@ -1,88 +1,162 @@
 # 🏥 First Aid Guide Bot
 
-A local LLM-powered first aid information assistant that provides step-by-step guidance for common emergency situations. Always recommends calling emergency services for serious situations.
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-1.0.0-orange)
+![LLM: Ollama](https://img.shields.io/badge/LLM-Ollama-purple)
+
+A production-grade, local LLM-powered first aid information assistant. Provides step-by-step guidance for common emergency situations, interactive triage, supply checklists, CPR instructions, and emergency contact management — all running privately on your machine.
 
 ---
 
-> **🚨 EMERGENCY DISCLAIMER**
+> ## 🚨🚨🚨 EMERGENCY DISCLAIMER 🚨🚨🚨
+>
+> # ☎️ FOR LIFE-THREATENING EMERGENCIES, CALL 911 IMMEDIATELY
+>
+> ### ☠️ Poison Control: 1-800-222-1222
+> ### 💬 Crisis Lifeline: 988
 >
 > **This tool is NOT a substitute for emergency medical services.**
 > **This is NOT medical advice.**
 >
-> - **For life-threatening emergencies, CALL 911 IMMEDIATELY.**
-> - **For poison control, call 1-800-222-1222.**
 > - Always seek professional medical evaluation for injuries and illness.
-> - This tool provides general first aid information only.
+> - This tool provides **general first aid information only**.
+> - **Do NOT delay calling 911** to use this tool.
 
 ---
 
-## Features
+## ✨ Features
 
-| Command | Description |
+| Feature | Description |
 |---------|-------------|
-| `python app.py guide --situation "minor burn"` | Get step-by-step first aid for a specific situation |
-| `python app.py chat` | Interactive first aid assistant |
-| `python app.py list` | List common first aid scenarios with severity levels |
+| 🏥 **Situation Guides** | Step-by-step first aid instructions for 15+ common scenarios |
+| 🔀 **Emergency Triage** | Quick decision-tree assessment for emergency situations |
+| 📦 **Supply Checklist** | Complete first aid kit inventory with priority levels |
+| ❤️ **CPR Guide** | Detailed CPR steps with timing information |
+| 📞 **Emergency Contacts** | Manage personal emergency contacts |
+| 🤖 **AI Chat** | Interactive first aid assistant with follow-up questions |
 
-### 📋 Guide Mode
-Get detailed, structured first aid instructions for any situation, including:
-- ⚠️ Emergency warning signs (when to call 911)
-- 📝 Numbered step-by-step instructions
-- 🚫 What NOT to do (common mistakes to avoid)
-- 🏥 When to seek professional medical help
+## 🏗️ Architecture
 
-### 🗣️ Chat Mode
-Ask follow-up questions interactively. The assistant maintains conversation context for multi-step guidance.
+```
+src/first_aid/
+├── __init__.py        # Package metadata
+├── core.py            # Core logic, data, decision trees, contact management
+├── cli.py             # Click CLI with all commands
+└── web_ui.py          # Streamlit web interface
+tests/
+├── test_core.py       # Unit tests for core logic
+└── test_cli.py        # CLI integration tests
+app.py                 # Original standalone script
+config.yaml            # Configuration
+setup.py               # Package setup
+```
 
-### 📊 List Mode
-Browse 15 common first aid scenarios with severity ratings:
-- Burns, cuts, choking, sprains, allergic reactions
-- Nosebleed, bee stings, heat exhaustion, hypothermia
-- Fractures, seizures, fainting, eye injuries, poisoning
+## 📋 Prerequisites
 
-## Prerequisites
+- **Python 3.10+**
+- [Ollama](https://ollama.ai/) running locally with a model pulled (e.g., `ollama pull llama3`)
 
-- Python 3.8+
-- [Ollama](https://ollama.ai/) running locally with a model pulled (e.g., `ollama pull llama3.2`)
-
-## Setup
+## 🚀 Installation
 
 ```bash
+# Install in development mode
+pip install -e ".[dev]"
+
+# Or install dependencies directly
 pip install -r requirements.txt
 ```
 
-## Usage
+## 💻 CLI Usage
 
 ```bash
 # Get first aid for a specific situation
-python app.py guide --situation "minor burn"
-python app.py guide -s "choking adult"
-python app.py guide -s "allergic reaction"
+first-aid guide --situation "minor burn"
+first-aid guide -s "choking adult"
 
 # Interactive chat mode
-python app.py chat
+first-aid chat
 
-# List common scenarios
-python app.py list
+# List common scenarios with severity levels
+first-aid list
+
+# Emergency triage assessment
+first-aid triage --conscious --breathing --bleeding
+first-aid triage --unconscious --not-breathing
+
+# View first aid supply checklist
+first-aid supplies
+first-aid supplies --priority essential
+
+# Display CPR steps
+first-aid cpr
+
+# Manage emergency contacts
+first-aid contacts --list
+first-aid contacts --add
+first-aid contacts --remove
 ```
 
-## Testing
+## 🌐 Web UI (Streamlit)
 
 ```bash
-pytest test_app.py -v
+streamlit run src/first_aid/web_ui.py
 ```
 
-## How It Works
+The web interface provides:
+- **🏥 Situation Guide** — Select from common scenarios or describe your own
+- **🔀 Emergency Triage** — Interactive radio buttons for quick assessment
+- **📦 Supply Checklist** — Filterable checklist with progress tracking
+- **❤️ CPR Guide** — Step-by-step cards with a practice timer
+- **📞 Emergency Contacts** — Add, view, and manage contacts
 
-The bot connects to a locally running LLM via Ollama. All processing happens on your machine — **no data is sent to external servers**. The LLM is instructed to always prioritize safety, recommend emergency services for serious situations, and provide clear step-by-step instructions.
+## 🧪 Testing
 
-## Emergency Resources
+```bash
+# Run all tests
+python -m pytest tests/ -v --tb=short
+
+# With coverage
+python -m pytest tests/ -v --cov=first_aid --cov-report=term-missing
+```
+
+## 🔧 Configuration
+
+Edit `config.yaml` to customize:
+
+```yaml
+app:
+  name: "First Aid Guide Bot"
+  version: "1.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.3
+  max_tokens: 1500
+emergency:
+  primary: "911"
+  poison_control: "1-800-222-1222"
+  crisis_line: "988"
+```
+
+## 🔒 Privacy
+
+All processing happens **locally on your machine**. No data is sent to external servers. The LLM runs through Ollama on your own hardware.
+
+## 📚 Emergency Resources
 
 - **Emergency Services**: Call **911**
 - **Poison Control**: **1-800-222-1222**
+- **Crisis Lifeline**: **988**
 - **American Red Cross First Aid App**: [Download](https://www.redcross.org/get-help/how-to-prepare-for-emergencies/mobile-apps.html)
 - **Mayo Clinic First Aid**: https://www.mayoclinic.org/first-aid
 
 ---
 
-*This tool is for general informational purposes only and is NOT medical advice. Always call 911 for life-threatening emergencies and seek professional medical care for injuries and illness.*
+> ## 🚨 REMINDER 🚨
+>
+> **This tool is for general informational purposes ONLY and is NOT medical advice.**
+>
+> **Always call 911 for life-threatening emergencies.**
+> **Poison Control: 1-800-222-1222**
+>
+> Always seek professional medical care for injuries and illness. Do NOT rely on this tool in place of professional medical services.

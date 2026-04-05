@@ -1,0 +1,32 @@
+app:
+  name: "Nutrition Label Analyzer"
+  version: "1.0.0"
+  description: "AI-powered nutrition analysis and tracking"
+
+llm:
+  model: "llama3"
+  temperature: 0.3
+  max_tokens: 2048
+
+daily_values:
+  calories: 2000
+  total_fat_g: 78
+  sodium_mg: 2300
+  fiber_g: 28
+  sugar_g: 50
+  protein_g: 50
+
+allergens:
+  - milk
+  - eggs
+  - fish
+  - shellfish
+  - tree nuts
+  - peanuts
+  - wheat
+  - soybeans
+  - sesame
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

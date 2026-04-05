@@ -1,89 +1,113 @@
 # 📚 Reading Comprehension Builder
 
-Create reading comprehension exercises from any topic using a local LLM (Gemma 4 via Ollama).
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM-Ollama-orange?logo=meta&logoColor=white)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-red?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?logo=pytest)
 
-## Features
+> 📖 **Create reading comprehension exercises with difficulty calibration, scoring rubrics, passage annotations, and answer keys — powered by a local LLM.**
 
-- **AI-generated passages**: Custom reading passages on any topic
-- **Multiple question types**: Factual, inferential, analytical, vocabulary, main-idea
-- **Adjustable difficulty**: Elementary through college level
-- **Interactive mode**: Answer questions and get scored
-- **Vocabulary support**: Key terms with definitions
-- **JSON export**: Save exercises for classroom use
+---
 
-## Prerequisites
+## ✨ Features
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with Gemma 4 model
+| Feature | Description |
+|---------|-------------|
+| 📖 **AI-Generated Passages** | Custom reading passages on any topic |
+| 🎯 **Difficulty Calibration** | Elementary → middle school → high school → college |
+| 📋 **Answer Key with Explanations** | Detailed explanations for every question |
+| 📝 **Passage Annotations** | Relevant passage references for each question |
+| 🏆 **Scoring Rubric** | 4-level rubric: Excellent, Good, Fair, Needs Improvement |
+| ❓ **Multiple Question Types** | Factual, inferential, analytical, vocabulary, main-idea |
+| 🌐 **Streamlit Web UI** | Interactive exercise and scoring dashboard |
+| 💻 **Rich CLI** | Terminal interface with interactive mode |
+| ⚙️ **YAML Config** | Centralized configuration management |
 
-## Installation
+---
+
+## 🏗️ Architecture
+
+```
+60-reading-comprehension-builder/
+├── src/reading_comp/
+│   ├── __init__.py          # Package metadata
+│   ├── core.py              # Business logic, scoring, difficulty calibration
+│   ├── cli.py               # Rich CLI with Click commands
+│   └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── test_core.py         # Core logic + scoring tests
+│   └── test_cli.py          # CLI integration tests
+├── config.yaml              # Application configuration
+├── setup.py                 # Package installation
+├── Makefile                 # Common development tasks
+├── .env.example             # Environment variable template
+├── requirements.txt         # Python dependencies
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Installation
 
 ```bash
-pip install -r requirements.txt
+cd 60-reading-comprehension-builder
+pip install -e ".[dev]"
+ollama serve
 ```
 
-## Usage
+---
 
-### Create an exercise
-```bash
-python app.py --topic "Climate Change" --level "high school" --questions 5
-```
-
-### Interactive mode
-```bash
-python app.py --topic "Space Exploration" --questions 8 --interactive
-```
-
-### Show answers
-```bash
-python app.py --topic "Ancient Egypt" --level "middle school" --show-answers
-```
-
-### Adjust passage length
-```bash
-python app.py --topic "Robotics" --length long --questions 10
-```
-
-### Save to file
-```bash
-python app.py --topic "Marine Biology" --output exercise.json
-```
-
-## Options
-
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--topic` | `-t` | Topic for the passage (required) |
-| `--level` | `-l` | Reading level (default: high school) |
-| `--questions` | `-q` | Number of questions (default: 5) |
-| `--length` | | Passage length: short, medium, long |
-| `--interactive` | `-i` | Answer questions interactively |
-| `--show-answers` | `-a` | Show answers immediately |
-| `--output` | `-o` | Save to JSON file |
-
-## Example Output
-
-```
-╭──── 📚 Reading Comprehension ────╮
-│ Understanding Climate Change      │
-│ Level: high school | Words: ~350  │
-╰──────────────────────────────────╯
-
-╭──────────── 📖 Passage ──────────╮
-│ Climate change refers to long-   │
-│ term shifts in temperatures...   │
-╰──────────────────────────────────╯
-
-Q1 [factual] (easy)
-  What has been the main driver of climate change?
-    A) Solar variations
-    B) Human activities
-    C) Volcanic eruptions
-    D) Ocean currents
-```
-
-## Running Tests
+## 💻 CLI Usage
 
 ```bash
-pytest test_app.py -v
+# Generate an exercise
+reading-comp generate --topic "Climate Change" --level "high school" --questions 5
+
+# Interactive mode (answer & get scored)
+reading-comp generate --topic "Space Exploration" --interactive
+
+# Show answers immediately
+reading-comp generate --topic "Ancient Egypt" --level "middle school" --show-answers
+
+# View answer key from saved file
+reading-comp answer-key --file exercise.json
+
+# Save to file
+reading-comp generate --topic "Marine Biology" --output exercise.json
 ```
+
+---
+
+## 🌐 Web UI
+
+```bash
+streamlit run src/reading_comp/web_ui.py
+```
+
+Features:
+- 📝 **Topic/Text Input** — Enter any topic or custom passage
+- 📖 **Passage Display** — Clean reading view with vocabulary highlights
+- ❓ **Interactive Questions** — Select answers with dropdown menus
+- 📊 **Score Dashboard** — Instant scoring with detailed feedback and rubric
+
+---
+
+## 🧪 Testing
+
+```bash
+pytest tests/ -v
+pytest tests/ -v --cov=src/reading_comp --cov-report=term-missing
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.yaml` to customize reading levels, passage lengths, scoring thresholds, and LLM settings.
+
+---
+
+## 📝 License
+
+MIT

@@ -1,95 +1,94 @@
 # 🔍 Research Paper Q&A
 
-Interactive question answering over research papers using a local LLM. Upload any research paper and engage in a contextual conversation about its content.
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![LLM](https://img.shields.io/badge/LLM-Ollama%2FGemma4-green)
+![CLI](https://img.shields.io/badge/CLI-Click-orange)
+![Web](https://img.shields.io/badge/Web-Streamlit-red)
+![Tests](https://img.shields.io/badge/tests-pytest-yellow)
+
+Interactive question answering over research papers with multi-paper support, citation tracking, follow-up question suggestions, and notes export. Includes both an interactive CLI and a Streamlit chat interface.
 
 ## Features
 
-- **Contextual Q&A** — Ask questions about any research paper with full conversation memory
-- **Follow-up Support** — The system maintains conversation history for coherent multi-turn dialogue
-- **Rich Output** — Markdown-rendered answers displayed in styled terminal panels
-- **Interactive CLI** — Clean command-line interface with intuitive controls
-- **Local & Private** — All processing runs locally via Ollama; your papers never leave your machine
+- **Multi-Paper Support** — Load and query across multiple papers simultaneously
+- **Citation Tracking** — Automatic extraction and display of paper citations
+- **Follow-up Suggestions** — AI-generated follow-up question recommendations
+- **Notes Export** — Export conversation to Markdown, JSON, or plain text
+- **Contextual Q&A** — Full conversation memory for coherent multi-turn dialogue
+- **Streamlit Chat UI** — Paper upload, chat interface, citation sidebar, notes export
+- **Interactive CLI** — Rich terminal interface with history and suggest commands
+- **YAML Configuration** — Customizable settings via `config.yaml`
 
 ## Installation
 
 ```bash
 cd 20-research-paper-qa
 pip install -r requirements.txt
-```
-
-Ensure [Ollama](https://ollama.com) is installed and running with the `gemma4` model:
-
-```bash
-ollama serve
-ollama pull gemma4
+ollama serve && ollama pull gemma4
 ```
 
 ## Usage
 
+### CLI
+
 ```bash
-python app.py --paper path/to/paper.txt
+# Single paper
+python -m src.research_qa.cli --paper paper.txt
+
+# Multiple papers
+python -m src.research_qa.cli --paper paper1.txt --paper paper2.txt
+```
+
+### Web UI
+
+```bash
+streamlit run src/research_qa/web_ui.py
 ```
 
 ### Interactive Commands
 
-| Command   | Description                        |
-|-----------|------------------------------------|
-| *(text)*  | Ask a question about the paper     |
-| `history` | View past questions and answers    |
-| `clear`   | Reset conversation context         |
-| `quit`    | Exit the application               |
+| Command            | Description                           |
+|--------------------|---------------------------------------|
+| *(question text)*  | Ask a question about the paper(s)     |
+| `suggest`          | Get follow-up question suggestions    |
+| `history`          | View conversation history             |
+| `export [file]`    | Export notes to file                  |
+| `clear`            | Reset conversation context            |
+| `quit`             | Exit the application                  |
 
-## Example Session
+### CLI Options
 
-```
-$ python app.py --paper transformer_paper.txt
-
- Loading paper: transformer_paper.txt
- ✓ Paper loaded (8,432 words)
-
-╭─ 🔍 Research Paper Q&A ─╮
-│ Commands:                │
-│   • Type your question   │
-│   • history              │
-│   • clear                │
-│   • quit                 │
-╰──────────────────────────╯
-
-Ask a question: What is the main contribution of this paper?
-
-╭─ 📄 Answer ──────────────────────────────────────────╮
-│ The main contribution of this paper is the           │
-│ Transformer architecture, which relies entirely on   │
-│ attention mechanisms, dispensing with recurrence and  │
-│ convolutions. The authors demonstrate that this      │
-│ model achieves state-of-the-art results on machine   │
-│ translation benchmarks.                              │
-╰──────────────────────────────────────────────────────╯
-
-Ask a question: How many layers does it use?
-
-╭─ 📄 Answer ──────────────────────────────────────────╮
-│ According to the paper, the Transformer uses a       │
-│ stack of 6 identical layers for both the encoder     │
-│ and decoder components.                              │
-╰──────────────────────────────────────────────────────╯
-
-Ask a question: quit
- Goodbye!
-```
+| Option      | Required | Default | Description                      |
+|-------------|----------|---------|----------------------------------|
+| `--paper`   | Yes      | —       | Path to paper file (repeatable)  |
+| `--config`  | No       | —       | Path to config.yaml              |
+| `--verbose` | No       | —       | Enable debug logging             |
 
 ## Testing
 
 ```bash
-pytest test_app.py -v
+python -m pytest tests/ -v
 ```
 
 ## Project Structure
 
 ```
 20-research-paper-qa/
-├── app.py              # Main application
-├── requirements.txt    # Dependencies
-├── test_app.py         # Test suite
-└── README.md           # Documentation
+├── src/research_qa/
+│   ├── __init__.py
+│   ├── core.py              # Q&A and citation logic
+│   ├── cli.py               # Click CLI interface
+│   ├── web_ui.py            # Streamlit chat interface
+│   ├── config.py            # Configuration management
+│   └── utils.py             # Export and logging helpers
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py
+│   └── test_cli.py
+├── config.yaml
+├── setup.py
+├── requirements.txt
+├── Makefile
+├── .env.example
+└── README.md
 ```

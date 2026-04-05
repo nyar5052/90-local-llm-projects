@@ -1,0 +1,16 @@
+# Mood Journal Bot Configuration
+
+llm:
+  model: gemma4
+  temperature: 0.7
+  max_tokens: 2048
+
+journal:
+  storage_file: journal_entries.json
+
+export:
+  format: json
+
+web_ui:
+  title: "📔 Mood Journal Bot"
+  page_icon: "📔"

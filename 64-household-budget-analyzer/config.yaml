@@ -1,0 +1,35 @@
+app:
+  name: "Household Budget Analyzer"
+  version: "1.0.0"
+  log_level: "INFO"
+  data_dir: "./data"
+
+budget:
+  currency: "USD"
+  currency_symbol: "$"
+  categories:
+    Groceries: 500
+    Utilities: 200
+    Entertainment: 150
+    Transportation: 200
+    Dining: 200
+    Healthcare: 100
+    Shopping: 300
+    Other: 200
+  category_rules:
+    Groceries: ["grocery", "supermarket", "food", "walmart", "costco", "trader"]
+    Utilities: ["electric", "water", "gas", "internet", "phone", "utility"]
+    Entertainment: ["movie", "netflix", "spotify", "game", "theater", "concert"]
+    Transportation: ["gas station", "uber", "lyft", "parking", "toll", "transit"]
+    Dining: ["restaurant", "cafe", "coffee", "pizza", "takeout", "doordash"]
+    Healthcare: ["pharmacy", "doctor", "hospital", "dental", "medical"]
+    Shopping: ["amazon", "target", "mall", "clothing", "electronics"]
+
+savings:
+  default_goal: 1000
+  emergency_fund_months: 6
+
+llm:
+  model: "llama3"
+  temperature: 0.5
+  system_prompt: "You are an expert financial advisor."

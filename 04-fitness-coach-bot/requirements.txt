@@ -1,4 +1,6 @@
 requests
 rich
 click
+PyYAML
+streamlit
 pytest

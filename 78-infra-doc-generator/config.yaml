@@ -1,0 +1,29 @@
+# Infrastructure Doc Generator Configuration
+# ============================================
+
+app:
+  name: "Infrastructure Doc Generator"
+  version: "2.0.0"
+  log_level: "INFO"
+
+llm:
+  model: "gemma3"
+  temperature: 0.3
+  max_tokens: 3000
+  timeout: 120
+
+defaults:
+  output_format: "markdown"
+  include_diagram: true
+
+supported_formats:
+  - terraform
+  - kubernetes
+  - docker-compose
+  - dockerfile
+  - ansible
+  - cloudformation
+
+ui:
+  theme: "dark"
+  page_title: "📐 Infra Doc Generator"

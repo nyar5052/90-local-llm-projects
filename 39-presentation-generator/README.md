@@ -1,71 +1,123 @@
+<div align="center">
+
 # Presentation Generator
 
-Generate complete presentation slide content with speaker notes using a local Gemma 4 LLM via Ollama.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Powered by Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai/)
+
+**Generate compelling slide decks with speaker notes, visual suggestions, and timing estimates using AI.**
+
+[Features](#-features) - [Installation](#-installation) - [CLI Usage](#-cli-usage) - [Web UI](#-web-ui) - [Architecture](#-architecture)
+
+</div>
+
+---
 
 ## Features
 
-- **Complete Slide Decks**: Title, content, visuals, and transitions for every slide
-- **Speaker Notes**: Conversational talking points for each slide
-- **Visual Suggestions**: Recommended images, charts, and diagrams
-- **Multiple Formats**: Standard, Pecha Kucha, lightning talk, keynote
-- **Audience-Aware**: Content tailored to audience knowledge level
-- **Structured Layout**: Title, agenda, content, data, Q&A, and closing slides
+| Feature | Description |
+|---------|-------------|
+| 4 Presentation Formats | Standard, Pecha Kucha (20x20), Lightning Talk, Keynote |
+| 9 Slide Templates | Title, Agenda, Content, Data, Quote, Comparison, Timeline, Q&A, Closing |
+| Speaker Notes | Conversational speaker notes for each slide |
+| Visual Suggestions | AI-recommended charts, diagrams, and images per slide |
+| Timing Estimates | Per-slide and total presentation timing with visual bar |
+| Markdown Export | Clean markdown export for easy conversion |
+| Dual Interface | Full CLI + Streamlit Web UI |
+| YAML Configuration | Flexible config management |
 
-## Prerequisites
+## Architecture
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with the Gemma 4 model
+`
+39-presentation-generator/
+├── src/
+│   └── presentation_gen/
+│       ├── __init__.py          # Package metadata
+│       ├── core.py              # Business logic, formats, templates, timing
+│       ├── cli.py               # Click CLI with subcommands
+│       └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py             # Core logic tests
+│   └── test_cli.py              # CLI tests
+├── config.yaml                  # Configuration
+├── setup.py                     # Package setup
+├── Makefile                     # Build commands
+├── .env.example                 # Environment template
+├── requirements.txt             # Dependencies
+└── README.md                    # Documentation
+`
 
 ## Installation
 
-```bash
-pip install -r requirements.txt
-```
+`bash
+make install    # or: pip install -e .
+make dev        # with dev dependencies
+`
 
-## Usage
+## CLI Usage
 
-```bash
-# Basic presentation
-python app.py --topic "Machine Learning 101" --slides 12 --audience "beginners"
+### Generate a Presentation
 
-# Keynote format
-python app.py --topic "Future of AI" --slides 20 --audience "executives" --format keynote
+`bash
+# Basic
+presentation-gen generate --topic "Machine Learning 101"
 
-# Lightning talk
-python app.py --topic "Docker in 5 Minutes" --slides 8 --format lightning -o slides.md
-```
+# Full options
+presentation-gen generate \
+  --topic "Machine Learning 101" \
+  --slides 15 \
+  --audience "beginners" \
+  --format keynote \
+  --notes-only \
+  -o slides.md
+`
 
-### Options
+### List Formats and Templates
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--topic` | Presentation topic (required) | - |
-| `--slides` | Number of slides | 12 |
-| `--audience` | Target audience | general |
-| `--format` | Format (standard/pecha-kucha/lightning/keynote) | standard |
-| `-o, --output` | Save to file | None |
+`bash
+presentation-gen formats
+presentation-gen slide-types
+`
 
-## Example Output
+### Estimate Timing
 
-```
-╭─ 📊 Presentation ─────────────────────────────╮
-│ ### Slide 1: Machine Learning 101              │
-│ **Content:**                                   │
-│ - "Making Machines Learn from Data"            │
-│ - Your Name | Date                             │
-│                                                │
-│ **Visual:** Clean title slide with neural      │
-│ network illustration                           │
-│                                                │
-│ **Speaker Notes:** Welcome everyone! Today     │
-│ we're going to demystify machine learning...   │
-│                                                │
-│ **Transition:** "Let's start with the basics"  │
-╰────────────────────────────────────────────────╯
-```
+`bash
+presentation-gen timing --slides 20 --format pecha-kucha
+`
+
+## Web UI
+
+`bash
+make run-web
+`
+
+| Tab | Description |
+|-----|-------------|
+| Topic Input | Enter topic, audience, format, slide count |
+| Slide Cards | Expandable slide cards with notes |
+| Timing | Visual timing bar with per-slide estimates |
+| Download | Download full presentation or notes only |
+
+## Configuration
+
+`yaml
+llm:
+  temperature: 0.7
+  max_tokens: 4096
+presentation:
+  default_slides: 12
+  words_per_minute: 130
+`
 
 ## Testing
 
-```bash
-pytest test_app.py -v
-```
+`bash
+make test
+`
+
+## License
+
+Part of the [90 Local LLM Projects](../../README.md) collection.

@@ -1,0 +1,17 @@
+# Fitness Coach Bot — Configuration
+model:
+  name: gemma4
+  temperature: 0.7
+  max_tokens: 4096
+
+workout:
+  default_days_per_week: 4
+  default_session_minutes: 45
+
+storage:
+  workout_log_file: workout_log.json
+  progress_file: progress.json
+
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

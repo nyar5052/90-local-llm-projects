@@ -1,4 +1,8 @@
 requests
 rich
 click
+pyyaml
+streamlit
+pandas
 pytest
+pytest-cov

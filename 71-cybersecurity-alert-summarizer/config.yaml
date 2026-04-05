@@ -1,0 +1,22 @@
+# Cybersecurity Alert Summarizer Configuration
+# Override defaults here; environment variables take precedence.
+
+app:
+  name: "Cybersecurity Alert Summarizer"
+  version: "1.0.0"
+  log_level: "INFO"            # DEBUG, INFO, WARNING, ERROR
+
+model:
+  name: "llama3"               # Ollama model name
+  temperature: 0.3
+  max_tokens: 2048
+
+analysis:
+  max_alert_chars: 15000       # Truncate large alerts
+  ioc_extraction: true         # Enable IOC extraction
+  cve_lookup: true             # Enable CVE database lookup
+  threat_scoring: true         # Enable threat intelligence scoring
+
+streamlit:
+  port: 8501
+  theme: "dark"

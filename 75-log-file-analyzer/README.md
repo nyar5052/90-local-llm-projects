@@ -1,69 +1,148 @@
 # 📊 Log File Analyzer
 
-AI-powered log file analyzer that detects error patterns, clusters related issues, and suggests root causes using a local LLM.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Powered by Ollama](https://img.shields.io/badge/LLM-Ollama-orange.svg)](https://ollama.ai)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
 
-## Features
+> **Production-grade log analysis with a built-in pattern library, anomaly detection, error clustering, timeline visualization, and configurable alert rules — powered by local AI.**
 
-- **Error Pattern Detection**: Identify recurring error patterns automatically
-- **Error Clustering**: Group similar errors for batch resolution
-- **Root Cause Analysis**: AI-suggested root causes for detected issues
-- **Focus Areas**: Errors, warnings, security, performance, or all
-- **Tail Support**: Analyze only the last N lines of large log files
+---
 
-## Usage
+## ✨ Features
+
+| Feature | Description | LLM Required |
+|---------|-------------|:---:|
+| 🔍 **Pattern Library** | 10 built-in patterns: DB errors, auth failures, HTTP errors, timeouts, crashes, etc. | ❌ |
+| ⚡ **Anomaly Detection** | Error bursts, repeated messages, timestamp gaps | ❌ |
+| 📦 **Error Clustering** | Group similar errors by normalized pattern | ❌ |
+| 📈 **Timeline Visualization** | Chronological event timeline with severity coloring | ❌ |
+| 🚨 **Alert Rules** | Configurable thresholds for critical events, error rates, auth failures | ❌ |
+| 🔬 **AI Analysis** | Deep LLM-powered log analysis with root cause suggestions | ✅ |
+| 🔗 **AI Error Clustering** | LLM-powered semantic error grouping | ✅ |
+| 🖥️ **Streamlit Web UI** | Interactive dashboard with 4 tabs | — |
+| 💻 **Rich CLI** | Beautiful terminal tables and panels | — |
+
+## 🏗️ Architecture
+
+```
+75-log-file-analyzer/
+├── src/log_analyzer/
+│   ├── __init__.py          # Package metadata
+│   ├── core.py              # Business logic: patterns, anomalies, clustering
+│   ├── cli.py               # Click CLI with Rich output
+│   ├── web_ui.py            # Streamlit dashboard (4 tabs)
+│   └── config.py            # YAML config management
+├── tests/
+│   ├── test_core.py         # Core logic tests (25+ test cases)
+│   └── test_cli.py          # CLI integration tests
+├── config.yaml              # Configuration
+├── .env.example             # Environment variables
+├── setup.py / Makefile      # Build & dev tools
+└── README.md
+```
+
+### Built-in Pattern Library
+
+| Pattern | Category | Severity | Description |
+|---------|----------|----------|-------------|
+| `database_error` | Database | 🟠 Error | DB connectivity/query errors |
+| `auth_failure` | Security | 🟡 Warning | Auth/login failures |
+| `http_error` | HTTP | 🟠 Error | HTTP 4xx/5xx responses |
+| `timeout` | Performance | 🟠 Error | Operation timeouts |
+| `memory_issue` | Resources | 🔴 Critical | OOM / memory exhaustion |
+| `disk_issue` | Resources | 🔴 Critical | Disk space issues |
+| `connection_error` | Network | 🟠 Error | Connection refused/reset |
+| `ssl_tls_error` | Security | 🟠 Error | Certificate/TLS errors |
+| `crash` | Application | 🔴 Critical | Segfault/panic/fatal |
+| `rate_limit` | Performance | 🟡 Warning | Rate limiting triggered |
+
+### Alert Rules
+
+```
+🚨 Critical Events    → Threshold: 1  (any critical = alert)
+🚨 Error Rate         → Threshold: 10 (>10 errors = alert)
+🚨 Auth Failures      → Threshold: 5  (>5 auth fails = alert)
+🚨 Timeouts           → Threshold: 3  (>3 timeouts = alert)
+```
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-# Analyze errors in a log file
-python app.py --file server.log --focus errors
+cd 75-log-file-analyzer
+pip install -r requirements.txt
+cp .env.example .env
+```
 
-# Analyze last 1000 lines only
-python app.py --file server.log --focus errors --last 1000
+### CLI Usage
 
-# Cluster similar errors
-python app.py --file server.log --cluster
+```bash
+# AI-powered log analysis
+python -m src.log_analyzer.cli --file server.log --focus errors
 
-# Focus on security events
-python app.py --file auth.log --focus security
+# Pattern matching (no LLM — instant!)
+python -m src.log_analyzer.cli --file server.log --patterns
 
-# Add system context
-python app.py --file server.log --focus performance --context "Django app on AWS"
+# Anomaly detection (no LLM)
+python -m src.log_analyzer.cli --file server.log --anomalies
+
+# Build event timeline (no LLM)
+python -m src.log_analyzer.cli --file server.log --timeline
+
+# Evaluate alert rules (no LLM)
+python -m src.log_analyzer.cli --file server.log --alerts
+
+# AI error clustering
+python -m src.log_analyzer.cli --file server.log --cluster
+
+# Analyze last 500 lines with system context
+python -m src.log_analyzer.cli --file server.log --last 500 --context "Production API server"
 
 # Save results
-python app.py --file server.log --focus all --output report.md
+python -m src.log_analyzer.cli --file server.log --focus all --output analysis.md
 ```
 
-## Example Output
-
-```
-╭──────────────────────────────────────╮
-│   📊 Log File Analyzer              │
-╰──────────────────────────────────────╯
-Analyzing: server.log
-Lines: 1523
-Focus: errors
-
-╭─ Log Analysis ──────────────────────╮
-│ ## Summary                          │
-│ 3 error patterns detected           │
-│                                     │
-│ ## Error Patterns                   │
-│ 1. Database timeouts (45 instances) │
-│ 2. HTTP 500 errors (12 instances)   │
-│ 3. Memory warnings (8 instances)    │
-│                                     │
-│ ## Root Cause                       │
-│ Connection pool exhaustion likely   │
-╰─────────────────────────────────────╯
-```
-
-## Requirements
-
-- Python 3.10+
-- Ollama running locally with Gemma 4 model
-- Dependencies: `pip install -r requirements.txt`
-
-## Testing
+### 🖥️ Web UI
 
 ```bash
-pytest test_app.py -v
+streamlit run src/log_analyzer/web_ui.py
 ```
+
+| Tab | Description |
+|-----|-------------|
+| 📤 **Log Upload** | Upload/paste logs, run AI analysis, pattern matching, anomaly detection |
+| ❌ **Error Table** | Clustered error view with example lines |
+| 🔍 **Pattern Matches** | Pattern library matches with category breakdown chart |
+| 📈 **Timeline Chart** | Chronological event timeline with severity icons |
+
+## 🧪 Testing
+
+```bash
+python -m pytest tests/ -v
+python -m pytest tests/ -v --cov=src/log_analyzer --cov-report=term-missing
+```
+
+## ⚙️ Configuration
+
+```yaml
+model:
+  name: "llama3"
+  temperature: 0.3
+analysis:
+  max_log_chars: 15000       # Truncate large files for LLM
+  pattern_matching: true     # Enable pattern library
+  anomaly_detection: true    # Enable anomaly detection
+```
+
+## 📦 Makefile Commands
+
+| Command | Description |
+|---------|-------------|
+| `make install` | Install dependencies |
+| `make test` | Run tests |
+| `make run ARGS="--help"` | Run CLI |
+| `make web` | Launch Streamlit UI |
+| `make clean` | Clean artifacts |

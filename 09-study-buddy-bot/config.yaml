@@ -1,0 +1,27 @@
+# Study Buddy Bot Configuration
+
+llm:
+  model: gemma4
+  temperature: 0.7
+  max_tokens: 3072
+
+modes:
+  quiz: "Generate quiz questions to test knowledge"
+  explain: "Explain a concept in detail"
+  plan: "Create a study plan"
+  summarize: "Summarize key points of a topic"
+  flashcards: "Generate flashcard-style Q&A pairs"
+
+timer:
+  default_minutes: 25
+  break_minutes: 5
+
+progress:
+  storage_file: study_progress.json
+
+flashcards_storage:
+  storage_file: flashcards.json
+
+web_ui:
+  title: "📚 Study Buddy Bot"
+  page_icon: "📚"

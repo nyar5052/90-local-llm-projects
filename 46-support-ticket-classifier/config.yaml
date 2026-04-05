@@ -1,0 +1,34 @@
+model:
+  name: "gemma3"
+  temperature: 0.2
+  max_tokens: 2000
+
+categories:
+  - billing
+  - technical
+  - account
+  - feature_request
+  - general
+
+sla_hours:
+  critical: 1
+  high: 4
+  medium: 8
+  low: 24
+
+team_routing:
+  billing: "finance-team"
+  technical: "engineering-team"
+  account: "account-management"
+  feature_request: "product-team"
+  general: "support-team"
+
+priority_weights:
+  critical: 4
+  high: 3
+  medium: 2
+  low: 1
+
+logging:
+  level: "INFO"
+  file: "ticket_classifier.log"

@@ -1,0 +1,28 @@
+model:
+  name: "gemma3"
+  temperature: 0.3
+  max_tokens: 3500
+
+targets:
+  revenue: 120000
+  customers: 600
+  churn_rate: 3.0
+  nps_score: 80
+
+anomaly_detection:
+  enabled: true
+  threshold: 2.0
+
+moving_average:
+  window: 3
+
+alert_threshold_pct: 10
+
+periods:
+  - monthly
+  - quarterly
+  - yearly
+
+logging:
+  level: "INFO"
+  file: "kpi_reporter.log"

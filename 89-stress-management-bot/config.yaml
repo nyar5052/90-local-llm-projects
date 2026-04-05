@@ -1,0 +1,16 @@
+app:
+  name: "Stress Management Bot"
+  version: "1.0.0"
+llm:
+  model: "llama3"
+  temperature: 0.7
+  max_tokens: 1024
+crisis:
+  suicide_lifeline: "988"
+  crisis_text: "741741"
+  emergency: "911"
+breathing:
+  default_technique: "box"
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

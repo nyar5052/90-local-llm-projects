@@ -1,0 +1,17 @@
+# Meal Planner Bot — Configuration
+model:
+  name: gemma4
+  temperature: 0.7
+  max_tokens: 4096
+
+meal_plan:
+  default_days: 7
+  default_diet: omnivore
+
+storage:
+  recipes_file: saved_recipes.json
+  shopping_list_file: shopping_list.json
+
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

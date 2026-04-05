@@ -1,0 +1,18 @@
+# Newsletter Editor Configuration
+llm:
+  temperature: 0.7
+  max_tokens: 4096
+
+newsletter:
+  default_sections: 4
+  default_tone: "informative"
+  supported_tones:
+    - informative
+    - casual
+    - witty
+    - formal
+    - friendly
+
+export:
+  output_dir: "output"
+  archive_dir: "archive"

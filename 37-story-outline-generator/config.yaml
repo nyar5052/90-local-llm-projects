@@ -1,0 +1,21 @@
+# Story Outline Generator Configuration
+llm:
+  temperature: 0.8
+  max_tokens: 4096
+
+story:
+  default_chapters: 10
+  default_characters: 4
+  genres:
+    - sci-fi
+    - fantasy
+    - mystery
+    - thriller
+    - romance
+    - horror
+    - literary
+    - historical
+  default_structure: "three_act"
+
+export:
+  output_dir: "output"

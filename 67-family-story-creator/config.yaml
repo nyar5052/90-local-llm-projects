@@ -1,0 +1,16 @@
+llm:
+  model: "llama3.2"
+  temperature: 0.8
+  max_tokens: 3000
+
+stories_file: "family_stories.json"
+default_style: "heartwarming"
+default_length: "medium"
+
+export:
+  formats: ["markdown", "html"]
+  output_dir: "exports"
+
+logging:
+  level: "INFO"
+  file: "family_story.log"

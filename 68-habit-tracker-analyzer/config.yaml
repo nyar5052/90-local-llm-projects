@@ -1,0 +1,19 @@
+llm:
+  model: "llama3.2"
+  temperature: 0.6
+  max_tokens: 2000
+
+habits_file: "habits.json"
+default_target: "daily"
+
+achievements:
+  enabled: true
+  notifications: true
+
+reports:
+  weekly: true
+  monthly: true
+
+logging:
+  level: "INFO"
+  file: "habit_tracker.log"

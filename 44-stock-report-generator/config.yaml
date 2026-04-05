@@ -1,0 +1,22 @@
+# Stock Report Generator Configuration
+# ======================================
+
+llm:
+  model: "gemma3:4b"
+  temperature: 0.4
+  max_tokens: 4000
+  base_url: "http://localhost:11434"
+
+analysis:
+  rsi_period: 14
+  bollinger_period: 20
+  sma_periods: [5, 20, 50]
+
+risk:
+  volatility_high_threshold: 5.0
+  volatility_moderate_threshold: 2.0
+  large_movement_threshold: 20.0
+
+logging:
+  level: "INFO"
+  file: null

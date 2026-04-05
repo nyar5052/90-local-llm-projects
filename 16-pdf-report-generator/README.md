@@ -1,18 +1,24 @@
 # 📊 PDF Report Generator
 
-Generate professional, structured markdown reports from raw CSV data using a local LLM.
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![LLM](https://img.shields.io/badge/LLM-Ollama%2FGemma4-green)
+![CLI](https://img.shields.io/badge/CLI-Click-orange)
+![Web](https://img.shields.io/badge/Web-Streamlit-red)
+![Tests](https://img.shields.io/badge/tests-pytest-yellow)
 
-## Description
-
-This tool takes a topic and a CSV data file, analyzes the data statistically, and uses a local LLM (via Ollama) to produce a comprehensive report with an executive summary, key findings, detailed analysis, actionable recommendations, and a conclusion.
+Generate professional, structured reports from CSV data using a local LLM. Supports multiple templates (executive, technical, summary), multi-format output (Markdown, HTML, text), and both CLI and web interfaces.
 
 ## Features
 
-- **Automatic Data Analysis** – Detects numeric vs. categorical columns and computes relevant statistics (min, max, mean, median, stdev, unique counts).
-- **LLM-Powered Reports** – Generates natural-language reports grounded in your actual data.
-- **Markdown Output** – Clean markdown with YAML front-matter, ready for conversion to PDF, HTML, or any other format.
-- **Rich CLI** – Colorful terminal output with data preview tables, progress spinners, and a report preview.
-- **Flexible Input** – Works with any well-formed CSV file.
+- **Template System** — Executive, technical, and summary report templates
+- **Multi-Format Output** — Markdown, HTML, and plain text export
+- **Chart Descriptions** — AI-generated visualization recommendations
+- **Executive Summary** — Auto-generated executive overview section
+- **Automatic Data Analysis** — Statistical profiling for numeric and categorical columns
+- **Streamlit Web UI** — Upload data, select templates, preview and download reports
+- **Rich CLI** — Beautiful terminal output with tables, spinners, and previews
+- **YAML Configuration** — Customizable settings via `config.yaml`
+- **Environment Overrides** — Configure via `.env` or environment variables
 
 ## Installation
 
@@ -30,66 +36,65 @@ ollama pull gemma4
 
 ## Usage
 
+### CLI
+
 ```bash
-# Basic usage
-python app.py --topic "Q4 Sales" --data data.csv
+# Executive report (default)
+python -m src.report_generator.cli --topic "Q4 Sales" --data data.csv
 
-# Specify output file
-python app.py --topic "Q4 Sales" --data data.csv --output reports/q4_sales.md
+# Technical analysis report
+python -m src.report_generator.cli --topic "Q4 Sales" --data data.csv --template technical
 
-# Help
-python app.py --help
+# HTML output
+python -m src.report_generator.cli --topic "Q4 Sales" --data data.csv --format html
+
+# With custom config
+python -m src.report_generator.cli --topic "Sales" --data data.csv --config config.yaml --verbose
+```
+
+### Web UI
+
+```bash
+streamlit run src/report_generator/web_ui.py
 ```
 
 ### CLI Options
 
-| Option     | Required | Default       | Description                  |
-|------------|----------|---------------|------------------------------|
-| `--topic`  | Yes      | —             | Report topic or title        |
-| `--data`   | Yes      | —             | Path to input CSV file       |
-| `--output` | No       | `report.md`   | Output markdown file path    |
-
-## Example Output
-
-```
----
-title: "Q4 Sales"
-generated: "2025-01-15 14:30:00"
-generator: "16-pdf-report-generator"
----
-
-# Q4 Sales Report
-
-## Executive Summary
-Revenue across all regions totaled $91,500 with an average of $18,300 per region...
-
-## Key Findings
-- North region led in units sold (350 total)
-- Widget B was the top-performing product ($49,000 combined revenue)
-- ...
-
-## Data Analysis
-...
-
-## Recommendations
-...
-
-## Conclusion
-...
-```
+| Option       | Required | Default      | Description                         |
+|--------------|----------|--------------|-------------------------------------|
+| `--topic`    | Yes      | —            | Report topic or title               |
+| `--data`     | Yes      | —            | Path to input CSV file              |
+| `--output`   | No       | `report.md`  | Output file path                    |
+| `--template` | No       | `executive`  | Template: executive/technical/summary |
+| `--format`   | No       | `markdown`   | Output format: markdown/html/text   |
+| `--config`   | No       | —            | Path to config.yaml                 |
+| `--verbose`  | No       | —            | Enable debug logging                |
 
 ## Testing
 
 ```bash
-pytest test_app.py -v
+python -m pytest tests/ -v
 ```
 
 ## Project Structure
 
 ```
 16-pdf-report-generator/
-├── app.py              # Main application
-├── requirements.txt    # Python dependencies
-├── test_app.py         # Pytest test suite
-└── README.md           # This file
+├── src/report_generator/
+│   ├── __init__.py          # Package init
+│   ├── core.py              # Core business logic
+│   ├── cli.py               # Click CLI interface
+│   ├── web_ui.py            # Streamlit web interface
+│   ├── config.py            # Configuration management
+│   └── utils.py             # Helper utilities
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py         # Core logic tests
+│   └── test_cli.py          # CLI integration tests
+├── config.yaml              # Default configuration
+├── setup.py                 # Package setup
+├── requirements.txt         # Dependencies
+├── Makefile                 # Dev commands
+├── .env.example             # Environment template
+└── README.md
 ```

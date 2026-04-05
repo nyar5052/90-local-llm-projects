@@ -1,0 +1,21 @@
+# Survey Response Analyzer Configuration
+# ========================================
+
+llm:
+  model: "gemma3:4b"
+  temperature: 0.3
+  max_tokens: 4000
+  base_url: "http://localhost:11434"
+
+analysis:
+  max_responses_for_themes: 50
+  max_responses_for_insights: 30
+  theme_min_count: 2
+
+clustering:
+  enabled: true
+  max_clusters: 10
+
+logging:
+  level: "INFO"
+  file: null

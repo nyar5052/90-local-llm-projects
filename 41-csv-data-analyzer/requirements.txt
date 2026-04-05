@@ -2,4 +2,10 @@ requests
 rich
 click
 pandas
+pyyaml
+streamlit
 pytest
+pytest-cov
+flake8
+black
+mypy

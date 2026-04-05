@@ -1,0 +1,29 @@
+app:
+  name: "Social Media Writer"
+  version: "2.0.0"
+
+llm:
+  model: "llama3"
+  temperature: 0.8
+  max_tokens: 2048
+
+platforms:
+  twitter:
+    max_chars: 280
+    name: "Twitter/X"
+    hashtag_count: 3
+    best_times: ["9:00 AM", "12:00 PM", "5:00 PM"]
+  linkedin:
+    max_chars: 3000
+    name: "LinkedIn"
+    hashtag_count: 5
+    best_times: ["7:30 AM", "12:00 PM", "5:30 PM"]
+  instagram:
+    max_chars: 2200
+    name: "Instagram"
+    hashtag_count: 15
+    best_times: ["11:00 AM", "2:00 PM", "7:00 PM"]
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

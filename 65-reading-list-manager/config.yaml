@@ -1,0 +1,32 @@
+app:
+  name: "Reading List Manager"
+  version: "1.0.0"
+  log_level: "INFO"
+  data_dir: "./data"
+
+reading:
+  statuses:
+    - to-read
+    - reading
+    - completed
+    - dropped
+    - on-hold
+  genres:
+    - Fiction
+    - Non-Fiction
+    - Science Fiction
+    - Fantasy
+    - Mystery
+    - Biography
+    - Self-Help
+    - Technical
+    - History
+    - Philosophy
+  max_rating: 5
+  yearly_goal: 24
+  pages_per_session: 30
+
+llm:
+  model: "llama3"
+  temperature: 0.6
+  system_prompt: "You are a well-read literary assistant."

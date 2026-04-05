@@ -1,0 +1,24 @@
+# Report Generator Configuration
+llm:
+  model: gemma4
+  temperature: 0.5
+  max_tokens: 4096
+
+report:
+  default_output: report.md
+  preview_length: 2000
+  templates:
+    - executive
+    - technical
+    - summary
+  default_template: executive
+  formats:
+    - markdown
+    - html
+    - text
+  default_format: markdown
+
+data:
+  max_rows_preview: 5
+  numeric_threshold: 0.5
+  max_categorical_display: 10

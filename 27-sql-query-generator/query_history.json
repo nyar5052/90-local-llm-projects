@@ -1,0 +1,14 @@
+[
+  {
+    "query": "show customers",
+    "dialect": "standard",
+    "result_preview": "```sql\nSELECT * FROM customers;\n```",
+    "timestamp": 1775361622.0827036
+  },
+  {
+    "query": "show all users",
+    "dialect": "standard",
+    "result_preview": "```sql\nSELECT * FROM users;\n```",
+    "timestamp": 1775361622.1156068
+  }
+]

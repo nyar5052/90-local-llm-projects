@@ -1,0 +1,19 @@
+# Compliance Checker Configuration
+llm:
+  model: gemma4
+  temperature: 0.3
+  max_tokens: 4096
+
+compliance:
+  severity_levels:
+    - high
+    - medium
+    - low
+  score_thresholds:
+    pass: 80
+    warning: 50
+  export_formats:
+    - json
+    - markdown
+    - csv
+  default_severity_filter: all

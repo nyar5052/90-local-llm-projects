@@ -1,71 +1,165 @@
-# 85 - EHR De-Identifier
+# 🛡️ EHR De-Identifier
 
-> **⚠️ DISCLAIMER: This tool is for EDUCATIONAL and RESEARCH purposes ONLY. It is NOT certified for HIPAA compliance and must NOT be used for actual patient data de-identification in clinical or production environments. Always use certified, validated de-identification tools for real Protected Health Information (PHI). This is NOT medical or legal advice.**
+> ⚠️ **CRITICAL DISCLAIMER**: This tool is for **EDUCATIONAL and RESEARCH purposes ONLY**. It is **NOT** certified for **HIPAA compliance**. Do **NOT** rely on this tool for actual medical record de-identification in clinical or production settings. **ALWAYS** use certified, validated de-identification tools for real patient data. This is **NOT** medical or legal advice.
 
-De-identifies medical records by removing Personally Identifiable Information (PII) and Protected Health Information (PHI). Uses a combination of regex pattern matching and local LLM analysis to replace sensitive data with bracketed placeholders.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
+[![Ollama](https://img.shields.io/badge/LLM-Ollama-green.svg)](https://ollama.ai)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-red.svg)](https://streamlit.io)
+[![NOT HIPAA](https://img.shields.io/badge/HIPAA-NOT%20Certified-red.svg)](#-hipaa-compliance-notice)
 
-## Features
+An AI-powered EHR de-identification tool that removes Protected Health Information (PHI) from medical records using regex pattern matching and LLM analysis. Features configurable PII rules, audit logging, batch processing, and validation reports.
 
-- **Dual-layer de-identification**: Regex pre-processing for structured patterns (SSNs, phones, emails, dates) followed by LLM analysis for contextual PII (names, addresses, etc.)
-- **File processing**: De-identify entire medical record files
-- **Inline text**: Quickly de-identify text snippets from the command line
-- **Rich output**: Color-coded display showing original vs. de-identified text with a replacement log
-- **Graceful fallback**: If the LLM is unavailable, regex-only results are still returned
+---
 
-## Placeholder Types
+## 🚨 HIPAA Compliance Notice
 
-| PII Type | Placeholder |
-|---|---|
-| Names | `[NAME_1]`, `[NAME_2]`, ... |
-| Dates | `[DATE_1]`, `[DATE_2]`, ... |
-| SSNs | `[SSN_1]`, `[SSN_2]`, ... |
-| Phone numbers | `[PHONE_1]`, `[PHONE_2]`, ... |
-| Addresses | `[ADDRESS_1]`, `[ADDRESS_2]`, ... |
-| Medical Record Numbers | `[MRN_1]`, `[MRN_2]`, ... |
-| Email addresses | `[EMAIL_1]`, `[EMAIL_2]`, ... |
+> **⛔ THIS TOOL IS NOT HIPAA CERTIFIED ⛔**
+>
+> This tool is a **demonstration/educational project** and has NOT been validated or certified for HIPAA compliance.
+>
+> - ❌ Do NOT use this on real patient data
+> - ❌ Do NOT use this in clinical or production environments
+> - ❌ This tool may MISS PHI or produce INCOMPLETE de-identification
+> - ❌ No warranty of any kind is provided
+> - ✅ Use certified de-identification tools (e.g., Scrubadub, Philter, clinical NLP tools) for real data
+> - ✅ Always have a qualified professional review de-identified records
+>
+> **Using this tool on real patient data could violate HIPAA regulations and result in serious legal consequences.**
 
-## Prerequisites
+---
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with a model pulled (e.g., `ollama pull llama3.2`)
+## ✨ Features
 
-## Setup
+| Feature | Description |
+|---------|-------------|
+| 🔍 **Regex Detection** | Pattern-based PII detection for SSN, phone, email, dates, MRN |
+| 🤖 **LLM Analysis** | AI-powered detection for names, addresses, and contextual PHI |
+| ⚙️ **Configurable Rules** | Enable/disable individual PII detection rules |
+| 📋 **Audit Log** | Complete audit trail of all de-identification operations |
+| 📦 **Batch Processing** | Process multiple files in one operation |
+| ✅ **Validation Reports** | Automated quality checks on de-identification results |
+| 🌐 **Web UI** | Interactive Streamlit interface with file upload |
+| ⚡ **CLI Tool** | Fast command-line processing |
+| 📊 **PII Statistics** | Visual breakdown of detected PII types |
+
+---
+
+## 🏗️ Architecture
+
+```
+85-ehr-deidentifier/
+├── src/
+│   └── ehr_deidentifier/
+│       ├── __init__.py
+│       ├── core.py              # Core logic, PII rules, audit, validation
+│       ├── cli.py               # Click CLI interface
+│       └── web_ui.py            # Streamlit web interface
+├── tests/
+│   ├── __init__.py
+│   ├── test_core.py
+│   └── test_cli.py
+├── config.yaml
+├── setup.py
+├── requirements.txt
+├── Makefile
+├── .env.example
+└── README.md
+```
+
+---
+
+## 🔐 HIPAA Safe Harbor - 18 Identifiers
+
+This tool attempts to detect the following HIPAA Safe Harbor identifiers:
+
+| # | Identifier | Detection Method |
+|---|-----------|-----------------|
+| 1 | Names | LLM |
+| 2 | Geographic data | LLM |
+| 3 | Dates | Regex + LLM |
+| 4 | Phone numbers | Regex |
+| 5 | Fax numbers | Regex |
+| 6 | Email addresses | Regex |
+| 7 | SSN | Regex |
+| 8 | Medical record numbers | Regex |
+| 9 | Health plan numbers | LLM |
+| 10 | Account numbers | LLM |
+| 11 | Certificate/license numbers | LLM |
+| 12 | Vehicle identifiers | LLM |
+| 13 | Device identifiers | LLM |
+| 14 | Web URLs | Regex |
+| 15 | IP addresses | Regex |
+| 16 | Biometric identifiers | LLM |
+| 17 | Full-face photographs | N/A (text only) |
+| 18 | Other unique identifiers | LLM |
+
+---
+
+## 🚀 Installation
 
 ```bash
 cd 85-ehr-deidentifier
-pip install -r requirements.txt
+make install
+cp .env.example .env
 ```
 
-## Usage
+---
 
-### De-identify a file
+## 💻 CLI Usage
+
+### De-identify a File
+```bash
+python -m ehr_deidentifier.cli deidentify --file patient_record.txt --output clean_record.txt
+```
+
+### De-identify Inline Text
+```bash
+python -m ehr_deidentifier.cli text --input "Patient John Smith, SSN 123-45-6789"
+```
+
+### Batch Processing
+```bash
+python -m ehr_deidentifier.cli batch --directory ./records/ --output-dir ./clean/
+```
+
+### View Audit Log
+```bash
+python -m ehr_deidentifier.cli audit
+```
+
+### Validation Report
+```bash
+python -m ehr_deidentifier.cli validate --file patient_record.txt
+```
+
+### List PII Rules
+```bash
+python -m ehr_deidentifier.cli rules
+```
+
+---
+
+## 🌐 Web UI
 
 ```bash
-python app.py deidentify --file medical_record.txt --output deidentified.txt
+make run-web
 ```
 
-### De-identify inline text
+---
+
+## 🧪 Testing
 
 ```bash
-python app.py text --input "Patient John Smith, DOB 01/15/1980, visited on 03/22/2024"
+make test
 ```
 
-## Running Tests
+---
 
-```bash
-pytest test_app.py -v
-```
+## ⚠️ Disclaimer
 
-## How It Works
+**This tool is for EDUCATIONAL and RESEARCH purposes ONLY. It is NOT certified for HIPAA compliance. Do NOT use this tool for actual patient data de-identification. Always use certified, validated tools and have qualified professionals review results.**
 
-1. **Regex pre-processing** scans for structured PII patterns (SSN, phone, email, dates) and replaces them with placeholders.
-2. **LLM analysis** sends the partially de-identified text to a local LLM which identifies remaining contextual PII (names, addresses, medical record numbers, etc.).
-3. **Results display** shows original text, a table of regex-detected items, and the final de-identified output.
+---
 
-## ⚠️ Important Limitations
-
-- This tool uses a local LLM which may miss PII or incorrectly flag non-PII text.
-- Regex patterns cover common US formats only and may miss international formats.
-- **Never use this on real patient data** — use HIPAA-certified tools for production use.
-- The LLM may hallucinate or alter medical terminology despite instructions not to.
-- This tool has not been validated against any de-identification benchmarks.
+*Part of the [90 Local LLM Projects](../../README.md) collection.*

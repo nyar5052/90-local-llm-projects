@@ -1,0 +1,21 @@
+# CSV Data Analyzer Configuration
+# ================================
+
+llm:
+  model: "gemma3:4b"
+  temperature: 0.3
+  max_tokens: 4000
+  base_url: "http://localhost:11434"
+
+analysis:
+  max_preview_rows: 5
+  correlation_threshold: 0.5
+  max_sample_rows_for_llm: 50
+
+export:
+  default_format: "json"
+  include_raw_data: false
+
+logging:
+  level: "INFO"
+  file: null

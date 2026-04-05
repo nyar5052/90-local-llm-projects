@@ -1,0 +1,29 @@
+llm:
+  model: "llama3.2"
+  temperature: 0.6
+  max_tokens: 2000
+
+time_log: "timelog.csv"
+
+pomodoro:
+  work_minutes: 25
+  short_break: 5
+  long_break: 15
+  sessions_before_long: 4
+
+productivity:
+  target_deep_work_hours: 4.0
+  target_total_hours: 8.0
+  categories:
+    deep_work: ["coding", "writing", "design", "research"]
+    shallow_work: ["email", "meetings", "admin"]
+    breaks: ["lunch", "break", "exercise"]
+
+scoring:
+  deep_work_weight: 0.4
+  consistency_weight: 0.3
+  balance_weight: 0.3
+
+logging:
+  level: "INFO"
+  file: "time_coach.log"

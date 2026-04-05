@@ -2,3 +2,5 @@ requests
 rich
 click
 pytest
+pyyaml
+streamlit

@@ -1,0 +1,18 @@
+# Medical Terms Explainer Configuration
+
+ollama:
+  base_url: "http://localhost:11434"
+  model: "gemma4"
+  temperature: 0.3
+  max_tokens: 2048
+
+detail_levels:
+  - brief
+  - standard
+  - comprehensive
+
+default_detail: standard
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

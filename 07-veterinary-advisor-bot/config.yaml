@@ -1,0 +1,27 @@
+# Veterinary Advisor Bot Configuration
+
+llm:
+  model: gemma4
+  temperature: 0.7
+  max_tokens: 2048
+
+pet_types:
+  - dog
+  - cat
+  - bird
+  - fish
+  - rabbit
+  - hamster
+  - reptile
+  - other
+
+profiles:
+  storage_file: pet_profiles.json
+
+symptom_history:
+  storage_file: symptom_history.json
+  max_entries: 500
+
+web_ui:
+  title: "🐾 Veterinary Advisor Bot"
+  page_icon: "🐾"

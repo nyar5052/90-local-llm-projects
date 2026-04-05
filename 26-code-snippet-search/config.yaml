@@ -1,0 +1,41 @@
+# Code Snippet Search Configuration
+# Copy to config.yaml and customize
+
+ollama_base_url: "http://localhost:11434"
+model: "gemma3:1b"
+max_files: 100
+max_context_chars: 8000
+temperature: 0.3
+cache_dir: ".cache"
+bookmarks_file: "bookmarks.json"
+
+extensions:
+  - ".py"
+  - ".js"
+  - ".ts"
+  - ".jsx"
+  - ".tsx"
+  - ".java"
+  - ".go"
+  - ".rs"
+  - ".cpp"
+  - ".c"
+  - ".h"
+  - ".rb"
+  - ".php"
+  - ".sh"
+  - ".sql"
+  - ".yaml"
+  - ".yml"
+  - ".json"
+  - ".html"
+  - ".css"
+
+ignore_dirs:
+  - ".git"
+  - "__pycache__"
+  - "node_modules"
+  - ".venv"
+  - "venv"
+  - "dist"
+  - "build"
