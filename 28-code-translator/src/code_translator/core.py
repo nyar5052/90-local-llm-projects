@@ -5,7 +5,7 @@ Handles language detection, translation, validation, and batch processing.
 
 import os
 import logging
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -87,7 +87,7 @@ def read_source_file(filepath: str) -> str:
         return f.read()
 
 
-def translate_code(code: str, source_lang: str, target_lang: str, chat_fn,
+def translate_code(code: str, source_lang: str, target_lang: str, chat_fn: Any,
                    config: Optional[dict] = None) -> str:
     """Translate code from one language to another using the LLM."""
     if config is None:
@@ -152,7 +152,7 @@ def compare_codes(source: str, translated: str) -> dict:
 def batch_translate_files(
     file_paths: list[str],
     target_lang: str,
-    chat_fn,
+    chat_fn: Any,
     output_dir: str = "translations",
     config: Optional[dict] = None,
 ) -> list[dict]:
@@ -199,7 +199,7 @@ def batch_translate_files(
     return results
 
 
-def generate_translation_notes(source_lang: str, target_lang: str, chat_fn) -> str:
+def generate_translation_notes(source_lang: str, target_lang: str, chat_fn: Any) -> str:
     """Generate general notes about translating between two languages."""
     source_name = get_language_name(source_lang)
     target_name = get_language_name(target_lang)

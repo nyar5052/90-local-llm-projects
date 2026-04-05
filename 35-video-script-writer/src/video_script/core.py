@@ -8,7 +8,7 @@ import logging
 import math
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -42,10 +42,12 @@ def _cfg() -> dict:
 
 
 def _video_cfg() -> dict:
+    """Video cfg."""
     return _cfg().get("video", {})
 
 
 def _llm_cfg() -> dict:
+    """Llm cfg."""
     return _cfg().get("llm", {})
 
 
@@ -83,6 +85,7 @@ class ScriptSection:
 
     @property
     def timestamp(self) -> str:
+        """Timestamp."""
         if self.timestamp_start and self.timestamp_end:
             return f"[{self.timestamp_start}-{self.timestamp_end}]"
         if self.timestamp_start:
@@ -105,14 +108,17 @@ class VideoScript:
 
     @property
     def word_count(self) -> int:
+        """Word count."""
         return len(self.full_text.split())
 
     @property
     def estimated_duration(self) -> float:
+        """Estimated duration."""
         return estimate_duration(self.full_text)
 
     @property
     def full_text(self) -> str:
+        """Full text."""
         if self.sections:
             return "\n\n".join(s.script_text for s in self.sections if s.script_text)
         return self.raw_text

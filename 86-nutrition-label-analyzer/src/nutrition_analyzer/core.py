@@ -15,7 +15,7 @@ import sys
 import os
 import logging
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 from common.llm_client import generate, check_ollama_running
@@ -223,6 +223,7 @@ class MealTracker:
     """Tracks meals and nutrient totals for a day."""
 
     def __init__(self) -> None:
+        """Initialize the instance."""
         self._meals: list[dict] = []
 
     def add_meal(self, name: str, nutrients: dict) -> None:
@@ -272,6 +273,7 @@ class MealTracker:
 
     @property
     def meals(self) -> list[dict]:
+        """Meals."""
         return list(self._meals)
 
 # ---------------------------------------------------------------------------

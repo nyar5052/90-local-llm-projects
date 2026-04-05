@@ -5,7 +5,7 @@ import logging
 import os
 import sys
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Dict
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -19,6 +19,7 @@ _CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "config.yaml"
 
 
 def load_config(path: str = _CONFIG_PATH) -> dict:
+    """Load config."""
     try:
         with open(path, "r", encoding="utf-8") as f:
             return yaml.safe_load(f) or {}
@@ -75,6 +76,7 @@ class ReadingExercise:
     scoring_rubric: List[ScoringRubric] = field(default_factory=list)
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         return asdict(self)
 
 
@@ -143,13 +145,15 @@ DIFFICULTY_CALIBRATION = {
 # ---------------------------------------------------------------------------
 
 
-def _get_llm_client():
+def _get_llm_client() -> Tuple[Any, ...]:
+    """Get llm client."""
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
     from common.llm_client import chat, check_ollama_running
     return chat, check_ollama_running
 
 
 def _parse_json_response(text: str) -> dict:
+    """Parse json response."""
     text = text.strip()
     if text.startswith("```"):
         text = text.split("\n", 1)[1].rsplit("```", 1)[0]
@@ -157,6 +161,7 @@ def _parse_json_response(text: str) -> dict:
 
 
 def _exercise_from_dict(data: dict) -> ReadingExercise:
+    """Exercise from dict."""
     vocab = [VocabularyWord(**v) for v in data.get("vocabulary_words", [])]
     questions = [Question(**q) for q in data.get("questions", [])]
     rubric_data = data.get("scoring_rubric", [])
@@ -271,5 +276,6 @@ def get_answer_key(exercise: ReadingExercise) -> List[Dict]:
 
 
 def check_service() -> bool:
+    """Check service."""
     _, check_ollama_running = _get_llm_client()
     return check_ollama_running()

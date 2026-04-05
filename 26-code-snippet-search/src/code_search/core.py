@@ -8,7 +8,7 @@ import json
 import hashlib
 import logging
 import time
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -172,7 +172,7 @@ def rank_files(files: list[dict], query: str) -> list[dict]:
     return [f for f, _ in scored]
 
 
-def search_code(directory: str, query: str, chat_fn, config: Optional[dict] = None) -> str:
+def search_code(directory: str, query: str, chat_fn: Any, config: Optional[dict] = None) -> str:
     """Search codebase using natural language query."""
     if config is None:
         config = load_config()

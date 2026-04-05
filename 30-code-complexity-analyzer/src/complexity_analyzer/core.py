@@ -9,7 +9,7 @@ import math
 import json
 import time
 import logging
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -215,7 +215,7 @@ def get_mi_rating(mi: float) -> str:
         return "[red]Poor[/red]"
 
 
-def get_llm_suggestions(filepath: str, metrics: dict, chat_fn,
+def get_llm_suggestions(filepath: str, metrics: dict, chat_fn: Any,
                         config: Optional[dict] = None) -> str:
     """Get LLM-powered improvement suggestions."""
     if config is None:

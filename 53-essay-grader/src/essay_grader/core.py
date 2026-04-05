@@ -14,7 +14,7 @@ import statistics
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -36,11 +36,13 @@ class ConfigManager:
     _instance: Optional["ConfigManager"] = None
     _config: dict
 
-    def __init__(self, config_path: str = CONFIG_PATH):
+    def __init__(self, config_path: str = CONFIG_PATH) -> None:
+        """Initialize the instance."""
         self._config = self._load(config_path)
 
     @staticmethod
     def _load(config_path: str) -> dict:
+        """Load data from storage."""
         path = Path(config_path)
         if path.exists():
             with open(path, "r", encoding="utf-8") as fh:
@@ -49,15 +51,17 @@ class ConfigManager:
 
     @classmethod
     def get_instance(cls, config_path: str = CONFIG_PATH) -> "ConfigManager":
+        """Get instance."""
         if cls._instance is None:
             cls._instance = cls(config_path)
         return cls._instance
 
     @classmethod
-    def reset(cls):
+    def reset(cls) -> None:
+        """Reset."""
         cls._instance = None
 
-    def get(self, *keys, default=None):
+    def get(self, *keys: Any, default: Optional[Any]=None) -> Any:
         """Dot-path access: cfg.get('llm', 'temperature', default=0.3)."""
         node = self._config
         for k in keys:
@@ -71,10 +75,11 @@ class ConfigManager:
 
     @property
     def raw(self) -> dict:
+        """Return the raw underlying data."""
         return self._config
 
 
-def setup_logging(level: str = "INFO", log_file: Optional[str] = None):
+def setup_logging(level: str = "INFO", log_file: Optional[str] = None) -> None:
     """Configure logging for the application."""
     numeric_level = getattr(logging, level.upper(), logging.INFO)
     handlers: list[logging.Handler] = [logging.StreamHandler()]
@@ -148,39 +153,47 @@ class PlagiarismIndicator:
 class GradeDistribution:
     """Tracks grade distribution across multiple essays."""
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize the instance."""
         self._scores: list[float] = []
 
-    def add_score(self, score: float):
+    def add_score(self, score: float) -> None:
+        """Add score."""
         self._scores.append(score)
 
     @property
     def scores(self) -> list[float]:
+        """Scores."""
         return list(self._scores)
 
     @property
     def count(self) -> int:
+        """Count."""
         return len(self._scores)
 
     @property
     def mean(self) -> float:
+        """Mean."""
         if not self._scores:
             return 0.0
         return statistics.mean(self._scores)
 
     @property
     def median(self) -> float:
+        """Median."""
         if not self._scores:
             return 0.0
         return statistics.median(self._scores)
 
     @property
     def std(self) -> float:
+        """Std."""
         if len(self._scores) < 2:
             return 0.0
         return statistics.stdev(self._scores)
 
     def summary(self) -> dict:
+        """Summary."""
         return {
             "count": self.count,
             "mean": round(self.mean, 2),

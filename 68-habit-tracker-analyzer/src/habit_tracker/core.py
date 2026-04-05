@@ -92,6 +92,7 @@ def load_config(config_path: str = "config.yaml") -> dict:
 
 
 def _setup_logging(config: dict) -> None:
+    """Setup logging."""
     log_cfg = config.get("logging", {})
     """Setup logging."""
     logging.basicConfig(

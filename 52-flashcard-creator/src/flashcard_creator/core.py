@@ -16,7 +16,7 @@ import uuid
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -72,7 +72,8 @@ class ConfigManager:
         "logging": {"level": "INFO", "file": "flashcard_creator.log"},
     }
 
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self, config_path: Optional[str] = None) -> None:
+        """Initialize the instance."""
         self._data: dict = {}
         if config_path is None:
             # Look next to the package, then cwd
@@ -91,7 +92,8 @@ class ConfigManager:
         else:
             logger.info("No config file found; using defaults")
 
-    def get(self, section: str, key: str, fallback=None):
+    def get(self, section: str, key: str, fallback: Optional[Any]=None) -> Any:
+        """Retrieve a value."""
         section_data = self._data.get(section, self._defaults.get(section, {}))
         default_val = self._defaults.get(section, {}).get(key, fallback)
         return section_data.get(key, default_val)
@@ -176,7 +178,8 @@ class SpacedRepetition:
         5 — perfect recall
     """
 
-    def __init__(self, config: Optional[ConfigManager] = None):
+    def __init__(self, config: Optional[ConfigManager] = None) -> None:
+        """Initialize the instance."""
         self.min_ef = 1.3
         self.initial_ef = 2.5
         self.initial_interval = 1
@@ -233,7 +236,8 @@ class SpacedRepetition:
 class ReviewSession:
     """Tracks state for a single review session."""
 
-    def __init__(self, deck: Deck, shuffle: bool = True, due_only: bool = False):
+    def __init__(self, deck: Deck, shuffle: bool = True, due_only: bool = False) -> None:
+        """Initialize the instance."""
         self.deck = deck
         self.scores: list[int] = []
         self.start_time = datetime.now()
@@ -247,9 +251,11 @@ class ReviewSession:
             random.shuffle(self.cards)
 
     def record(self, quality: int) -> None:
+        """Record."""
         self.scores.append(max(0, min(5, quality)))
 
     def finish(self) -> ReviewStats:
+        """Finish."""
         self.end_time = datetime.now()
         total = len(self.cards)
         reviewed = len(self.scores)
@@ -280,23 +286,27 @@ class ReviewSession:
 class DeckManager:
     """Persist and manage multiple decks on disk."""
 
-    def __init__(self, decks_dir: str = "./decks"):
+    def __init__(self, decks_dir: str = "./decks") -> None:
+        """Initialize the instance."""
         self.decks_dir = Path(decks_dir)
         self.decks_dir.mkdir(parents=True, exist_ok=True)
 
     def _deck_path(self, name: str) -> Path:
+        """Deck path."""
         safe = name.lower().replace(" ", "_")[:60]
         return self.decks_dir / f"{safe}.json"
 
     # CRUD -------------------------------------------------------------------
 
     def create_deck(self, name: str, description: str = "", tags: list[str] | None = None) -> Deck:
+        """Create deck."""
         deck = Deck(name=name, description=description, tags=tags or [])
         self._save(deck)
         logger.info("Created deck '%s'", name)
         return deck
 
     def delete_deck(self, name: str) -> bool:
+        """Delete deck."""
         path = self._deck_path(name)
         if path.exists():
             path.unlink()
@@ -305,6 +315,7 @@ class DeckManager:
         return False
 
     def list_decks(self) -> list[Deck]:
+        """List decks."""
         decks: list[Deck] = []
         for fp in sorted(self.decks_dir.glob("*.json")):
             try:
@@ -314,6 +325,7 @@ class DeckManager:
         return decks
 
     def get_deck(self, name: str) -> Optional[Deck]:
+        """Get deck."""
         path = self._deck_path(name)
         if path.exists():
             return self._load_from_path(path)
@@ -322,6 +334,7 @@ class DeckManager:
     # Cards ------------------------------------------------------------------
 
     def add_card(self, deck_name: str, card: Flashcard) -> Deck:
+        """Add card."""
         deck = self.get_deck(deck_name)
         if deck is None:
             deck = self.create_deck(deck_name)
@@ -330,6 +343,7 @@ class DeckManager:
         return deck
 
     def remove_card(self, deck_name: str, card_id: str) -> Deck:
+        """Remove card."""
         deck = self.get_deck(deck_name)
         if deck is None:
             raise ValueError(f"Deck '{deck_name}' not found")
@@ -340,11 +354,13 @@ class DeckManager:
     # Import / Export --------------------------------------------------------
 
     def import_deck(self, filepath: str, fmt: str = "json") -> Deck:
+        """Import deck."""
         if fmt == "csv":
             return import_deck_csv(filepath)
         return import_deck_json(filepath)
 
     def export_deck(self, deck: Deck, filepath: str, fmt: str = "json") -> str:
+        """Export deck."""
         if fmt == "csv":
             return export_deck_csv(deck, filepath)
         return export_deck_json(deck, filepath)
@@ -352,6 +368,7 @@ class DeckManager:
     # Merge ------------------------------------------------------------------
 
     def merge_decks(self, deck_a: Deck, deck_b: Deck, new_name: Optional[str] = None) -> Deck:
+        """Merge decks."""
         merged = Deck(
             name=new_name or f"{deck_a.name} + {deck_b.name}",
             description=f"Merged from '{deck_a.name}' and '{deck_b.name}'",
@@ -364,6 +381,7 @@ class DeckManager:
     # Stats ------------------------------------------------------------------
 
     def get_stats(self, deck: Deck) -> ReviewStats:
+        """Get stats."""
         by_diff: dict[str, int] = {}
         for c in deck.cards:
             by_diff[c.difficulty] = by_diff.get(c.difficulty, 0) + 1
@@ -380,6 +398,7 @@ class DeckManager:
     # Internal persistence ---------------------------------------------------
 
     def _save(self, deck: Deck) -> None:
+        """Save data to storage."""
         path = self._deck_path(deck.name)
         data = {
             "name": deck.name,
@@ -392,6 +411,7 @@ class DeckManager:
             json.dump(data, fh, indent=2, ensure_ascii=False)
 
     def _load_from_path(self, path: Path) -> Deck:
+        """Load from path."""
         with open(path, "r", encoding="utf-8") as fh:
             raw = json.load(fh)
         cards = [Flashcard(**c) for c in raw.get("cards", [])]

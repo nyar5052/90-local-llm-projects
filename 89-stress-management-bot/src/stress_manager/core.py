@@ -174,7 +174,7 @@ COPING_TOOLKIT = {
 # ---------------------------------------------------------------------------
 
 
-def show_disclaimer():
+def show_disclaimer() -> None:
     """Display the mental health disclaimer."""
     console.print(Panel(DISCLAIMER, border_style="red", title="Disclaimer"))
     console.print()

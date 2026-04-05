@@ -61,7 +61,7 @@ class MathProblemResult:
     latex_output: str = ""
 
     def to_dict(self) -> dict:
-        """To dict."""
+        """Convert to dictionary representation."""
         return asdict(self)
 
 

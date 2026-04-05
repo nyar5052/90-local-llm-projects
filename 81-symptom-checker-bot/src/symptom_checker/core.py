@@ -251,7 +251,7 @@ class MedicalHistoryTracker:
     """Track symptom history across a session."""
 
     def __init__(self) -> None:
-        """Init."""
+        """Initialize the instance."""
         self.entries: list[dict] = []
 
     def add_entry(

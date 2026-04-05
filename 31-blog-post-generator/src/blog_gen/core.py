@@ -79,6 +79,7 @@ def load_config(path: Optional[str] = None) -> dict:
         data = {}
 
     def _merge(base: dict, override: dict) -> dict:
+        """Merge override values into base."""
         merged = base.copy()
         for key, val in override.items():
             """Merge."""
@@ -126,8 +127,9 @@ class BlogPost:
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     def __post_init__(self) -> None:
+        """Validate and finalize initialization."""
         if self.word_count == 0:
-            """Post init."""
+            """Validate and finalize initialization."""
             self.word_count = len(self.content.split())
 
 

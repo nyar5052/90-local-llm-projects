@@ -8,7 +8,7 @@ import sys
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
@@ -70,10 +70,12 @@ class Poem:
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         return asdict(self)
 
     @classmethod
     def from_dict(cls, data: dict) -> "Poem":
+        """Create instance from dictionary data."""
         return cls(**{k: v for k, v in data.items() if k in cls.__dataclass_fields__})
 
 
@@ -86,6 +88,7 @@ class PoemCollection:
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         return {
             "name": self.name,
             "poems": [p.to_dict() for p in self.poems],
@@ -94,6 +97,7 @@ class PoemCollection:
 
     @classmethod
     def from_dict(cls, data: dict) -> "PoemCollection":
+        """Create instance from dictionary data."""
         poems = [Poem.from_dict(p) for p in data.get("poems", [])]
         return cls(
             name=data["name"],

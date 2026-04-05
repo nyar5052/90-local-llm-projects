@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Core business logic for Standup Generator."""
 
+from typing import Optional, List, Dict, Any, Tuple, Union
 import json
 import logging
 import os
@@ -171,7 +172,7 @@ def get_git_branches(repo_path: str = ".") -> list[str]:
         return []
 
 
-def categorize_tasks(tasks) -> dict:
+def categorize_tasks(tasks: str) -> dict:
     """Categorize tasks into completed, in_progress, planned, and blocked."""
     categorized = {
         "completed": [],
@@ -227,7 +228,7 @@ def format_ticket_refs(text: str, link_template: str = "") -> str:
     return result
 
 
-def _task_to_text(task) -> str:
+def _task_to_text(task: Any) -> str:
     """Convert a task (dict or str) to display text."""
     if isinstance(task, dict):
         return task.get("title", str(task))
@@ -235,7 +236,7 @@ def _task_to_text(task) -> str:
 
 
 def generate_standup(
-    tasks,
+    tasks: str,
     git_log: str = "",
     team: str = "",
     project: str = "",
@@ -296,7 +297,7 @@ Keep it concise, professional, and action-oriented. Each item should be a single
     return result
 
 
-def generate_weekly_summary(tasks, git_log: str = "", config: dict | None = None) -> str:
+def generate_weekly_summary(tasks: str, git_log: str = "", config: dict | None = None) -> str:
     """Generate a weekly summary from tasks."""
     config = config or DEFAULT_CONFIG
     tasks_text = json.dumps(tasks, indent=2) if isinstance(tasks, (dict, list)) else str(tasks)
@@ -324,7 +325,7 @@ Provide:
 
 
 def generate_sprint_review(
-    tasks, sprint_name: str = "Current Sprint", config: dict | None = None
+    tasks: str, sprint_name: str = "Current Sprint", config: dict | None = None
 ) -> str:
     """Generate a sprint review report."""
     config = config or DEFAULT_CONFIG

@@ -6,7 +6,7 @@ Handles code analysis, test generation, coverage analysis, and edge case detecti
 import os
 import ast
 import logging
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -172,7 +172,7 @@ def analyze_coverage(code_info: dict) -> dict:
     }
 
 
-def generate_tests(filepath: str, chat_fn, framework: str = "pytest",
+def generate_tests(filepath: str, chat_fn: Any, framework: str = "pytest",
                    config: Optional[dict] = None) -> str:
     """Generate unit tests for the code in filepath."""
     if config is None:

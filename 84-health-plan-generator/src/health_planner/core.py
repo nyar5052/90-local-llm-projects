@@ -145,7 +145,7 @@ class ProgressTracker:
     """Track progress toward health goals."""
 
     def __init__(self) -> None:
-        """Init."""
+        """Initialize the instance."""
         self.checkins: list[dict] = []
         self.current_week: int = 1
         self.goal: str | None = None

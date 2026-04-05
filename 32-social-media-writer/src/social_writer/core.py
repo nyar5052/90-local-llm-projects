@@ -134,7 +134,7 @@ class SocialPost:
     created_at: datetime = field(default_factory=datetime.now)
 
     def __post_init__(self) -> None:
-        """Post init."""
+        """Validate and finalize initialization."""
         self.char_count = len(self.content)
         config = _get_platform_config(self.platform)
         self.is_within_limit = self.char_count <= config["max_chars"]

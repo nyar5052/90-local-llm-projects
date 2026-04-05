@@ -7,7 +7,7 @@ import os
 import json
 import time
 import logging
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -110,7 +110,7 @@ def visualize_schema(tables: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def generate_sql(schema: str, query: str, chat_fn, dialect: str = "standard",
+def generate_sql(schema: str, query: str, chat_fn: Any, dialect: str = "standard",
                  config: Optional[dict] = None) -> str:
     """Generate SQL from natural language using the LLM."""
     if config is None:
@@ -136,7 +136,7 @@ Provide the SQL query, explanation, and any optimization tips."""
     return response
 
 
-def generate_sql_no_schema(query: str, chat_fn, dialect: str = "standard",
+def generate_sql_no_schema(query: str, chat_fn: Any, dialect: str = "standard",
                            config: Optional[dict] = None) -> str:
     """Generate SQL from natural language without a schema."""
     if config is None:
@@ -157,7 +157,7 @@ Create reasonable table and column names. Provide the SQL query with explanation
     return response
 
 
-def optimize_query(sql: str, chat_fn, dialect: str = "standard") -> str:
+def optimize_query(sql: str, chat_fn: Any, dialect: str = "standard") -> str:
     """Get optimization suggestions for a SQL query."""
     prompt = f"""Analyze this SQL query and suggest optimizations:
 

@@ -5,7 +5,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -74,6 +74,7 @@ VISUAL_SUGGESTIONS = {
 
 
 def load_config(config_path: Optional[str] = None) -> dict:
+    """Load config."""
     config = DEFAULT_CONFIG.copy()
     if config_path and os.path.exists(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
@@ -83,6 +84,7 @@ def load_config(config_path: Optional[str] = None) -> dict:
 
 
 def _deep_merge(base: dict, override: dict) -> None:
+    """Deep merge."""
     for key, value in override.items():
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
             _deep_merge(base[key], value)
@@ -91,14 +93,17 @@ def _deep_merge(base: dict, override: dict) -> None:
 
 
 def get_formats() -> dict:
+    """Get formats."""
     return FORMATS
 
 
 def get_slide_templates() -> dict:
+    """Get slide templates."""
     return SLIDE_TEMPLATES
 
 
 def get_visual_suggestions() -> dict:
+    """Get visual suggestions."""
     return VISUAL_SUGGESTIONS
 
 

@@ -133,7 +133,7 @@ CPR_STEPS = [
 # Helper functions
 # ---------------------------------------------------------------------------
 
-def show_disclaimer():
+def show_disclaimer() -> None:
     """Display the emergency disclaimer prominently."""
     from rich.console import Console
     from rich.panel import Panel
@@ -263,7 +263,7 @@ class EmergencyContactManager:
     """Manage a list of emergency contacts (in-memory storage)."""
 
     def __init__(self) -> None:
-        """Init."""
+        """Initialize the instance."""
         self._contacts: list[EmergencyContact] = []
 
     def add_contact(self, contact: EmergencyContact) -> None:

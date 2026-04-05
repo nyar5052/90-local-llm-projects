@@ -7,7 +7,7 @@ import sys
 import random
 import time
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Dict
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -21,6 +21,7 @@ _CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "config.yaml"
 
 
 def load_config(path: str = _CONFIG_PATH) -> dict:
+    """Load config."""
     try:
         with open(path, "r", encoding="utf-8") as f:
             return yaml.safe_load(f) or {}
@@ -58,6 +59,7 @@ class VocabularySet:
     words: List[WordEntry] = field(default_factory=list)
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         return asdict(self)
 
 
@@ -97,10 +99,12 @@ class ProgressStats:
 
     @property
     def mastery_pct(self) -> float:
+        """Mastery pct."""
         return (self.words_learned / self.total_words * 100) if self.total_words > 0 else 0.0
 
     @property
     def avg_score(self) -> float:
+        """Avg score."""
         return sum(self.quiz_scores) / len(self.quiz_scores) if self.quiz_scores else 0.0
 
 
@@ -138,13 +142,15 @@ Return ONLY the JSON, no other text."""
 # ---------------------------------------------------------------------------
 
 
-def _get_llm_client():
+def _get_llm_client() -> Tuple[Any, ...]:
+    """Get llm client."""
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
     from common.llm_client import chat, check_ollama_running
     return chat, check_ollama_running
 
 
 def _parse_json_response(text: str) -> dict:
+    """Parse json response."""
     text = text.strip()
     if text.startswith("```"):
         text = text.split("\n", 1)[1].rsplit("```", 1)[0]
@@ -152,6 +158,7 @@ def _parse_json_response(text: str) -> dict:
 
 
 def _vocabset_from_dict(data: dict) -> VocabularySet:
+    """Vocabset from dict."""
     words = [WordEntry(**w) for w in data.get("words", [])]
     return VocabularySet(
         topic=data.get("topic", ""),
@@ -235,5 +242,6 @@ def get_due_cards(deck: List[SpacedRepetitionCard]) -> List[SpacedRepetitionCard
 
 
 def check_service() -> bool:
+    """Check service."""
     _, check_ollama_running = _get_llm_client()
     return check_ollama_running()

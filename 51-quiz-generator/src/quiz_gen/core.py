@@ -11,7 +11,7 @@ from enum import Enum
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -73,7 +73,8 @@ _DEFAULT_CONFIG = {
 class ConfigManager:
     """Loads and provides access to config.yaml with sensible defaults."""
 
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self, config_path: Optional[str] = None) -> None:
+        """Initialize the instance."""
         self._config = dict(_DEFAULT_CONFIG)
         if config_path is None:
             config_path = os.path.join(
@@ -83,6 +84,7 @@ class ConfigManager:
         self._load()
 
     def _load(self) -> None:
+        """Load data from storage."""
         path = Path(self._path)
         if path.exists():
             with open(path, "r", encoding="utf-8") as fh:
@@ -91,13 +93,14 @@ class ConfigManager:
 
     @staticmethod
     def _merge(base: dict, override: dict) -> None:
+        """Merge override values into base."""
         for key, value in override.items():
             if key in base and isinstance(base[key], dict) and isinstance(value, dict):
                 ConfigManager._merge(base[key], value)
             else:
                 base[key] = value
 
-    def get(self, *keys, default=None):
+    def get(self, *keys: Any, default: Optional[Any]=None) -> Any:
         """Retrieve a nested config value, e.g. cfg.get('llm', 'temperature')."""
         node = self._config
         for k in keys:
@@ -109,6 +112,7 @@ class ConfigManager:
 
     @property
     def raw(self) -> dict:
+        """Return the raw underlying data."""
         return self._config
 
 
@@ -154,6 +158,7 @@ class QuizQuestion:
     difficulty: Optional[str] = None
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         d: dict = {
             "number": self.number,
             "type": self.q_type,
@@ -172,6 +177,7 @@ class QuizQuestion:
 
     @classmethod
     def from_dict(cls, data: dict) -> "QuizQuestion":
+        """Create instance from dictionary data."""
         return cls(
             number=data.get("number", 0),
             question=data.get("question", ""),
@@ -194,10 +200,12 @@ class QuizResult:
     timestamp: str = ""
 
     def to_dict(self) -> dict:
+        """Convert to dictionary representation."""
         return asdict(self)
 
     @classmethod
     def from_dict(cls, data: dict) -> "QuizResult":
+        """Create instance from dictionary data."""
         return cls(**{k: v for k, v in data.items() if k in cls.__dataclass_fields__})
 
 
@@ -351,22 +359,26 @@ def export_quiz_pdf_ready(quiz_data: dict) -> str:
 class QuestionBank:
     """Manages a persistent bank of quiz questions."""
 
-    def __init__(self, storage_file: str = "question_bank.json"):
+    def __init__(self, storage_file: str = "question_bank.json") -> None:
+        """Initialize the instance."""
         self._path = Path(storage_file)
         self._questions: list[QuizQuestion] = []
         self._load()
 
     def _load(self) -> None:
+        """Load data from storage."""
         if self._path.exists():
             with open(self._path, "r", encoding="utf-8") as fh:
                 data = json.load(fh)
             self._questions = [QuizQuestion.from_dict(q) for q in data]
 
     def _save(self) -> None:
+        """Save data to storage."""
         with open(self._path, "w", encoding="utf-8") as fh:
             json.dump([q.to_dict() for q in self._questions], fh, indent=2)
 
     def add(self, question: QuizQuestion) -> None:
+        """Add."""
         self._questions.append(question)
         self._save()
 
@@ -383,6 +395,7 @@ class QuestionBank:
         return added
 
     def remove(self, index: int) -> None:
+        """Remove."""
         if 0 <= index < len(self._questions):
             self._questions.pop(index)
             self._save()
@@ -393,6 +406,7 @@ class QuestionBank:
         difficulty: Optional[str] = None,
         q_type: Optional[str] = None,
     ) -> list[QuizQuestion]:
+        """Filter."""
         results = self._questions
         if topic:
             results = [q for q in results if q.topic and topic.lower() in q.topic.lower()]
@@ -403,13 +417,16 @@ class QuestionBank:
         return results
 
     def all(self) -> list[QuizQuestion]:
+        """All."""
         return list(self._questions)
 
     def clear(self) -> None:
+        """Clear."""
         self._questions.clear()
         self._save()
 
     def __len__(self) -> int:
+        """Return the number of items."""
         return len(self._questions)
 
 
@@ -421,20 +438,24 @@ class QuestionBank:
 class TimedQuiz:
     """Wraps a quiz with timer functionality."""
 
-    def __init__(self, quiz_data: dict, seconds_per_question: int = 30):
+    def __init__(self, quiz_data: dict, seconds_per_question: int = 30) -> None:
+        """Initialize the instance."""
         self.quiz_data = quiz_data
         self.seconds_per_question = seconds_per_question
         self._start_time: Optional[float] = None
         self._end_time: Optional[float] = None
 
     def start(self) -> None:
+        """Start."""
         self._start_time = time.time()
 
     def stop(self) -> None:
+        """Stop."""
         self._end_time = time.time()
 
     @property
     def elapsed(self) -> float:
+        """Elapsed."""
         if self._start_time is None:
             return 0.0
         end = self._end_time or time.time()
@@ -442,11 +463,13 @@ class TimedQuiz:
 
     @property
     def time_limit(self) -> int:
+        """Time limit."""
         n = len(self.quiz_data.get("questions", []))
         return n * self.seconds_per_question
 
     @property
     def is_expired(self) -> bool:
+        """Is expired."""
         return self.elapsed > self.time_limit
 
 
@@ -458,21 +481,25 @@ class TimedQuiz:
 class ScoreTracker:
     """Tracks quiz scores across sessions, persisted to JSON."""
 
-    def __init__(self, history_file: str = "quiz_scores.json"):
+    def __init__(self, history_file: str = "quiz_scores.json") -> None:
+        """Initialize the instance."""
         self._path = Path(history_file)
         self._scores: list[dict] = []
         self._load()
 
     def _load(self) -> None:
+        """Load data from storage."""
         if self._path.exists():
             with open(self._path, "r", encoding="utf-8") as fh:
                 self._scores = json.load(fh)
 
     def _save(self) -> None:
+        """Save data to storage."""
         with open(self._path, "w", encoding="utf-8") as fh:
             json.dump(self._scores, fh, indent=2)
 
     def record(self, result: QuizResult) -> None:
+        """Record."""
         entry = result.to_dict()
         if not entry.get("timestamp"):
             entry["timestamp"] = datetime.now().isoformat()
@@ -480,9 +507,11 @@ class ScoreTracker:
         self._save()
 
     def history(self) -> list[dict]:
+        """History."""
         return list(self._scores)
 
     def average_score(self) -> float:
+        """Average score."""
         if not self._scores:
             return 0.0
         return round(
@@ -490,13 +519,16 @@ class ScoreTracker:
         )
 
     def best_score(self) -> Optional[dict]:
+        """Best score."""
         if not self._scores:
             return None
         return max(self._scores, key=lambda s: s.get("percentage", 0))
 
     def clear(self) -> None:
+        """Clear."""
         self._scores.clear()
         self._save()
 
     def __len__(self) -> int:
+        """Return the number of items."""
         return len(self._scores)

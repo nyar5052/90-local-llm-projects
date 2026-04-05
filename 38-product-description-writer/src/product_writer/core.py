@@ -5,7 +5,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -81,6 +81,7 @@ LENGTH_GUIDE = {
 
 
 def load_config(config_path: Optional[str] = None) -> dict:
+    """Load config."""
     config = DEFAULT_CONFIG.copy()
     if config_path and os.path.exists(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
@@ -90,6 +91,7 @@ def load_config(config_path: Optional[str] = None) -> dict:
 
 
 def _deep_merge(base: dict, override: dict) -> None:
+    """Deep merge."""
     for key, value in override.items():
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
             _deep_merge(base[key], value)
@@ -98,10 +100,12 @@ def _deep_merge(base: dict, override: dict) -> None:
 
 
 def get_platform_configs() -> dict:
+    """Get platform configs."""
     return PLATFORM_CONFIGS
 
 
 def get_feature_benefit_map() -> dict:
+    """Get feature benefit map."""
     return FEATURE_BENEFIT_MAP
 
 

@@ -9,7 +9,7 @@ import os
 import json
 import logging
 from dataclasses import dataclass, field, asdict
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 from pathlib import Path
 
 import yaml
@@ -50,7 +50,8 @@ class ConfigManager:
         "logging": {"level": "INFO", "file": "curriculum_planner.log"},
     }
 
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self, config_path: Optional[str] = None) -> None:
+        """Initialize the instance."""
         self._data: dict = {}
         if config_path is None:
             config_path = os.path.join(
@@ -60,6 +61,7 @@ class ConfigManager:
         self.load()
 
     def load(self) -> None:
+        """Load data from storage."""
         if os.path.exists(self._path):
             with open(self._path, "r", encoding="utf-8") as fh:
                 self._data = yaml.safe_load(fh) or {}
@@ -68,11 +70,13 @@ class ConfigManager:
             self._data = {}
             logger.warning("Config file not found at %s; using defaults", self._path)
 
-    def get(self, section: str, key: str, default=None):
+    def get(self, section: str, key: str, default: Optional[Any]=None) -> Any:
+        """Retrieve a value."""
         return self._data.get(section, {}).get(key, self._DEFAULT_CONFIG.get(section, {}).get(key, default))
 
     @property
     def data(self) -> dict:
+        """Data."""
         merged = {}
         for section, defaults in self._DEFAULT_CONFIG.items():
             merged[section] = {**defaults, **self._data.get(section, {})}
@@ -168,7 +172,8 @@ class CourseDesign:
 class OutcomeMapper:
     """Maps learning outcomes to weekly plans."""
 
-    def __init__(self, outcomes: list[LearningOutcome], weekly_plan: list[WeekPlan]):
+    def __init__(self, outcomes: list[LearningOutcome], weekly_plan: list[WeekPlan]) -> None:
+        """Initialize the instance."""
         self.outcomes = outcomes
         self.weekly_plan = weekly_plan
 
@@ -206,7 +211,8 @@ class OutcomeMapper:
 class AssessmentPlanner:
     """Plans and balances course assessments."""
 
-    def __init__(self, assessments: Optional[list[Assessment]] = None):
+    def __init__(self, assessments: Optional[list[Assessment]] = None) -> None:
+        """Initialize the instance."""
         self.assessments: list[Assessment] = assessments or []
 
     def plan_assessments(self, outcomes: list[LearningOutcome], weeks: int) -> list[Assessment]:
@@ -298,10 +304,12 @@ class ResourceSuggester:
 class PrerequisiteTracker:
     """Manages course prerequisites."""
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize the instance."""
         self.prerequisites: list[Prerequisite] = []
 
     def add_prerequisite(self, prereq: Prerequisite) -> None:
+        """Add prerequisite."""
         self.prerequisites.append(prereq)
 
     def check_prerequisites(self) -> list[Prerequisite]:
@@ -358,7 +366,7 @@ Return ONLY the JSON, no other text."""
 # Core functions
 # ---------------------------------------------------------------------------
 
-def parse_response(response: str):
+def parse_response(response: str) -> Any:
     """Parse a JSON response from the LLM, stripping markdown fences."""
     text = response.strip()
     if text.startswith("```"):

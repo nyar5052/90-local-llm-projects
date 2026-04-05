@@ -13,7 +13,7 @@ import logging
 from dataclasses import dataclass, field, asdict
 from enum import IntEnum
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import yaml
 
@@ -36,11 +36,13 @@ _CONFIG_PATHS = [
 class ConfigManager:
     """Loads and provides access to config.yaml values."""
 
-    def __init__(self, config_path: Optional[str] = None):
+    def __init__(self, config_path: Optional[str] = None) -> None:
+        """Initialize the instance."""
         self._data: dict = {}
         self._load(config_path)
 
     def _load(self, config_path: Optional[str] = None) -> None:
+        """Load data from storage."""
         paths = [Path(config_path)] if config_path else _CONFIG_PATHS
         for p in paths:
             if p.exists():
@@ -50,11 +52,13 @@ class ConfigManager:
                     return
         logger.warning("No config.yaml found; using defaults.")
 
-    def get(self, section: str, key: str, default=None):
+    def get(self, section: str, key: str, default: Optional[Any]=None) -> Any:
+        """Retrieve a value."""
         return self._data.get(section, {}).get(key, default)
 
     @property
     def raw(self) -> dict:
+        """Return the raw underlying data."""
         return self._data
 
 
@@ -240,6 +244,7 @@ class SafetyDatabase:
     GRADE_ORDER = ["elementary", "middle school", "high school", "college"]
 
     def get_safety_info(self, material: str) -> Optional[SafetyWarning]:
+        """Get safety info."""
         key = material.lower().strip()
         entry = self.BUILT_IN.get(key)
         if not entry:
@@ -247,6 +252,7 @@ class SafetyDatabase:
         return SafetyWarning(**entry)
 
     def get_required_ppe(self, experiment: dict) -> list[str]:
+        """Get required ppe."""
         ppe: set[str] = set()
         for mat in experiment.get("materials", []):
             info = self.get_safety_info(mat.get("item", ""))
@@ -257,6 +263,7 @@ class SafetyDatabase:
         return sorted(ppe)
 
     def get_risk_level(self, experiment: dict) -> str:
+        """Get risk level."""
         levels = {"low": 0, "medium": 1, "high": 2, "critical": 3}
         max_risk = 0
         for mat in experiment.get("materials", []):
@@ -267,6 +274,7 @@ class SafetyDatabase:
         return inv.get(max_risk, "low")
 
     def check_age_appropriate(self, experiment: dict, grade_level: str) -> bool:
+        """Check age appropriate."""
         grade_idx = self.GRADE_ORDER.index(grade_level) if grade_level in self.GRADE_ORDER else 0
         for mat in experiment.get("materials", []):
             item = mat.get("item", "").lower().strip()
@@ -304,6 +312,7 @@ class EquipmentManager:
     }
 
     def get_equipment_list(self, experiment: dict) -> list[Equipment]:
+        """Get equipment list."""
         items: list[Equipment] = []
         for mat in experiment.get("materials", []):
             name = mat.get("item", "").lower().strip()
@@ -318,10 +327,12 @@ class EquipmentManager:
         return items
 
     def suggest_alternatives(self, equipment_name: str) -> list[str]:
+        """Suggest alternatives."""
         entry = self.EQUIPMENT_DB.get(equipment_name.lower().strip(), {})
         return entry.get("alternatives", [])
 
     def estimate_cost(self, equipment_list: list[str]) -> float:
+        """Estimate cost."""
         total = 0.0
         for name in equipment_list:
             entry = self.EQUIPMENT_DB.get(name.lower().strip(), {})

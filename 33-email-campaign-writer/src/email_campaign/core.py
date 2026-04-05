@@ -117,7 +117,7 @@ class Email:
     personalization_tokens: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        """Post init."""
+        """Validate and finalize initialization."""
         if not self.personalization_tokens:
             self.personalization_tokens = extract_personalization_tokens(self.body)
 

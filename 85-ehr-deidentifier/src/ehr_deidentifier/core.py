@@ -22,7 +22,7 @@ import sys
 import json
 import logging
 import datetime
-from typing import Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 # Add common module to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', '..'))
@@ -163,7 +163,8 @@ class AuditLog:
     for a HIPAA-compliant audit trail.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize the instance."""
         self.entries: list[dict] = []
 
     def log_operation(
@@ -242,7 +243,8 @@ class ValidationReport:
         original: str,
         deidentified: str,
         replacements: list[dict],
-    ):
+    ) -> None:
+        """Initialize the instance."""
         self.original = original
         self.deidentified = deidentified
         self.replacements = replacements
@@ -367,7 +369,8 @@ def regex_preprocess(text: str) -> tuple[str, list[dict]]:
 
     for pattern, pii_type in patterns:
 
-        def _replacer(match, pii_type=pii_type):
+        def _replacer(match: Any, pii_type: Any=pii_type) -> Any:
+            """Replacer."""
             counters[pii_type] += 1
             placeholder = f"[{pii_type}_{counters[pii_type]}]"
             replacements.append(
@@ -413,7 +416,8 @@ def configurable_regex_preprocess(
         if pii_type not in counters:
             counters[pii_type] = 0
 
-        def _replacer(match, pii_type=pii_type):
+        def _replacer(match: Any, pii_type: Any=pii_type) -> Any:
+            """Replacer."""
             counters[pii_type] += 1
             placeholder = f"[{pii_type}_{counters[pii_type]}]"
             replacements.append(

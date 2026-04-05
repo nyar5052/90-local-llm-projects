@@ -42,6 +42,7 @@ SKILL_CATEGORIES = {
 
 
 def load_config(config_path: Optional[str] = None) -> dict:
+    """Load config."""
     config = DEFAULT_CONFIG.copy()
     if config_path and os.path.exists(config_path):
         """Load config."""
@@ -52,6 +53,7 @@ def load_config(config_path: Optional[str] = None) -> dict:
 
 
 def _deep_merge(base: dict, override: dict) -> None:
+    """Deep merge."""
     for key, value in override.items():
         """Deep merge."""
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
