@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90 Local LLM Projects — Built with Gemma 4 + Ollama</title>
+<meta name="description" content="90 Cool Projects with Local LLM. Built with Gemma 4 + Ollama. 100% Private AI. No cloud, no API keys, no data leaks.">
+<meta property="og:title" content="90 Local LLM Projects">
+<meta property="og:description" content="Built with Gemma 4 + Ollama — 100% Private AI">
+<meta property="og:type" content="website">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:rgba(255,255,255,0.03);--glass:rgba(255,255,255,0.06);
+  --glass-border:rgba(255,255,255,0.1);--text:#e4e4e7;--text-dim:#a1a1aa;
+  --accent1:#6366f1;--accent2:#8b5cf6;--accent3:#a855f7;--accent4:#06b6d4;
+  --gradient:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7,#06b6d4);
+  --glow:0 0 20px rgba(99,102,241,0.3),0 0 40px rgba(139,92,246,0.15);
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#6366f1 #0a0a0f}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0a0a0f}
+::-webkit-scrollbar-thumb{background:linear-gradient(#6366f1,#a855f7);border-radius:4px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
+}
+canvas#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes borderGlow{0%,100%{border-color:rgba(99,102,241,.3)}50%{border-color:rgba(168,85,247,.6)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.reveal-left.active{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.reveal-right.active{opacity:1;transform:translateX(0)}
+
+.gradient-text{
+  background:var(--gradient);background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:gradientShift 4s ease infinite;
+}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:40px 20px}
+.hero-content{position:relative;z-index:2}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 20px;
+  background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);
+  border-radius:50px;font-size:.85rem;color:#a5b4fc;margin-bottom:28px;
+  animation:fadeInUp .8s ease,borderGlow 3s ease infinite;
+}
+.hero h1{
+  font-size:clamp(2.5rem,7vw,5.5rem);font-weight:800;letter-spacing:-2px;
+  line-height:1.08;margin-bottom:20px;animation:fadeInUp 1s ease .2s both;
+}
+.hero .subtitle{
+  font-size:clamp(1rem,2.5vw,1.4rem);color:var(--text-dim);
+  margin-bottom:48px;animation:fadeInUp 1s ease .4s both;max-width:600px;margin-left:auto;margin-right:auto;
+}
+.hero .subtitle strong{color:#a5b4fc}
+
+/* Stats */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-bottom:48px;animation:fadeInUp 1s ease .6s both;
+  max-width:700px;margin-left:auto;margin-right:auto;
+}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;padding:24px 16px;
+  text-align:center;transition:all .3s ease;
+}
+.stat-card:hover{transform:translateY(-4px);border-color:rgba(99,102,241,.4);box-shadow:var(--glow)}
+.stat-number{
+  font-size:2.2rem;font-weight:800;display:block;
+  background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:.82rem;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* CTA Buttons */
+.cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease .8s both}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:14px 32px;
+  border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;
+  transition:all .3s ease;cursor:pointer;border:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;
+  box-shadow:0 4px 20px rgba(99,102,241,.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,.5)}
+.btn-secondary{background:transparent;color:#a5b4fc;border:1px solid rgba(99,102,241,.4)}
+.btn-secondary:hover{background:rgba(99,102,241,.1);transform:translateY(-2px)}
+
+/* ===== SECTION COMMON ===== */
+section{padding:100px 0;position:relative;z-index:1}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;margin-bottom:12px}
+.section-header p{color:var(--text-dim);font-size:1.1rem;max-width:600px;margin:0 auto}
+.section-divider{width:80px;height:4px;border-radius:2px;margin:16px auto 0;background:var(--gradient)}
+
+/* ===== WHY LOCAL LLM ===== */
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:64px}
+@media(max-width:768px){.comparison-grid{grid-template-columns:1fr}}
+.comparison-card{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:20px;padding:36px;
+  transition:all .3s ease;
+}
+.comparison-card.cloud{border-color:rgba(239,68,68,.15)}
+.comparison-card.cloud:hover{border-color:rgba(239,68,68,.3)}
+.comparison-card.local{border-color:rgba(34,197,94,.15)}
+.comparison-card.local:hover{border-color:rgba(34,197,94,.3);box-shadow:0 0 30px rgba(34,197,94,.1)}
+.comparison-card h3{font-size:1.3rem;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.comparison-item{
+  display:flex;align-items:center;gap:12px;padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);font-size:.95rem;
+}
+.comparison-item:last-child{border-bottom:none}
+.check{color:#22c55e;font-size:1.2rem;flex-shrink:0}
+.cross{color:#ef4444;font-size:1.2rem;flex-shrink:0}
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.benefit-card{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;padding:32px;
+  text-align:center;transition:all .4s cubic-bezier(.4,0,.2,1);
+}
+.benefit-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(99,102,241,.4);box-shadow:var(--glow)}
+.benefit-icon{font-size:2.8rem;margin-bottom:14px;display:block}
+.benefit-card h4{font-size:1.1rem;margin-bottom:8px}
+.benefit-card p{color:var(--text-dim);font-size:.88rem}
+
+/* ===== CATEGORIES GRID ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cat-grid{grid-template-columns:1fr}}
+.cat-card{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:20px;padding:32px;
+  cursor:pointer;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+}
+.cat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient);transform:scaleX(0);transition:transform .4s ease;transform-origin:left;
+}
+.cat-card:hover{transform:translateY(-8px);border-color:rgba(99,102,241,.5);box-shadow:var(--glow)}
+.cat-card:hover::before{transform:scaleX(1)}
+.cat-icon{font-size:2.8rem;margin-bottom:14px;display:block}
+.cat-card h3{font-size:1.2rem;margin-bottom:8px}
+.cat-count{
+  display:inline-block;padding:4px 14px;background:rgba(99,102,241,.12);
+  border-radius:50px;font-size:.8rem;color:#a5b4fc;margin-bottom:12px;
+}
+.cat-card p{color:var(--text-dim);font-size:.88rem;line-height:1.5}
+
+/* ===== PROJECTS ===== */
+.search-bar{
+  display:flex;align-items:center;max-width:600px;margin:0 auto 48px;
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:14px;padding:4px;
+  transition:all .3s ease;
+}
+.search-bar:focus-within{border-color:rgba(99,102,241,.5);box-shadow:0 0 25px rgba(99,102,241,.12)}
+.search-bar input{
+  flex:1;background:transparent;border:none;padding:14px 20px;
+  color:var(--text);font-size:1rem;outline:none;
+}
+.search-bar input::placeholder{color:var(--text-dim)}
+.search-icon{padding:0 16px;color:var(--text-dim);font-size:1.2rem}
+.filter-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px}
+.filter-tag{
+  padding:6px 16px;background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:50px;font-size:.85rem;color:var(--text-dim);cursor:pointer;
+  transition:all .2s ease;
+}
+.filter-tag:hover,.filter-tag.active{background:rgba(99,102,241,.15);color:#a5b4fc;border-color:rgba(99,102,241,.4)}
+.cat-section{margin-bottom:72px}
+.cat-section-header{
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.cat-section-header h3{font-size:1.6rem;font-weight:700}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+@media(max-width:768px){.project-grid{grid-template-columns:1fr}}
+.project-card{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;padding:24px;
+  transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.project-card::after{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background:linear-gradient(135deg,rgba(99,102,241,.05),transparent);
+  opacity:0;transition:opacity .3s ease;pointer-events:none;
+}
+.project-card:hover{transform:translateY(-4px);border-color:rgba(99,102,241,.4);box-shadow:var(--glow)}
+.project-card:hover::after{opacity:1}
+.project-number{
+  position:absolute;top:16px;right:16px;
+  font-size:.75rem;font-weight:700;color:rgba(99,102,241,.5);
+  background:rgba(99,102,241,.08);padding:4px 10px;border-radius:8px;
+}
+.project-card h4{font-size:1.05rem;margin-bottom:8px;padding-right:50px}
+.project-card .desc{color:var(--text-dim);font-size:.88rem;margin-bottom:14px;flex:1}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tag{
+  padding:3px 10px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.15);
+  border-radius:6px;font-size:.72rem;color:#a5b4fc;
+}
+.project-link{
+  display:inline-flex;align-items:center;gap:6px;color:#a5b4fc;
+  font-size:.88rem;text-decoration:none;font-weight:500;transition:all .2s;
+}
+.project-link:hover{color:#c4b5fd;gap:10px}
+.no-results{text-align:center;padding:60px 20px;color:var(--text-dim);font-size:1.1rem;display:none}
+
+/* ===== TECH STACK ===== */
+.tech-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
+.tech-item{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;padding:28px 36px;
+  text-align:center;transition:all .4s cubic-bezier(.4,0,.2,1);min-width:140px;
+}
+.tech-item:hover{transform:translateY(-8px) scale(1.05);border-color:rgba(99,102,241,.4);box-shadow:var(--glow)}
+.tech-icon{font-size:2.4rem;margin-bottom:10px;display:block}
+.tech-item span{font-size:.95rem;font-weight:600}
+
+/* ===== ARCHITECTURE ===== */
+.arch-flow{
+  display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
+  padding:40px 0;
+}
+.arch-node{
+  background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;padding:24px 28px;
+  text-align:center;transition:all .3s ease;min-width:120px;
+}
+.arch-node:hover{border-color:rgba(99,102,241,.5);box-shadow:var(--glow);transform:scale(1.08)}
+.arch-node .arch-icon{font-size:2rem;margin-bottom:6px;display:block}
+.arch-node .arch-label{font-size:.85rem;font-weight:600}
+.arch-arrow{color:var(--accent1);font-size:1.8rem;padding:0 10px;animation:pulse 2s ease infinite}
+@media(max-width:600px){
+  .arch-flow{flex-direction:column;gap:4px}
+  .arch-arrow{transform:rotate(90deg)}
+}
+.arch-desc{
+  max-width:700px;margin:40px auto 0;text-align:center;
+  color:var(--text-dim);font-size:1rem;line-height:1.8;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  padding:80px 0 40px;text-align:center;
+  border-top:1px solid rgba(255,255,255,.06);position:relative;z-index:1;
+}
+footer p{color:var(--text-dim);font-size:.95rem;margin-bottom:16px}
+.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.footer-links a{color:#a5b4fc;text-decoration:none;font-weight:500;transition:color .2s}
+.footer-links a:hover{color:#c4b5fd}
+.footer-heart{color:#ef4444}
+
+/* Back to top */
+.back-to-top{
+  position:fixed;bottom:30px;right:30px;width:48px;height:48px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;
+  border-radius:50%;color:#fff;font-size:1.3rem;cursor:pointer;
+  box-shadow:0 4px 20px rgba(99,102,241,.4);z-index:100;
+  opacity:0;transform:translateY(20px);transition:all .3s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.back-to-top.visible{opacity:1;transform:translateY(0)}
+.back-to-top:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(99,102,241,.5)}
+
+/* LinkedIn */
+.linkedin-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;background:#0a66c2;color:#fff;
+  border-radius:12px;text-decoration:none;font-weight:600;
+  transition:all .3s ease;font-size:.95rem;
+}
+.linkedin-btn:hover{background:#004182;transform:translateY(-2px);box-shadow:0 4px 20px rgba(10,102,194,.4)}
+
+/* Progress bar at top */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;z-index:200;
+  background:var(--gradient);background-size:200% auto;
+  animation:gradientShift 3s ease infinite;transition:width .1s linear;
+}
+
+/* Glow orbs in hero */
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;
+  animation:float 8s ease-in-out infinite;pointer-events:none;
+}
+.hero-orb-1{width:400px;height:400px;background:#6366f1;top:-100px;left:-100px;animation-delay:0s}
+.hero-orb-2{width:350px;height:350px;background:#a855f7;bottom:-100px;right:-100px;animation-delay:2s}
+.hero-orb-3{width:300px;height:300px;background:#06b6d4;top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:4s}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles"></canvas>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">&#128640; Open Source &bull; 100% Free &bull; No API Keys</div>
+    <h1><span class="gradient-text">90 Local LLM<br>Projects</span></h1>
+    <p class="subtitle">Built with <strong>Gemma 4 + Ollama</strong> &mdash; 100% Private AI<br>No cloud. No API keys. No data leaks.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number" data-target="90">0</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="9">0</span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="2400" data-suffix="+">0</span>
+        <span class="stat-label">Tests</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="270" data-suffix="+">0</span>
+        <span class="stat-label">SVG Images</span>
+      </div>
+    </div>
+    <div class="cta-group">
+      <a href="https://github.com/kennedyraju55" class="btn btn-primary" target="_blank" rel="noopener">&#11088; Star on GitHub</a>
+      <a href="#categories" class="btn btn-secondary">Explore Projects &#8595;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY LOCAL LLM ==================== -->
+<section id="why">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="gradient-text">Why Local LLM?</h2>
+      <p>Run powerful AI on your own machine. No cloud, no API keys, no data leaks.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-card cloud reveal-left">
+        <h3>&#9729;&#65039; Cloud AI</h3>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Data sent to third-party servers</div>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Monthly subscription costs ($20-200/mo)</div>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Requires internet connection</div>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Rate limits &amp; downtime</div>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Vendor lock-in risk</div>
+        <div class="comparison-item"><span class="cross">&#10007;</span> Privacy concerns for sensitive data</div>
+      </div>
+      <div class="comparison-card local reveal-right">
+        <h3>&#127968; Local AI (This Project)</h3>
+        <div class="comparison-item"><span class="check">&#10003;</span> Data never leaves your machine</div>
+        <div class="comparison-item"><span class="check">&#10003;</span> Completely free forever</div>
+        <div class="comparison-item"><span class="check">&#10003;</span> Works 100% offline</div>
+        <div class="comparison-item"><span class="check">&#10003;</span> No rate limits, unlimited usage</div>
+        <div class="comparison-item"><span class="check">&#10003;</span> Full control &amp; customization</div>
+        <div class="comparison-item"><span class="check">&#10003;</span> HIPAA / GDPR friendly by design</div>
+      </div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <span class="benefit-icon">&#128274;</span>
+        <h4>100% Private</h4>
+        <p>Your data never leaves your machine. Process sensitive documents with zero risk.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon">&#128176;</span>
+        <h4>Completely Free</h4>
+        <p>No subscriptions, no API costs, no hidden fees. Open source forever.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon">&#128244;</span>
+        <h4>Works Offline</h4>
+        <p>No internet required. Perfect for air-gapped environments &amp; travel.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon">&#127918;</span>
+        <h4>Full Control</h4>
+        <p>Customize models, tweak prompts, extend functionality. Your AI, your rules.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CATEGORIES ==================== -->
+<section id="categories">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="gradient-text">9 Categories</h2>
+      <p>From chatbots to healthcare &mdash; explore projects across every domain.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== ALL 90 PROJECTS ==================== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="gradient-text">All 90 Projects</h2>
+      <p>Each project is a standalone repo with tests, docs, and beautiful SVG images.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="search-bar reveal">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="searchInput" placeholder="Search projects... (e.g. chatbot, PDF, security)" autocomplete="off">
+    </div>
+    <div class="filter-tags reveal" id="filterTags"></div>
+    <div id="projectsContainer"></div>
+    <div class="no-results" id="noResults">&#128269; No projects found. Try a different search term.</div>
+  </div>
+</section>
+
+<!-- ==================== TECH STACK ==================== -->
+<section id="tech">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="gradient-text">Tech Stack</h2>
+      <p>Built with battle-tested tools for reliability and performance.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-item"><span class="tech-icon">&#128013;</span><span>Python</span></div>
+      <div class="tech-item"><span class="tech-icon">&#129433;</span><span>Ollama</span></div>
+      <div class="tech-item"><span class="tech-icon">&#128142;</span><span>Gemma 4</span></div>
+      <div class="tech-item"><span class="tech-icon">&#128640;</span><span>Streamlit</span></div>
+      <div class="tech-item"><span class="tech-icon">&#128187;</span><span>Click CLI</span></div>
+      <div class="tech-item"><span class="tech-icon">&#127912;</span><span>Rich</span></div>
+      <div class="tech-item"><span class="tech-icon">&#129514;</span><span>pytest</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ARCHITECTURE ==================== -->
+<section id="architecture">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="gradient-text">How It Works</h2>
+      <p>Simple, elegant architecture. Everything runs on your machine.</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="arch-flow reveal">
+      <div class="arch-node"><span class="arch-icon">&#128100;</span><span class="arch-label">User</span></div>
+      <span class="arch-arrow">&#8594;</span>
+      <div class="arch-node"><span class="arch-icon">&#128187;</span><span class="arch-label">CLI / Web UI</span></div>
+      <span class="arch-arrow">&#8594;</span>
+      <div class="arch-node"><span class="arch-icon">&#9881;&#65039;</span><span class="arch-label">Core Engine</span></div>
+      <span class="arch-arrow">&#8594;</span>
+      <div class="arch-node"><span class="arch-icon">&#129433;</span><span class="arch-label">Ollama</span></div>
+      <span class="arch-arrow">&#8594;</span>
+      <div class="arch-node"><span class="arch-icon">&#128142;</span><span class="arch-label">Gemma 4</span></div>
+    </div>
+    <p class="arch-desc reveal">
+      Each project follows the same clean architecture: your input flows through a CLI or Streamlit web interface
+      into a core processing engine, which communicates with Ollama running Gemma 4 locally. All processing
+      happens on your machine &mdash; no data ever leaves your network. Install once, use forever.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container">
+    <div class="cta-group" style="margin-bottom:36px">
+      <a href="https://github.com/kennedyraju55" class="btn btn-primary" target="_blank" rel="noopener">&#11088; Star on GitHub</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://github.com/kennedyraju55" class="linkedin-btn" target="_blank" rel="noopener">
+        &#128226; Share on LinkedIn
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/kennedyraju55" target="_blank" rel="noopener">GitHub</a>
+      <a href="#home">Back to Top</a>
+      <a href="#projects">Browse Projects</a>
+    </div>
+    <p>Built with <span class="footer-heart">&#10084;</span> by <strong>kennedyraju55</strong></p>
+    <p style="margin-top:8px;font-size:.82rem;color:#71717a">&copy; 2025 &bull; 90 Local LLM Projects &bull; Open Source</p>
+  </div>
+</footer>
+
+<script>
+/* ========== PROJECT DATA ========== */
+const CATEGORIES = [
+  {
+    id: 'chatbots', icon: '\ud83e\udd16', name: 'Chatbots',
+    desc: 'Interactive AI assistants for daily life, planning, and learning.',
+    projects: [
+      { n: 1, name: 'PDF Chat Assistant', desc: 'Chat with your PDF documents using local AI.', repo: 'pdf-chat-assistant', tags: ['PDF', 'RAG', 'Chat'] },
+      { n: 2, name: 'IT Helpdesk Bot', desc: 'AI-powered IT support assistant for troubleshooting.', repo: 'it-helpdesk-bot', tags: ['Support', 'IT'] },
+      { n: 3, name: 'Meal Planner Bot', desc: 'Plan meals and get personalized recipe suggestions.', repo: 'meal-planner-bot', tags: ['Food', 'Planning'] },
+      { n: 4, name: 'Fitness Coach Bot', desc: 'Your personal AI fitness trainer and workout planner.', repo: 'fitness-coach-bot', tags: ['Health', 'Fitness'] },
+      { n: 5, name: 'Travel Itinerary Bot', desc: 'Plan trips with a smart AI travel assistant.', repo: 'travel-itinerary-bot', tags: ['Travel', 'Planning'] },
+      { n: 6, name: 'Language Learning Bot', desc: 'Learn new languages with interactive AI tutoring.', repo: 'language-learning-bot', tags: ['Education', 'Language'] },
+      { n: 7, name: 'Veterinary Advisor Bot', desc: 'Get pet health advice from your local AI.', repo: 'veterinary-advisor-bot', tags: ['Pets', 'Health'] },
+      { n: 8, name: 'Gift Recommendation Bot', desc: 'Find the perfect gift with AI recommendations.', repo: 'gift-recommendation-bot', tags: ['Shopping', 'Gifts'] },
+      { n: 9, name: 'Study Buddy Bot', desc: 'AI-powered study companion for students.', repo: 'study-buddy-bot', tags: ['Education', 'Study'] },
+      { n: 10, name: 'Mood Journal Bot', desc: 'Track moods and get emotional wellness support.', repo: 'mood-journal-bot', tags: ['Mental Health', 'Journal'] }
+    ]
+  },
+  {
+    id: 'documents', icon: '\ud83d\udcc4', name: 'Documents',
+    desc: 'Summarize, analyze, and extract insights from any document type.',
+    projects: [
+      { n: 11, name: 'Legal Doc Summarizer', desc: 'Summarize legal documents and contracts instantly.', repo: 'legal-doc-summarizer', tags: ['Legal', 'NLP'] },
+      { n: 12, name: 'Resume Analyzer', desc: 'AI-powered resume review, scoring, and feedback.', repo: 'resume-analyzer', tags: ['HR', 'Resume'] },
+      { n: 13, name: 'Meeting Summarizer', desc: 'Turn meeting notes into concise action summaries.', repo: 'meeting-summarizer', tags: ['Meetings', 'Summary'] },
+      { n: 14, name: 'Medical Lit Summarizer', desc: 'Summarize medical literature and research papers.', repo: 'medical-lit-summarizer', tags: ['Medical', 'Research'] },
+      { n: 15, name: 'Invoice Extractor', desc: 'Extract structured data from invoices automatically.', repo: 'invoice-extractor', tags: ['Finance', 'OCR'] },
+      { n: 16, name: 'PDF Report Generator', desc: 'Generate professional PDF reports from data.', repo: 'pdf-report-generator', tags: ['PDF', 'Reports'] },
+      { n: 17, name: 'Textbook Summarizer', desc: 'Condense textbook chapters into key takeaways.', repo: 'textbook-summarizer', tags: ['Education', 'Summary'] },
+      { n: 18, name: 'Policy Compliance Checker', desc: 'Check documents for policy and regulatory compliance.', repo: 'policy-compliance-checker', tags: ['Compliance', 'Legal'] },
+      { n: 19, name: 'News Digest Generator', desc: 'Create personalized news digests from articles.', repo: 'news-digest-generator', tags: ['News', 'Summary'] },
+      { n: 20, name: 'Research Paper QA', desc: 'Ask questions about research papers and get answers.', repo: 'research-paper-qa', tags: ['Research', 'QA'] }
+    ]
+  },
+  {
+    id: 'devtools', icon: '\ud83d\udcbb', name: 'Dev Tools',
+    desc: 'Supercharge your development workflow with AI-powered tools.',
+    projects: [
+      { n: 21, name: 'Code Review Bot', desc: 'AI-powered code review assistant for better code.', repo: 'code-review-bot', tags: ['Code Review', 'Dev'] },
+      { n: 22, name: 'Commit Message Generator', desc: 'Generate meaningful, conventional commit messages.', repo: 'commit-message-generator', tags: ['Git', 'Dev'] },
+      { n: 23, name: 'Stack Trace Explainer', desc: 'Understand complex stack traces with AI explanations.', repo: 'stack-trace-explainer', tags: ['Debug', 'Dev'] },
+      { n: 24, name: 'Regex Generator', desc: 'Generate and test regex patterns with natural language.', repo: 'regex-generator', tags: ['Regex', 'Dev'] },
+      { n: 25, name: 'API Doc Generator', desc: 'Auto-generate comprehensive API documentation.', repo: 'api-doc-generator', tags: ['API', 'Docs'] },
+      { n: 26, name: 'Code Snippet Search', desc: 'Search and discover reusable code snippets.', repo: 'code-snippet-search', tags: ['Search', 'Code'] },
+      { n: 27, name: 'SQL Query Generator', desc: 'Generate SQL queries from natural language prompts.', repo: 'sql-query-generator', tags: ['SQL', 'Database'] },
+      { n: 28, name: 'Code Translator', desc: 'Translate code between programming languages.', repo: 'code-translator', tags: ['Translation', 'Code'] },
+      { n: 29, name: 'Unit Test Generator', desc: 'Auto-generate comprehensive unit tests for your code.', repo: 'unit-test-generator', tags: ['Testing', 'Dev'] },
+      { n: 30, name: 'Code Complexity Analyzer', desc: 'Analyze and visualize code complexity metrics.', repo: 'code-complexity-analyzer', tags: ['Analysis', 'Dev'] }
+    ]
+  },
+  {
+    id: 'content', icon: '\u270d\ufe0f', name: 'Content',
+    desc: 'Create compelling content for blogs, social media, and more.',
+    projects: [
+      { n: 31, name: 'Blog Post Generator', desc: 'Generate engaging, SEO-friendly blog posts.', repo: 'blog-post-generator', tags: ['Blog', 'Writing'] },
+      { n: 32, name: 'Social Media Writer', desc: 'Create scroll-stopping social media content.', repo: 'social-media-writer', tags: ['Social', 'Marketing'] },
+      { n: 33, name: 'Email Campaign Writer', desc: 'Write high-converting email marketing campaigns.', repo: 'email-campaign-writer', tags: ['Email', 'Marketing'] },
+      { n: 34, name: 'Poem & Lyrics Generator', desc: 'Create beautiful poems and song lyrics with AI.', repo: 'poem-lyrics-generator', tags: ['Creative', 'Poetry'] },
+      { n: 35, name: 'Video Script Writer', desc: 'Write professional scripts for video content.', repo: 'video-script-writer', tags: ['Video', 'Scripts'] },
+      { n: 36, name: 'Newsletter Editor', desc: 'Create and edit compelling newsletters.', repo: 'newsletter-editor', tags: ['Newsletter', 'Writing'] },
+      { n: 37, name: 'Story Outline Generator', desc: 'Generate story outlines, plots, and character arcs.', repo: 'story-outline-generator', tags: ['Fiction', 'Writing'] },
+      { n: 38, name: 'Product Description Writer', desc: 'Write product descriptions that convert and sell.', repo: 'product-description-writer', tags: ['E-commerce', 'Copy'] },
+      { n: 39, name: 'Presentation Generator', desc: 'Create presentation slide content and outlines.', repo: 'presentation-generator', tags: ['Slides', 'Business'] },
+      { n: 40, name: 'Cover Letter Generator', desc: 'Write tailored, professional cover letters.', repo: 'cover-letter-generator', tags: ['Jobs', 'Writing'] }
+    ]
+  },
+  {
+    id: 'business', icon: '\ud83d\udcca', name: 'Business',
+    desc: 'Data analysis, reporting, and business intelligence tools.',
+    projects: [
+      { n: 41, name: 'CSV Data Analyzer', desc: 'Analyze CSV data with AI-generated insights.', repo: 'csv-data-analyzer', tags: ['Data', 'CSV'] },
+      { n: 42, name: 'Sentiment Analysis Dashboard', desc: 'Analyze sentiment from text data at scale.', repo: 'sentiment-analysis-dashboard', tags: ['NLP', 'Analytics'] },
+      { n: 43, name: 'Survey Response Analyzer', desc: 'Analyze and summarize survey responses with AI.', repo: 'survey-response-analyzer', tags: ['Survey', 'Analysis'] },
+      { n: 44, name: 'Stock Report Generator', desc: 'Generate comprehensive stock analysis reports.', repo: 'stock-report-generator', tags: ['Finance', 'Stocks'] },
+      { n: 45, name: 'Competitor Analysis Tool', desc: 'Analyze competitors with AI-powered insights.', repo: 'competitor-analysis-tool', tags: ['Business', 'Strategy'] },
+      { n: 46, name: 'Support Ticket Classifier', desc: 'Auto-classify and route support tickets with AI.', repo: 'support-ticket-classifier', tags: ['Support', 'NLP'] },
+      { n: 47, name: 'Financial Report Generator', desc: 'Generate professional financial reports.', repo: 'financial-report-generator', tags: ['Finance', 'Reports'] },
+      { n: 48, name: 'Sales Email Generator', desc: 'Generate personalized sales outreach emails.', repo: 'sales-email-generator', tags: ['Sales', 'Email'] },
+      { n: 49, name: 'KPI Dashboard Reporter', desc: 'Generate KPI dashboard reports automatically.', repo: 'kpi-dashboard-reporter', tags: ['KPI', 'Dashboard'] },
+      { n: 50, name: 'Trend Analysis Tool', desc: 'Identify and analyze emerging market trends.', repo: 'trend-analysis-tool', tags: ['Trends', 'Analytics'] }
+    ]
+  },
+  {
+    id: 'education', icon: '\ud83c\udf93', name: 'Education',
+    desc: 'Teaching, learning, and academic tools powered by AI.',
+    projects: [
+      { n: 51, name: 'Quiz Generator', desc: 'Generate quizzes from any topic or material.', repo: 'quiz-generator', tags: ['Quiz', 'Teaching'] },
+      { n: 52, name: 'Flashcard Creator', desc: 'Create study flashcards with AI assistance.', repo: 'flashcard-creator', tags: ['Flashcards', 'Study'] },
+      { n: 53, name: 'Essay Grader', desc: 'AI-powered essay evaluation and feedback.', repo: 'essay-grader', tags: ['Grading', 'Academic'] },
+      { n: 54, name: 'Curriculum Planner', desc: 'Plan structured curricula with AI assistance.', repo: 'curriculum-planner', tags: ['Curriculum', 'Planning'] },
+      { n: 55, name: 'Science Experiment Explainer', desc: 'Explain science experiments step by step.', repo: 'science-experiment-explainer', tags: ['Science', 'Learning'] },
+      { n: 56, name: 'Math Problem Solver', desc: 'Solve math problems with detailed step-by-step solutions.', repo: 'math-problem-solver', tags: ['Math', 'Solver'] },
+      { n: 57, name: 'History Timeline Generator', desc: 'Generate interactive history timelines.', repo: 'history-timeline-generator', tags: ['History', 'Timeline'] },
+      { n: 58, name: 'Vocabulary Builder', desc: 'Build vocabulary with AI-powered exercises.', repo: 'vocabulary-builder', tags: ['Vocabulary', 'Language'] },
+      { n: 59, name: 'Debate Topic Generator', desc: 'Generate debate topics with pro/con arguments.', repo: 'debate-topic-generator', tags: ['Debate', 'Critical Thinking'] },
+      { n: 60, name: 'Reading Comprehension Builder', desc: 'Build reading comprehension skills with AI.', repo: 'reading-comprehension-builder', tags: ['Reading', 'Comprehension'] }
+    ]
+  },
+  {
+    id: 'productivity', icon: '\ud83c\udfe0', name: 'Productivity',
+    desc: 'Personal organization, planning, and life management tools.',
+    projects: [
+      { n: 61, name: 'Smart Calendar Assistant', desc: 'AI-powered calendar and schedule management.', repo: 'smart-calendar-assistant', tags: ['Calendar', 'Planning'] },
+      { n: 62, name: 'Personal Knowledge Base', desc: 'Build and query your personal knowledge graph.', repo: 'personal-knowledge-base', tags: ['Knowledge', 'Notes'] },
+      { n: 63, name: 'Diary Journal Organizer', desc: 'Organize and analyze diary entries with AI.', repo: 'diary-journal-organizer', tags: ['Journal', 'Personal'] },
+      { n: 64, name: 'Household Budget Analyzer', desc: 'Analyze household spending and budget smarter.', repo: 'household-budget-analyzer', tags: ['Budget', 'Finance'] },
+      { n: 65, name: 'Reading List Manager', desc: 'Manage and prioritize your reading lists.', repo: 'reading-list-manager', tags: ['Reading', 'Lists'] },
+      { n: 66, name: 'Home Automation Scripter', desc: 'Generate smart home automation scripts.', repo: 'home-automation-scripter', tags: ['IoT', 'Automation'] },
+      { n: 67, name: 'Family Story Creator', desc: 'Create family stories and preserve histories.', repo: 'family-story-creator', tags: ['Family', 'Stories'] },
+      { n: 68, name: 'Habit Tracker Analyzer', desc: 'Track habits and get AI improvement insights.', repo: 'habit-tracker-analyzer', tags: ['Habits', 'Wellness'] },
+      { n: 69, name: 'Standup Generator', desc: 'Generate daily standup reports automatically.', repo: 'standup-generator', tags: ['Agile', 'Dev'] },
+      { n: 70, name: 'Time Management Coach', desc: 'AI-powered time management advisor and coach.', repo: 'time-management-coach', tags: ['Time', 'Productivity'] }
+    ]
+  },
+  {
+    id: 'security', icon: '\ud83d\udd10', name: 'Security',
+    desc: 'Cybersecurity, DevOps, and infrastructure management tools.',
+    projects: [
+      { n: 71, name: 'Cybersecurity Alert Summarizer', desc: 'Summarize and prioritize security alerts.', repo: 'cybersecurity-alert-summarizer', tags: ['Security', 'Alerts'] },
+      { n: 72, name: 'Incident Report Generator', desc: 'Generate structured incident reports quickly.', repo: 'incident-report-generator', tags: ['Incidents', 'Reports'] },
+      { n: 73, name: 'GDPR Compliance Checker', desc: 'Check applications for GDPR compliance.', repo: 'gdpr-compliance-checker', tags: ['GDPR', 'Privacy'] },
+      { n: 74, name: 'Password Strength Advisor', desc: 'Evaluate and improve password strength.', repo: 'password-strength-advisor', tags: ['Passwords', 'Security'] },
+      { n: 75, name: 'Log File Analyzer', desc: 'Analyze log files for issues and anomalies.', repo: 'log-file-analyzer', tags: ['Logs', 'DevOps'] },
+      { n: 76, name: 'Docker Compose Generator', desc: 'Generate Docker Compose configurations with AI.', repo: 'docker-compose-generator', tags: ['Docker', 'DevOps'] },
+      { n: 77, name: 'CI/CD Pipeline Generator', desc: 'Generate CI/CD pipeline configurations.', repo: 'cicd-pipeline-generator', tags: ['CI/CD', 'DevOps'] },
+      { n: 78, name: 'Infra Doc Generator', desc: 'Generate infrastructure documentation.', repo: 'infra-doc-generator', tags: ['Infra', 'Docs'] },
+      { n: 79, name: 'Vulnerability Report Writer', desc: 'Write detailed vulnerability assessment reports.', repo: 'vulnerability-report-writer', tags: ['Vulnerability', 'Security'] },
+      { n: 80, name: 'Env Config Manager', desc: 'Manage environment configurations securely.', repo: 'env-config-manager', tags: ['Config', 'DevOps'] }
+    ]
+  },
+  {
+    id: 'healthcare', icon: '\ud83c\udfe5', name: 'Healthcare',
+    desc: 'Health, wellness, and medical tools with complete privacy.',
+    projects: [
+      { n: 81, name: 'Symptom Checker Bot', desc: 'Check symptoms with private AI health guidance.', repo: 'symptom-checker-bot', tags: ['Symptoms', 'Health'] },
+      { n: 82, name: 'Drug Interaction Checker', desc: 'Check drug interactions safely and privately.', repo: 'drug-interaction-checker', tags: ['Pharmacy', 'Safety'] },
+      { n: 83, name: 'Medical Terms Explainer', desc: 'Explain complex medical terminology simply.', repo: 'medical-terms-explainer', tags: ['Medical', 'Education'] },
+      { n: 84, name: 'Health Plan Generator', desc: 'Generate personalized health and wellness plans.', repo: 'health-plan-generator', tags: ['Health', 'Planning'] },
+      { n: 85, name: 'EHR De-identifier', desc: 'De-identify electronic health records for privacy.', repo: 'ehr-deidentifier', tags: ['EHR', 'Privacy'] },
+      { n: 86, name: 'Nutrition Label Analyzer', desc: 'Analyze nutrition labels for healthier choices.', repo: 'nutrition-label-analyzer', tags: ['Nutrition', 'Food'] },
+      { n: 87, name: 'Exercise Form Guide', desc: 'Guide proper exercise form to prevent injuries.', repo: 'exercise-form-guide', tags: ['Exercise', 'Fitness'] },
+      { n: 88, name: 'Sleep Improvement Advisor', desc: 'Get personalized AI sleep improvement tips.', repo: 'sleep-improvement-advisor', tags: ['Sleep', 'Wellness'] },
+      { n: 89, name: 'Stress Management Bot', desc: 'AI assistant for stress management techniques.', repo: 'stress-management-bot', tags: ['Stress', 'Mental Health'] },
+      { n: 90, name: 'First Aid Guide Bot', desc: 'AI-powered first aid guidance for emergencies.', repo: 'first-aid-guide-bot', tags: ['First Aid', 'Emergency'] }
+    ]
+  }
+];
+
+const GITHUB_BASE = 'https://github.com/kennedyraju55/';
+
+/* ========== PARTICLE BACKGROUND ========== */
+(function () {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [], mouse = { x: null, y: null };
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  document.addEventListener('mousemove', function (e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
+      this.opacity = Math.random() * 0.5 + 0.1;
+      const colors = ['99,102,241', '139,92,246', '168,85,247', '6,182,212'];
+      this.rgb = colors[Math.floor(Math.random() * colors.length)];
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (mouse.x !== null) {
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          const force = (150 - dist) / 150;
+          this.x += (dx / dist) * force * 1.5;
+          this.y += (dy / dist) * force * 1.5;
+        }
+      }
+      if (this.x < -10 || this.x > w + 10 || this.y < -10 || this.y > h + 10) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + this.rgb + ',' + this.opacity + ')';
+      ctx.fill();
+    }
+  }
+
+  const count = Math.min(150, Math.floor(w * h / 7000));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = dx * dx + dy * dy;
+        if (dist < 14400) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(99,102,241,' + (0.08 * (1 - Math.sqrt(dist) / 120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(function (p) { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ========== SCROLL REVEAL ========== */
+function setupReveal() {
+  const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('active');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { observer.observe(el); });
+  return observer;
+}
+const revealObserver = setupReveal();
+
+/* ========== PROGRESS BAR ========== */
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', function () {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+}, { passive: true });
+
+/* ========== COUNTER ANIMATION ========== */
+function animateCounters() {
+  document.querySelectorAll('.stat-number').forEach(function (el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let current = 0;
+    const increment = target / 70;
+    const timer = setInterval(function () {
+      current += increment;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current) + suffix;
+    }, 20);
+  });
+}
+const heroObserver = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) {
+    if (e.isIntersecting) { animateCounters(); heroObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.3 });
+heroObserver.observe(document.querySelector('.stats-grid'));
+
+/* ========== RENDER CATEGORIES ========== */
+const catGrid = document.getElementById('catGrid');
+CATEGORIES.forEach(function (cat) {
+  const card = document.createElement('div');
+  card.className = 'cat-card reveal';
+  card.innerHTML =
+    '<span class="cat-icon">' + cat.icon + '</span>' +
+    '<h3>' + cat.name + '</h3>' +
+    '<span class="cat-count">' + cat.projects.length + ' Projects</span>' +
+    '<p>' + cat.desc + '</p>';
+  card.addEventListener('click', function () {
+    document.getElementById('cat-' + cat.id).scrollIntoView({ behavior: 'smooth' });
+  });
+  catGrid.appendChild(card);
+  revealObserver.observe(card);
+});
+
+/* ========== RENDER FILTER TAGS ========== */
+const filterTagsContainer = document.getElementById('filterTags');
+const catNames = CATEGORIES.map(function (c) { return c.name; });
+catNames.forEach(function (name) {
+  const tag = document.createElement('span');
+  tag.className = 'filter-tag';
+  tag.textContent = name;
+  tag.addEventListener('click', function () {
+    const isActive = tag.classList.contains('active');
+    document.querySelectorAll('.filter-tag').forEach(function (t) { t.classList.remove('active'); });
+    if (!isActive) {
+      tag.classList.add('active');
+      document.getElementById('searchInput').value = name;
+    } else {
+      document.getElementById('searchInput').value = '';
+    }
+    document.getElementById('searchInput').dispatchEvent(new Event('input'));
+  });
+  filterTagsContainer.appendChild(tag);
+});
+
+/* ========== RENDER PROJECTS ========== */
+const projContainer = document.getElementById('projectsContainer');
+CATEGORIES.forEach(function (cat) {
+  const section = document.createElement('div');
+  section.className = 'cat-section';
+  section.id = 'cat-' + cat.id;
+  section.innerHTML =
+    '<div class="cat-section-header reveal">' +
+    '<span style="font-size:2rem">' + cat.icon + '</span>' +
+    '<h3 class="gradient-text">' + cat.name + '</h3>' +
+    '</div>';
+  const grid = document.createElement('div');
+  grid.className = 'project-grid';
+  cat.projects.forEach(function (p) {
+    const card = document.createElement('div');
+    card.className = 'project-card reveal';
+    card.dataset.search = (p.name + ' ' + p.desc + ' ' + p.tags.join(' ') + ' ' + cat.name).toLowerCase();
+    card.innerHTML =
+      '<span class="project-number">#' + String(p.n).padStart(2, '0') + '</span>' +
+      '<h4>' + p.name + '</h4>' +
+      '<p class="desc">' + p.desc + '</p>' +
+      '<div class="project-tags">' + p.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+      '<a href="' + GITHUB_BASE + p.repo + '" class="project-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>';
+    grid.appendChild(card);
+    revealObserver.observe(card);
+  });
+  section.appendChild(grid);
+  projContainer.appendChild(section);
+  revealObserver.observe(section.querySelector('.cat-section-header'));
+});
+
+/* ========== SEARCH ========== */
+const searchInput = document.getElementById('searchInput');
+const noResults = document.getElementById('noResults');
+searchInput.addEventListener('input', function () {
+  const q = this.value.toLowerCase().trim();
+  let found = 0;
+  document.querySelectorAll('.project-card').forEach(function (card) {
+    const match = !q || card.dataset.search.indexOf(q) !== -1;
+    card.style.display = match ? '' : 'none';
+    if (match) { found++; card.classList.add('active'); }
+  });
+  document.querySelectorAll('.cat-section').forEach(function (sec) {
+    const hasVisible = Array.from(sec.querySelectorAll('.project-card')).some(function (c) { return c.style.display !== 'none'; });
+    sec.style.display = hasVisible ? '' : 'none';
+  });
+  noResults.style.display = found === 0 ? 'block' : 'none';
+});
+
+/* ========== BACK TO TOP ========== */
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', function () {
+  backBtn.classList.toggle('visible', window.scrollY > 500);
+}, { passive: true });
+
+/* ========== SMOOTH NAV ========== */
+document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
